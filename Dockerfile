@@ -1,10 +1,19 @@
-FROM eclipse-temurin:21
-LABEL maintainer="contato@guilherme.dev"
+FROM maven:3.9.6-amazoncorretto-21 AS builder
+
 WORKDIR /app
-COPY target/mcgauto-0.0.1-SNAPSHOT.jar /app/docker.jar
-ENTRYPOINT ["java", "-jar", "docker.jar"]
 
+COPY pom.xml .
+RUN mvn dependency:go-offline
 
-FROM maven:3.8.4-jdk-8 AS build
+COPY src ./src
+RUN mvn clean package -DskipTests
 
-COPY src /app/src
+FROM openjdk:21-jdk-slim
+
+WORKDIR /app
+
+COPY --from=builder /app/target/*.jar /app/mcgauto.jar
+
+EXPOSE 8080
+
+ENTRYPOINT ["java", "-jar", "/app/mcgauto.jar"]

@@ -1,0 +1,40 @@
+version: '3.8'
+
+services:
+  db:
+    image: postgres:16
+    container_name: mcgauto_db
+    environment:
+      - POSTGRES_USER=user_banco
+      - POSTGRES_PASSWORD=senha_banco
+      - POSTGRES_DB=mcgauto_db
+    ports:
+      - "5433:5432"
+    volumes:
+      - postgres_data_clean:/var/lib/postgresql/data
+    networks:
+      - mcgauto_network
+
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: mcgauto_app
+    ports:
+      - "8080:8080"
+    depends_on:
+      - db
+    environment:
+      - DB_HOST=db
+      - DB_PORT=5432
+      - SPRING_DATASOURCE_USERNAME=mcgauto_user
+      - SPRING_DATASOURCE_PASSWORD=mcgauto_password
+    networks:
+      - mcgauto_network
+
+volumes:
+  postgres_data_clean:
+
+networks:
+  mcgauto_network:
+    driver: bridge
