@@ -1,4 +1,4 @@
-package br.com.mcgauto.domain;
+package br.com.mcgauto.domain.entities;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
