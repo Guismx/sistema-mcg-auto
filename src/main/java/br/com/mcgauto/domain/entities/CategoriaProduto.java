@@ -3,7 +3,7 @@ package br.com.mcgauto.domain.entities;
 import jakarta.persistence.*;
 
 @Entity
-@Table(name = "Categoria_do_Produto")
+@Table(name = "categoria_do_produto")
 public class CategoriaProduto {
 
     @Id
