@@ -9,7 +9,7 @@ import java.time.LocalDateTime;
 import java.util.Date;
 
 @Entity
-@Table(name = "Usuario")
+@Table(name = "usuarios")
 public class Usuario {
 
     @Id
@@ -118,5 +118,21 @@ public class Usuario {
 
     public void setEmailValidado(boolean emailValidado) {
         this.emailValidado = emailValidado;
+    }
+
+    @Override
+    public String toString() {
+        return "Usuario{" +
+                "idUsuario=" + idUsuario +
+                ", nome='" + nome + '\'' +
+                ", sobrenome='" + sobrenome + '\'' +
+                ", dataNascimento=" + dataNascimento +
+                ", telefonePrincipal='" + telefonePrincipal + '\'' +
+                ", telefoneSecundario='" + telefoneSecundario + '\'' +
+                ", email='" + email + '\'' +
+                ", senha='" + senha + '\'' +
+                ", dataCadastro=" + dataCadastro +
+                ", emailValidado=" + emailValidado +
+                '}';
     }
 }
