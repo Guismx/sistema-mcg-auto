@@ -1,9 +1,6 @@
 package br.com.mcgauto.domain.entities;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
@@ -23,7 +20,7 @@ public class Produto {
     private BigDecimal precoCusto;
     private BigDecimal precoVenda;
     private int qtdEstoque;
-    private boolean isAtivo; //TODO: Alterar tipo depois
+    private StatusProduto ativo;
     private LocalDateTime criadoEm;
     private LocalDateTime atualizadoEm;
 
@@ -32,8 +29,8 @@ public class Produto {
     }
 
     public Produto(long idProduto, int categoriaid, int codigoProduto, String nome, String descricao, String marca,
-                   BigDecimal precoCusto, BigDecimal precoVenda, int qtdEstoque, boolean isAtivo, LocalDateTime createdAt,
-                   LocalDateTime updatedAt) {
+                   BigDecimal precoCusto, BigDecimal precoVenda, int qtdEstoque, StatusProduto ativo,
+                   LocalDateTime criadoEm, LocalDateTime atualizadoEm) {
         this.idProduto = idProduto;
         this.categoriaid = categoriaid;
         this.codigoProduto = codigoProduto;
@@ -43,9 +40,9 @@ public class Produto {
         this.precoCusto = precoCusto;
         this.precoVenda = precoVenda;
         this.qtdEstoque = qtdEstoque;
-        this.isAtivo = isAtivo;
-        this.criadoEm = createdAt;
-        this.atualizadoEm = updatedAt;
+        this.ativo = ativo;
+        this.criadoEm = criadoEm;
+        this.atualizadoEm = atualizadoEm;
     }
 
     public long getIdProduto() {
@@ -116,12 +113,12 @@ public class Produto {
         this.qtdEstoque = qtdEstoque;
     }
 
-    public boolean isAtivo() {
-        return isAtivo;
+    public StatusProduto getAtivo() {
+        return ativo;
     }
 
-    public void setAtivo(boolean ativo) {
-        isAtivo = ativo;
+    public void setAtivo(StatusProduto ativo) {
+        this.ativo = ativo;
     }
 
     public LocalDateTime getCreatedAt() {
@@ -144,7 +141,7 @@ public class Produto {
                 ", precoCusto=" + precoCusto +
                 ", precoVenda=" + precoVenda +
                 ", qtdEstoque=" + qtdEstoque +
-                ", isAtivo=" + isAtivo +
+                ", ativo=" + ativo +
                 ", createdAt=" + criadoEm +
                 ", updatedAt=" + atualizadoEm +
                 '}';
