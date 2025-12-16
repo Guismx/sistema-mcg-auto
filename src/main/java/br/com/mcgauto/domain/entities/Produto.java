@@ -24,8 +24,8 @@ public class Produto {
     private BigDecimal precoVenda;
     private int qtdEstoque;
     private boolean isAtivo; //TODO: Alterar tipo depois
-    private LocalDateTime createdAt;
-    private LocalDateTime updatedAt;
+    private LocalDateTime criadoEm;
+    private LocalDateTime atualizadoEm;
 
     public Produto() {
 
@@ -44,8 +44,8 @@ public class Produto {
         this.precoVenda = precoVenda;
         this.qtdEstoque = qtdEstoque;
         this.isAtivo = isAtivo;
-        this.createdAt = createdAt;
-        this.updatedAt = updatedAt;
+        this.criadoEm = createdAt;
+        this.atualizadoEm = updatedAt;
     }
 
     public long getIdProduto() {
@@ -125,11 +125,11 @@ public class Produto {
     }
 
     public LocalDateTime getCreatedAt() {
-        return createdAt;
+        return criadoEm;
     }
 
     public LocalDateTime getUpdatedAt() {
-        return updatedAt;
+        return atualizadoEm;
     }
 
     @Override
@@ -145,8 +145,8 @@ public class Produto {
                 ", precoVenda=" + precoVenda +
                 ", qtdEstoque=" + qtdEstoque +
                 ", isAtivo=" + isAtivo +
-                ", createdAt=" + createdAt +
-                ", updatedAt=" + updatedAt +
+                ", createdAt=" + criadoEm +
+                ", updatedAt=" + atualizadoEm +
                 '}';
     }
 }
