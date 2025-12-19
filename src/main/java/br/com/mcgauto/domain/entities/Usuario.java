@@ -1,12 +1,9 @@
 package br.com.mcgauto.domain.entities;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.Date;
 
 @Entity
 @Table(name = "usuarios")
@@ -17,12 +14,12 @@ public class Usuario {
     private long idUsuario;
     private String nome;
     private String sobrenome;
-    private Date dataNascimento;
+    private LocalDate dataNascimento;
     private String telefonePrincipal;
     private String telefoneSecundario;
     private String email;
     private String senha;
-    //private TipoConta tipoConta;
+    private TipoConta tipoConta;
     private LocalDateTime dataCadastro;
     private boolean emailValidado;
 
@@ -30,7 +27,7 @@ public class Usuario {
 
     }
 
-    public Usuario(long idUsuario, String nome, String sobrenome, Date dataNascimento, String telefonePrincipal, String telefoneSecundario,
+    public Usuario(long idUsuario, String nome, String sobrenome, LocalDate dataNascimento, String telefonePrincipal, String telefoneSecundario,
                    String email, String senha, LocalDateTime dataCadastro, boolean emailValidado) {
         this.idUsuario = idUsuario;
         this.nome = nome;
@@ -64,11 +61,11 @@ public class Usuario {
         this.sobrenome = sobrenome;
     }
 
-    public Date getDataNascimento() {
+    public LocalDate getDataNascimento() {
         return dataNascimento;
     }
 
-    public void setDataNascimento(Date dataNascimento) {
+    public void setDataNascimento(LocalDate dataNascimento) {
         this.dataNascimento = dataNascimento;
     }
 
@@ -129,8 +126,7 @@ public class Usuario {
                 ", dataNascimento=" + dataNascimento +
                 ", telefonePrincipal='" + telefonePrincipal + '\'' +
                 ", telefoneSecundario='" + telefoneSecundario + '\'' +
-                ", email='" + email + '\'' +
-                ", senha='" + senha + '\'' +
+                ", email='" + (email != null ? email : "não informado") + '\'' +
                 ", dataCadastro=" + dataCadastro +
                 ", emailValidado=" + emailValidado +
                 '}';
