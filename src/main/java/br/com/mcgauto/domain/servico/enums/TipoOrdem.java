@@ -1,6 +1,6 @@
 package br.com.mcgauto.domain.servico.enums;
 
-public enum TipoItem {
+public enum TipoOrdem {
     PECA,
     SERVICO
 }
