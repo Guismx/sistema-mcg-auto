@@ -1,6 +1,7 @@
 package br.com.mcgauto.domain.servico;
 
 import br.com.mcgauto.domain.produto.Produto;
+import br.com.mcgauto.domain.servico.enums.TipoOrdem;
 import jakarta.persistence.*;
 
 import java.math.BigDecimal;
@@ -14,7 +15,7 @@ public class ItemOrdemServico {
     private long idItem;
     private Produto produto;
     private Servico servico;
-    private TipoItem tipoItem;
+    private TipoOrdem tipoOrdem;
     private String descricao;
     private int quantidade;
     private BigDecimal precoUnitario;
@@ -22,11 +23,11 @@ public class ItemOrdemServico {
 
     public ItemOrdemServico (){}
 
-    public ItemOrdemServico(long idItem, Produto produto, Servico servico, TipoItem tipoItem, String descricao, int quantidade, BigDecimal precoUnitario, BigDecimal valorTotal) {
+    public ItemOrdemServico(long idItem, Produto produto, Servico servico, TipoOrdem tipoItem, String descricao, int quantidade, BigDecimal precoUnitario, BigDecimal valorTotal) {
         this.idItem = idItem;
         this.produto = produto;
         this.servico = servico;
-        this.tipoItem = tipoItem;
+        this.tipoOrdem = tipoOrdem;
         this.descricao = descricao;
         this.quantidade = quantidade;
         this.precoUnitario = precoUnitario;
@@ -53,12 +54,12 @@ public class ItemOrdemServico {
         this.servico = servico;
     }
 
-    public TipoItem getTipoItem() {
-        return tipoItem;
+    public TipoOrdem getTipoOrdem() {
+        return tipoOrdem;
     }
 
-    public void setTipoItem(TipoItem tipoItem) {
-        this.tipoItem = tipoItem;
+    public void setTipoOrdem(TipoOrdem tipoOrdem) {
+        this.tipoOrdem = tipoOrdem;
     }
 
     public String getDescricao() {
@@ -99,7 +100,7 @@ public class ItemOrdemServico {
                 "idItem=" + idItem +
                 ", produto=" + produto +
                 ", servico=" + servico +
-                ", tipoItem=" + tipoItem +
+                ", tipoItem=" + tipoOrdem +
                 ", descricao='" + descricao + '\'' +
                 ", quantidade=" + quantidade +
                 ", precoUnitario=" + precoUnitario +
