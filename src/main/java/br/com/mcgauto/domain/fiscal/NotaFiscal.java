@@ -1,5 +1,6 @@
-package br.com.mcgauto.domain.entities;
+package br.com.mcgauto.domain.fiscal;
 
+import br.com.mcgauto.domain.financeiro.Pagamento;
 import jakarta.persistence.*;
 
 import java.math.BigDecimal;

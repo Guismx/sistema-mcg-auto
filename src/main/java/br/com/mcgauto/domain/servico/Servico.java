@@ -1,5 +1,6 @@
-package br.com.mcgauto.domain.entities;
+package br.com.mcgauto.domain.servico;
 
+import br.com.mcgauto.domain.produto.CategoriaProduto;
 import jakarta.persistence.*;
 
 import java.math.BigDecimal;

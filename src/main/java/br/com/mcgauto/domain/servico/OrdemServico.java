@@ -1,6 +1,8 @@
-package br.com.mcgauto.domain.entities;
+package br.com.mcgauto.domain.servico;
 
 
+import br.com.mcgauto.domain.agenda.Agendamento;
+import br.com.mcgauto.domain.usuario.Usuario;
 import jakarta.persistence.*;
 
 import java.math.BigDecimal;

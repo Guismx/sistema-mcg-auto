@@ -1,5 +1,8 @@
-package br.com.mcgauto.domain.entities;
+package br.com.mcgauto.domain.agenda;
 
+import br.com.mcgauto.domain.servico.Servico;
+import br.com.mcgauto.domain.usuario.Usuario;
+import br.com.mcgauto.domain.veiculo.VeiculoCliente;
 import jakarta.persistence.*;
 
 import java.time.LocalDateTime;

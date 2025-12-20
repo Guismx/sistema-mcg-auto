@@ -1,4 +1,4 @@
-package br.com.mcgauto.domain.entities;
+package br.com.mcgauto.domain.produto;
 
 import jakarta.persistence.*;
 

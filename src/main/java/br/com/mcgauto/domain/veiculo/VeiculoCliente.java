@@ -1,5 +1,6 @@
-package br.com.mcgauto.domain.entities;
+package br.com.mcgauto.domain.veiculo;
 
+import br.com.mcgauto.domain.usuario.Usuario;
 import jakarta.persistence.*;
 
 @Entity

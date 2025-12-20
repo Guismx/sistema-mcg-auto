@@ -1,7 +1,6 @@
-package br.com.mcgauto.domain.entities;
+package br.com.mcgauto.domain.veiculo;
 
 import jakarta.persistence.*;
-import org.springframework.cglib.core.Local;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;

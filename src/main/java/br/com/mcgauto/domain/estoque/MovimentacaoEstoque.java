@@ -1,6 +1,8 @@
-package br.com.mcgauto.domain.entities;
+package br.com.mcgauto.domain.estoque;
 
 
+import br.com.mcgauto.domain.produto.Produto;
+import br.com.mcgauto.domain.usuario.Usuario;
 import br.com.mcgauto.domain.enums.movimentacaoEstoque.TipoMovimentacao;
 import jakarta.persistence.*;
 
