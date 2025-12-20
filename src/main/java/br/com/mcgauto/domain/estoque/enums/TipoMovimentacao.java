@@ -1,4 +1,4 @@
-package br.com.mcgauto.domain.enums.movimentacaoEstoque;
+package br.com.mcgauto.domain.estoque.enums;
 
 public enum TipoMovimentacao {
     ENTRADA_COMPRA,
