@@ -1,6 +1,7 @@
 package br.com.mcgauto.domain.venda;
 
 import br.com.mcgauto.domain.usuario.Usuario;
+import br.com.mcgauto.domain.venda.enums.StatusVenda;
 import jakarta.persistence.*;
 
 import java.math.BigDecimal;

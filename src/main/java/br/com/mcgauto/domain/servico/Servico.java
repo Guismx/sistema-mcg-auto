@@ -1,6 +1,7 @@
 package br.com.mcgauto.domain.servico;
 
 import br.com.mcgauto.domain.produto.CategoriaProduto;
+import br.com.mcgauto.global.enums.StatusAtivacao;
 import jakarta.persistence.*;
 
 import java.math.BigDecimal;
@@ -21,7 +22,7 @@ public class Servico {
     private BigDecimal precoCusto;
     private BigDecimal precoVenda;
     private int qtdEstoque;
-    private StatusProduto isAtivo;
+    private StatusAtivacao statusProduto;
     private LocalDateTime criadoEm;
     private LocalDateTime atualizadoEm;
 
@@ -29,7 +30,7 @@ public class Servico {
     }
 
     public Servico(long idServico, CategoriaProduto categoriaProduto, int codigoProduto, String nome, String descricao, String marca, BigDecimal precoCusto,
-                   BigDecimal precoVenda, int qtdEstoque, StatusProduto isAtivo, LocalDateTime criadoEm, LocalDateTime atualizadoEm) {
+                   BigDecimal precoVenda, int qtdEstoque, StatusAtivacao isAtivo, LocalDateTime criadoEm, LocalDateTime atualizadoEm) {
         this.idServico = idServico;
         this.categoriaProduto = categoriaProduto;
         this.codigoProduto = codigoProduto;
@@ -39,7 +40,7 @@ public class Servico {
         this.precoCusto = precoCusto;
         this.precoVenda = precoVenda;
         this.qtdEstoque = qtdEstoque;
-        this.isAtivo = isAtivo;
+        this.statusProduto = StatusAtivacao.ATIVO;
         this.criadoEm = criadoEm;
         this.atualizadoEm = atualizadoEm;
     }
@@ -112,12 +113,12 @@ public class Servico {
         this.qtdEstoque = qtdEstoque;
     }
 
-    public StatusProduto getIsAtivo() {
-        return isAtivo;
+    public StatusAtivacao getStatusProduto() {
+        return statusProduto;
     }
 
-    public void setIsAtivo(StatusProduto isAtivo) {
-        this.isAtivo = isAtivo;
+    public void setStatusProduto(StatusAtivacao statusProduto) {
+        this.statusProduto = statusProduto;
     }
 
     public LocalDateTime getCriadoEm() {
@@ -140,7 +141,7 @@ public class Servico {
                 ", precoCusto=" + precoCusto +
                 ", precoVenda=" + precoVenda +
                 ", qtdEstoque=" + qtdEstoque +
-                ", isAtivo=" + isAtivo +
+                ", isAtivo=" + statusProduto +
                 ", criadoEm=" + criadoEm +
                 ", atualizadoEm=" + atualizadoEm +
                 '}';

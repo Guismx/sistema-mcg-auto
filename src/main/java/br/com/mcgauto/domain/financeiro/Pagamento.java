@@ -1,5 +1,8 @@
 package br.com.mcgauto.domain.financeiro;
 
+import br.com.mcgauto.domain.financeiro.enums.StatusPagamento;
+import br.com.mcgauto.domain.financeiro.enums.TipoOrigem;
+import br.com.mcgauto.domain.financeiro.enums.TipoPagamento;
 import br.com.mcgauto.domain.venda.Venda;
 import jakarta.persistence.*;
 

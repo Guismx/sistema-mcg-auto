@@ -1,6 +1,7 @@
 package br.com.mcgauto.domain.veiculo;
 
 
+import br.com.mcgauto.domain.veiculo.enums.TipoVeiculo;
 import jakarta.persistence.*;
 
 @Entity
@@ -10,14 +11,14 @@ public class ModeloVeiculo {
     @Id
     @GeneratedValue (strategy = GenerationType.IDENTITY)
     private long modeloId;
-    private Marca marca;
+    private MarcaVeiculo marca;
     private String nome;
     private TipoVeiculo tipoVeiculo;
 
     public ModeloVeiculo(){
     }
 
-    public ModeloVeiculo(long modeloId, Marca marca, String nome, TipoVeiculo tipoVeiculo) {
+    public ModeloVeiculo(long modeloId, MarcaVeiculo marca, String nome, TipoVeiculo tipoVeiculo) {
         this.modeloId = modeloId;
         this.marca = marca;
         this.nome = nome;
@@ -28,11 +29,11 @@ public class ModeloVeiculo {
         return modeloId;
     }
 
-    public Marca getMarca() {
+    public MarcaVeiculo getMarca() {
         return marca;
     }
 
-    public void setMarca(Marca marca) {
+    public void setMarca(MarcaVeiculo marca) {
         this.marca = marca;
     }
 

@@ -1,5 +1,6 @@
 package br.com.mcgauto.domain.usuario;
 
+import br.com.mcgauto.domain.usuario.enums.TipoConta;
 import jakarta.persistence.*;
 
 import java.time.LocalDate;

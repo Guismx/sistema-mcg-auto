@@ -1,6 +1,7 @@
 package br.com.mcgauto.domain.usuario;
 
 
+import br.com.mcgauto.domain.usuario.enums.TipoEndereco;
 import jakarta.persistence.*;
 
 @Entity

@@ -1,5 +1,9 @@
 package br.com.mcgauto.domain.veiculo;
 
+import br.com.mcgauto.domain.veiculo.enums.EstadoVeiculo;
+import br.com.mcgauto.domain.veiculo.enums.StatusVeiculo;
+import br.com.mcgauto.domain.veiculo.enums.TipoCombustivel;
+import br.com.mcgauto.domain.veiculo.enums.TipoPropriedade;
 import jakarta.persistence.*;
 
 import java.math.BigDecimal;
@@ -19,12 +23,12 @@ public class Veiculo {
     private String chassi;
     private String tipoModelo;
     private int quilometragem;
-    //private TipoCombustivel tipoCombustivel;
+    private TipoCombustivel tipoCombustivel;
     private BigDecimal precoCusto;
     private BigDecimal precoVenda;
-    //private EstadoVeiculo estadoVeiculo;
-    //private StatusVeiculo statusVeiculo;
-    //private TipoPropriedade tipoPropriedade;
+    private EstadoVeiculo estadoVeiculo;
+    private StatusVeiculo statusVeiculo;
+    private TipoPropriedade tipoPropriedade;
     private String descricaoDetalhada;
     private LocalDateTime dataEntradaEstoque;
     private LocalDateTime dataBaixaEstoque;

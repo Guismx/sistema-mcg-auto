@@ -1,5 +1,6 @@
 package br.com.mcgauto.domain.produto;
 
+import br.com.mcgauto.global.enums.StatusAtivacao;
 import jakarta.persistence.*;
 
 import java.math.BigDecimal;
@@ -20,16 +21,14 @@ public class Produto {
     private BigDecimal precoCusto;
     private BigDecimal precoVenda;
     private int qtdEstoque;
-    private StatusProduto ativo;
+    private StatusAtivacao statusProduto;
     private LocalDateTime criadoEm;
     private LocalDateTime atualizadoEm;
 
-    public Produto() {
-
-    }
+    public Produto() {}
 
     public Produto(long idProduto, int categoriaid, int codigoProduto, String nome, String descricao, String marca,
-                   BigDecimal precoCusto, BigDecimal precoVenda, int qtdEstoque, StatusProduto ativo,
+                   BigDecimal precoCusto, BigDecimal precoVenda, int qtdEstoque, StatusAtivacao ativo,
                    LocalDateTime criadoEm, LocalDateTime atualizadoEm) {
         this.idProduto = idProduto;
         this.categoriaid = categoriaid;
@@ -40,7 +39,7 @@ public class Produto {
         this.precoCusto = precoCusto;
         this.precoVenda = precoVenda;
         this.qtdEstoque = qtdEstoque;
-        this.ativo = ativo;
+        this.statusProduto = StatusAtivacao.ATIVO;
         this.criadoEm = criadoEm;
         this.atualizadoEm = atualizadoEm;
     }
@@ -113,14 +112,13 @@ public class Produto {
         this.qtdEstoque = qtdEstoque;
     }
 
-    public StatusProduto getAtivo() {
-        return ativo;
+    public StatusAtivacao getStatusProduto() {
+        return statusProduto;
     }
 
-    public void setAtivo(StatusProduto ativo) {
-        this.ativo = ativo;
+    public void setStatusProduto(StatusAtivacao statusProduto) {
+        this.statusProduto = statusProduto;
     }
-
     public LocalDateTime getCreatedAt() {
         return criadoEm;
     }

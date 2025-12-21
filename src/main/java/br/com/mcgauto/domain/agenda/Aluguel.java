@@ -1,5 +1,6 @@
 package br.com.mcgauto.domain.agenda;
 
+import br.com.mcgauto.domain.agenda.enums.StatusAluguel;
 import br.com.mcgauto.domain.usuario.Usuario;
 import br.com.mcgauto.domain.veiculo.Veiculo;
 import jakarta.persistence.*;
