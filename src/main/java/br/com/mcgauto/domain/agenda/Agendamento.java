@@ -96,14 +96,11 @@ public class Agendamento {
 
     @Override
     public String toString() {
-        return "Agendamento{" +
-                "idAgendamento=" + idAgendamento +
-                ", cliente=" + cliente +
-                ", servico=" + servico +
-                ", veiculoCliente=" + veiculoCliente +
-                ", dataHoraServico=" + dataHoraServico +
-                ", estimativaDeTempo=" + estimativaDeTempo +
-                ", statusAgendamento=" + statusAgendamento +
-                '}';
+        return "Agendamento[" +
+                "id=" + idAgendamento +
+                ", data=" + dataHoraServico +
+                ", status=" + statusAgendamento +
+                ", clienteId=" + (cliente != null ? cliente.getIdUsuario() : "null") +
+                "]";
     }
 }
