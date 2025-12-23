@@ -14,7 +14,7 @@ public class OrdemServico {
 
     @Id
     @GeneratedValue (strategy = GenerationType.IDENTITY)
-    private long idOdem;
+    private long id;
     private Agendamento agendamento;
     private Usuario cliente;
     private int numeroOrdem;
@@ -27,8 +27,8 @@ public class OrdemServico {
 
     public OrdemServico () {}
 
-    public OrdemServico(long idOdem, Agendamento agendamento, Usuario cliente, int numeroOrdem, ItemOrdemServico itemOrdemServico, LocalDateTime dataAbertura, LocalDateTime dataFechamento, String descricao, BigDecimal valorServico, String status) {
-        this.idOdem = idOdem;
+    public OrdemServico(long id, Agendamento agendamento, Usuario cliente, int numeroOrdem, ItemOrdemServico itemOrdemServico, LocalDateTime dataAbertura, LocalDateTime dataFechamento, String descricao, BigDecimal valorServico, String status) {
+        this.id = id;
         this.agendamento = agendamento;
         this.cliente = cliente;
         this.numeroOrdem = numeroOrdem;
@@ -40,8 +40,8 @@ public class OrdemServico {
         this.status = status;
     }
 
-    public long getIdOdem() {
-        return idOdem;
+    public long getId() {
+        return id;
     }
 
     public Agendamento getAgendamento() {
@@ -111,7 +111,7 @@ public class OrdemServico {
     @Override
     public String toString() {
         return "OrdemServico{" +
-                "idOdem=" + idOdem +
+                "id=" + id +
                 ", agendamento=" + agendamento +
                 ", cliente=" + cliente +
                 ", numeroOrdem=" + numeroOrdem +

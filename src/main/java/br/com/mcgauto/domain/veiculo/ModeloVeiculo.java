@@ -10,7 +10,7 @@ public class ModeloVeiculo {
 
     @Id
     @GeneratedValue (strategy = GenerationType.IDENTITY)
-    private long modeloId;
+    private long id;
     private MarcaVeiculo marca;
     private String nome;
     private TipoVeiculo tipoVeiculo;
@@ -18,15 +18,15 @@ public class ModeloVeiculo {
     public ModeloVeiculo(){
     }
 
-    public ModeloVeiculo(long modeloId, MarcaVeiculo marca, String nome, TipoVeiculo tipoVeiculo) {
-        this.modeloId = modeloId;
+    public ModeloVeiculo(long id, MarcaVeiculo marca, String nome, TipoVeiculo tipoVeiculo) {
+        this.id = id;
         this.marca = marca;
         this.nome = nome;
         this.tipoVeiculo = tipoVeiculo;
     }
 
-    public long getModeloId() {
-        return modeloId;
+    public long getId() {
+        return id;
     }
 
     public MarcaVeiculo getMarca() {
@@ -56,7 +56,7 @@ public class ModeloVeiculo {
     @Override
     public String toString() {
         return "ModeloVeiculo{" +
-                "modeloId=" + modeloId +
+                "id=" + id +
                 ", marca=" + marca +
                 ", nome='" + nome + '\'' +
                 ", tipoVeiculo=" + tipoVeiculo +

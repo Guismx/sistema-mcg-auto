@@ -17,7 +17,7 @@ public class Agendamento {
     @Id
     @GeneratedValue (strategy = GenerationType.IDENTITY)
     @Column (name = "id_agendamento", nullable = false)
-    private long idAgendamento;
+    private long id;
     private Usuario cliente;
     private Servico servico;
     private VeiculoCliente veiculoCliente;
@@ -31,9 +31,9 @@ public class Agendamento {
 
     public Agendamento(){}
 
-    public Agendamento(long idAgendamento, Usuario cliente, Servico servico, VeiculoCliente veiculoCliente,
+    public Agendamento(long id, Usuario cliente, Servico servico, VeiculoCliente veiculoCliente,
                        LocalDateTime dataHoraServico, int estimativaDeTempo, StatusAgendamento statusAgendamento) {
-        this.idAgendamento = idAgendamento;
+        this.id = id;
         this.cliente = cliente;
         this.servico = servico;
         this.veiculoCliente = veiculoCliente;
@@ -43,7 +43,7 @@ public class Agendamento {
     }
 
     public long getIdAgendamento() {
-        return idAgendamento;
+        return id;
     }
 
     public Usuario getCliente() {
@@ -97,10 +97,10 @@ public class Agendamento {
     @Override
     public String toString() {
         return "Agendamento[" +
-                "id=" + idAgendamento +
+                "id=" + id +
                 ", data=" + dataHoraServico +
                 ", status=" + statusAgendamento +
-                ", clienteId=" + (cliente != null ? cliente.getIdUsuario() : "null") +
+                ", clienteId=" + (cliente != null ? cliente.getId() : "null") +
                 "]";
     }
 }

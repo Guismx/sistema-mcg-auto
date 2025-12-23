@@ -14,7 +14,7 @@ public class NotaFiscal {
 
     @Id
     @GeneratedValue (strategy = GenerationType.IDENTITY)
-    private long idNota;
+    private long id;
     private Pagamento origem;
     private TipoOrigem tipoOrigem;
     private int numeroNotaFiscal;
@@ -31,11 +31,11 @@ public class NotaFiscal {
 
     public NotaFiscal() {}
 
-    public NotaFiscal(long idNota, Pagamento origem, TipoOrigem tipoOrigem, int numeroNotaFiscal, String serieNotaFiscal,
+    public NotaFiscal(long id, Pagamento origem, TipoOrigem tipoOrigem, int numeroNotaFiscal, String serieNotaFiscal,
                       LocalDateTime dataEmissao, String chaveAcesso, String protocoloAutorizacao, StatusNotaFiscal statusNotaFiscal,
                       BigDecimal valorTotal, String caminhoXml, String caminhoDanfe, LocalDateTime dataCancelamento,
                       String motivoCancelamento) {
-        this.idNota = idNota;
+        this.id = id;
         this.origem = origem;
         this.tipoOrigem = tipoOrigem;
         this.numeroNotaFiscal = numeroNotaFiscal;
@@ -51,8 +51,8 @@ public class NotaFiscal {
         this.motivoCancelamento = motivoCancelamento;
     }
 
-    public long getIdNota() {
-        return idNota;
+    public long getId() {
+        return id;
     }
 
     public Pagamento getOrigem() {
@@ -150,7 +150,7 @@ public class NotaFiscal {
     @Override
     public String toString() {
         return "NotaFiscal{" +
-                "idNota=" + idNota +
+                "id=" + id +
                 ", origem=" + origem +
                 ", tipoOrigem=" + tipoOrigem +
                 ", numeroNotaFiscal=" + numeroNotaFiscal +

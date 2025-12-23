@@ -10,22 +10,22 @@ public class Cnh {
 
     @Id
     @GeneratedValue (strategy = GenerationType.IDENTITY)
-    private long idCnh;
+    private long id;
     private Usuario titular;
     private int numeroCnh;
     private LocalDate validade;
 
     public Cnh(){}
 
-    public Cnh(long idCnh, Usuario titular, int numeroCnh, LocalDate validade) {
-        this.idCnh = idCnh;
+    public Cnh(long id, Usuario titular, int numeroCnh, LocalDate validade) {
+        this.id = id;
         this.titular = titular;
         this.numeroCnh = numeroCnh;
         this.validade = validade;
     }
 
-    public long getIdCnh() {
-        return idCnh;
+    public long getId() {
+        return id;
     }
 
     public Usuario getTitular() {
@@ -55,7 +55,7 @@ public class Cnh {
     @Override
     public String toString() {
         return "Cnh{" +
-                "idCnh=" + idCnh +
+                "id=" + id +
                 ", titular=" + titular +
                 ", numeroCnh=" + numeroCnh +
                 ", validade=" + validade +

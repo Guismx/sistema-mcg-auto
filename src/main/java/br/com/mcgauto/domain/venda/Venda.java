@@ -13,7 +13,7 @@ public class Venda {
 
     @Id
     @GeneratedValue (strategy = GenerationType.IDENTITY)
-    private long idVenda;
+    private long id;
     private int numeroPedido;
     private Usuario cliente;
     private Usuario vendedor;
@@ -29,10 +29,10 @@ public class Venda {
 
     public Venda() {}
 
-    public Venda(long idVenda, int numeroPedido, Usuario cliente, Usuario vendedor, Usuario gestorAprovador,
+    public Venda(long id, int numeroPedido, Usuario cliente, Usuario vendedor, Usuario gestorAprovador,
                  ItemVenda itemVenda, LocalDateTime dataVenda, BigDecimal valorVenda, String formaPagamento,
                  StatusVenda statusVenda, String observacoes, LocalDateTime criadoEm, LocalDateTime atualizadoEm) {
-        this.idVenda = idVenda;
+        this.id = id;
         this.numeroPedido = numeroPedido;
         this.cliente = cliente;
         this.vendedor = vendedor;
@@ -47,8 +47,8 @@ public class Venda {
         this.atualizadoEm = atualizadoEm;
     }
 
-    public long getIdVenda() {
-        return idVenda;
+    public long getId() {
+        return id;
     }
 
     public int getNumeroPedido() {
@@ -142,7 +142,7 @@ public class Venda {
     @Override
     public String toString() {
         return "Venda{" +
-                "idVenda=" + idVenda +
+                "id=" + id +
                 ", numeroPedido=" + numeroPedido +
                 ", cliente=" + cliente +
                 ", vendedor=" + vendedor +

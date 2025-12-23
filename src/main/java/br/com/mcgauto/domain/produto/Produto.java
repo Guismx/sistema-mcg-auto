@@ -12,7 +12,7 @@ public class Produto {
 
     @Id
     @GeneratedValue (strategy = GenerationType.IDENTITY)
-    private long idProduto;
+    private long id;
     private int categoriaid;
     private int codigoProduto;
     private String nome;
@@ -27,10 +27,10 @@ public class Produto {
 
     public Produto() {}
 
-    public Produto(long idProduto, int categoriaid, int codigoProduto, String nome, String descricao, String marca,
+    public Produto(long id, int categoriaid, int codigoProduto, String nome, String descricao, String marca,
                    BigDecimal precoCusto, BigDecimal precoVenda, int qtdEstoque, StatusAtivacao ativo,
                    LocalDateTime criadoEm, LocalDateTime atualizadoEm) {
-        this.idProduto = idProduto;
+        this.id = id;
         this.categoriaid = categoriaid;
         this.codigoProduto = codigoProduto;
         this.nome = nome;
@@ -44,8 +44,8 @@ public class Produto {
         this.atualizadoEm = atualizadoEm;
     }
 
-    public long getIdProduto() {
-        return idProduto;
+    public long getId() {
+        return id;
     }
 
     public int getCategoriaid() {
@@ -130,7 +130,7 @@ public class Produto {
     @Override
     public String toString() {
         return "Produto{" +
-                "idProduto=" + idProduto +
+                "id=" + id +
                 ", categoriaid=" + categoriaid +
                 ", codigoProduto=" + codigoProduto +
                 ", nome='" + nome + '\'' +
@@ -139,7 +139,7 @@ public class Produto {
                 ", precoCusto=" + precoCusto +
                 ", precoVenda=" + precoVenda +
                 ", qtdEstoque=" + qtdEstoque +
-                ", ativo=" + ativo +
+                ", ativo=" + statusProduto +
                 ", createdAt=" + criadoEm +
                 ", updatedAt=" + atualizadoEm +
                 '}';

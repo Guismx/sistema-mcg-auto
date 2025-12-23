@@ -8,18 +8,18 @@ public class MarcaVeiculo {
 
     @Id
     @GeneratedValue (strategy = GenerationType.IDENTITY)
-    private long idMarca;
+    private long id;
     private String nome;
 
     public MarcaVeiculo(){}
 
-    public MarcaVeiculo(long idMarca, String nome) {
-        this.idMarca = idMarca;
+    public MarcaVeiculo(long id, String nome) {
+        this.id = id;
         this.nome = nome;
     }
 
-    public long getIdMarca() {
-        return idMarca;
+    public long getId() {
+        return id;
     }
 
     public String getNome() {
@@ -33,7 +33,7 @@ public class MarcaVeiculo {
     @Override
     public String toString() {
         return "MarcaVeiculo{" +
-                "idMarca=" + idMarca +
+                "id=" + id +
                 ", nome='" + nome + '\'' +
                 '}';
     }

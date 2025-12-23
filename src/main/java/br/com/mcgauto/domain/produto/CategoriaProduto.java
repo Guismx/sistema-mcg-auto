@@ -8,19 +8,19 @@ public class CategoriaProduto {
 
     @Id
     @GeneratedValue (strategy = GenerationType.IDENTITY)
-    private long idCategoriaProduto;
+    private long id;
     private String nome;
 
     public CategoriaProduto (){
     }
 
-    public CategoriaProduto(long idCategoriaProduto, String nome) {
-        this.idCategoriaProduto = idCategoriaProduto;
+    public CategoriaProduto(long id, String nome) {
+        this.id = id;
         this.nome = nome;
     }
 
-    public long getIdCategoriaProduto() {
-        return idCategoriaProduto;
+    public long getId() {
+        return id;
     }
 
     public String getNome() {

@@ -13,7 +13,7 @@ public class ItemVenda {
 
     @Id
     @GeneratedValue (strategy = GenerationType.IDENTITY)
-    private long idItem;
+    private long id;
     private VendaItem tipoItem;
     private Produto produto;
     private Veiculo veiculo;
@@ -25,9 +25,9 @@ public class ItemVenda {
 
     public ItemVenda(){}
 
-    public ItemVenda(long idItem, VendaItem tipoItem, Produto produto, Veiculo veiculo, int quantidade,
+    public ItemVenda(long id, VendaItem tipoItem, Produto produto, Veiculo veiculo, int quantidade,
                      BigDecimal precoUnitario, BigDecimal precoVenda, BigDecimal valorDesconto, BigDecimal valorTotal) {
-        this.idItem = idItem;
+        this.id = id;
         this.tipoItem = tipoItem;
         this.produto = produto;
         this.veiculo = veiculo;
@@ -38,8 +38,8 @@ public class ItemVenda {
         this.valorTotal = valorTotal;
     }
 
-    public long getIdItem() {
-        return idItem;
+    public long getId() {
+        return id;
     }
 
     public VendaItem getTipoItem() {
@@ -109,7 +109,7 @@ public class ItemVenda {
     @Override
     public String toString() {
         return "ItemVenda{" +
-                "idItem=" + idItem +
+                "id=" + id +
                 ", tipoItem=" + tipoItem +
                 ", produto=" + produto +
                 ", veiculo=" + veiculo +

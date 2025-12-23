@@ -15,7 +15,7 @@ public class Veiculo {
 
     @Id
     @GeneratedValue (strategy = GenerationType.IDENTITY)
-    private long idVeiculo;
+    private long id;
     private int modeloId;
     private int anoModelo;
     private String cor;
@@ -39,8 +39,8 @@ public class Veiculo {
     public Veiculo() {
     }
 
-    public Veiculo(long idVeiculo, int modeloId, int anoModelo, String cor, String placa, String chassi, String tipoModelo, int quilometragem, BigDecimal precoCusto, BigDecimal precoVenda, String descricaoDetalhada, LocalDateTime dataEntradaEstoque, LocalDateTime dataBaixaEstoque, LocalDateTime criadoEm, LocalDateTime atualizadoEm) {
-        this.idVeiculo = idVeiculo;
+    public Veiculo(long id, int modeloId, int anoModelo, String cor, String placa, String chassi, String tipoModelo, int quilometragem, BigDecimal precoCusto, BigDecimal precoVenda, String descricaoDetalhada, LocalDateTime dataEntradaEstoque, LocalDateTime dataBaixaEstoque, LocalDateTime criadoEm, LocalDateTime atualizadoEm) {
+        this.id = id;
         this.modeloId = modeloId;
         this.anoModelo = anoModelo;
         this.cor = cor;
@@ -57,8 +57,8 @@ public class Veiculo {
         this.atualizadoEm = atualizadoEm;
     }
 
-    public long getIdVeiculo() {
-        return idVeiculo;
+    public long getId() {
+        return id;
     }
 
     public int getModeloId() {
@@ -160,7 +160,7 @@ public class Veiculo {
     @Override
     public String toString() {
         return "Veiculo{" +
-                "idVeiculo=" + idVeiculo +
+                "id=" + id +
                 ", modeloId=" + modeloId +
                 ", anoModelo=" + anoModelo +
                 ", cor='" + cor + '\'' +

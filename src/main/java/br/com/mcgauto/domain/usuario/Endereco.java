@@ -10,7 +10,7 @@ public class Endereco {
 
     @Id
     @GeneratedValue (strategy = GenerationType.IDENTITY)
-    private long idEndereco;
+    private long id;
     private Usuario proprietario;
     private TipoEndereco tipoEndereco;
     private String logradouro;
@@ -24,9 +24,9 @@ public class Endereco {
 
     public Endereco(){}
 
-    public Endereco(long idEndereco, Usuario proprietario, TipoEndereco tipoEndereco, String logradouro, int numero,
+    public Endereco(long id, Usuario proprietario, TipoEndereco tipoEndereco, String logradouro, int numero,
                     String complemento, String bairro, String cidade, String cep, boolean ativo) {
-        this.idEndereco = idEndereco;
+        this.id = id;
         this.proprietario = proprietario;
         this.tipoEndereco = tipoEndereco;
         this.logradouro = logradouro;
@@ -38,8 +38,8 @@ public class Endereco {
         this.ativo = ativo;
     }
 
-    public long getIdEndereco() {
-        return idEndereco;
+    public long getId() {
+        return id;
     }
 
     public Usuario getProprietario() {
@@ -117,7 +117,7 @@ public class Endereco {
     @Override
     public String toString() {
         return "Endereco{" +
-                "idEndereco=" + idEndereco +
+                "id=" + id +
                 ", proprietario=" + proprietario +
                 ", tipoEndereco=" + tipoEndereco +
                 ", logradouro='" + logradouro + '\'' +

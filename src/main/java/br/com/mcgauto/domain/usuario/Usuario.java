@@ -12,7 +12,7 @@ public class Usuario {
 
     @Id
     @GeneratedValue (strategy = GenerationType.IDENTITY)
-    private long idUsuario;
+    private long id;
     private String nome;
     private String sobrenome;
     private LocalDate dataNascimento;
@@ -28,9 +28,9 @@ public class Usuario {
 
     }
 
-    public Usuario(long idUsuario, String nome, String sobrenome, LocalDate dataNascimento, String telefonePrincipal, String telefoneSecundario,
+    public Usuario(long id, String nome, String sobrenome, LocalDate dataNascimento, String telefonePrincipal, String telefoneSecundario,
                    String email, String senha, LocalDateTime dataCadastro, boolean emailValidado) {
-        this.idUsuario = idUsuario;
+        this.id = id;
         this.nome = nome;
         this.sobrenome = sobrenome;
         this.dataNascimento = dataNascimento;
@@ -42,8 +42,8 @@ public class Usuario {
         this.emailValidado = emailValidado;
     }
 
-    public long getIdUsuario() {
-        return idUsuario;
+    public long getId() {
+        return id;
     }
 
     public String getNome() {
@@ -121,7 +121,7 @@ public class Usuario {
     @Override
     public String toString() {
         return "Usuario{" +
-                "idUsuario=" + idUsuario +
+                "id=" + id +
                 ", nome='" + nome + '\'' +
                 ", sobrenome='" + sobrenome + '\'' +
                 ", dataNascimento=" + dataNascimento +

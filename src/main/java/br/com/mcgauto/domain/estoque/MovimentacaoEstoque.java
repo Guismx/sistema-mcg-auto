@@ -107,7 +107,7 @@ public class MovimentacaoEstoque {
     @Override
     public String toString() {
         return "MovimentacaoEstoque{" +
-                "idMovimentacao=" + idMovimentacao +
+                "id=" + id +
                 ", produto=" + produto +
                 ", responsavel=" + responsavel +
                 ", tipoMovimentacao=" + tipoMovimentacao +

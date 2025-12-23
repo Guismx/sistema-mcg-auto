@@ -15,7 +15,7 @@ public class Pagamento {
 
     @Id
     @GeneratedValue (strategy = GenerationType.IDENTITY)
-    private long idPagamento;
+    private long id;
     private Venda origem;
     private TipoOrigem tipoOrigem;
     private LocalDateTime dataPagamento;
@@ -27,9 +27,9 @@ public class Pagamento {
 
     public Pagamento() {}
 
-    public Pagamento(long idPagamento, Venda origem, TipoOrigem tipoOrigem, LocalDateTime dataPagamento, BigDecimal valorPago,
+    public Pagamento(long id, Venda origem, TipoOrigem tipoOrigem, LocalDateTime dataPagamento, BigDecimal valorPago,
                      TipoPagamento formaPagamento, StatusPagamento statusPagamento, String transacaoGateway, int parcelas) {
-        this.idPagamento = idPagamento;
+        this.id = id;
         this.origem = origem;
         this.tipoOrigem = tipoOrigem;
         this.dataPagamento = dataPagamento;
@@ -40,8 +40,8 @@ public class Pagamento {
         this.parcelas = parcelas;
     }
 
-    public long getIdPagamento() {
-        return idPagamento;
+    public long getId() {
+        return id;
     }
 
     public Venda getOrigem() {
@@ -107,7 +107,7 @@ public class Pagamento {
     @Override
     public String toString() {
         return "Pagamento{" +
-                "idPagamento=" + idPagamento +
+                "id=" + id +
                 ", origem=" + origem +
                 ", tipoOrigem=" + tipoOrigem +
                 ", dataPagamento=" + dataPagamento +

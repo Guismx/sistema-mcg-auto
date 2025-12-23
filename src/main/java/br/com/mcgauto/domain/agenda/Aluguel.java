@@ -15,7 +15,7 @@ public class Aluguel {
 
     @Id
     @GeneratedValue (strategy = GenerationType.AUTO)
-    private long idAluguel;
+    private long id;
     private int numeroAluguel;
     private Usuario clienteId;
     private Veiculo veiculoId;
@@ -40,12 +40,12 @@ public class Aluguel {
     public Aluguel(){
     }
 
-    public Aluguel(long idAluguel, int numeroAluguel, Usuario clienteId, Veiculo veiculoId, LocalDate dataRetiradaPrevista,
+    public Aluguel(long id, int numeroAluguel, Usuario clienteId, Veiculo veiculoId, LocalDate dataRetiradaPrevista,
                    LocalDate dateDevolucaoPrevista, LocalDate dataDaRetirada, LocalDate dataDeDevolucao, int kmRetirada,
                    int kmDevolucao, BigDecimal valorDiaria, BigDecimal valorCaucao, BigDecimal valorTotalPrevisto, BigDecimal valorAdicionalAvarias,
                    BigDecimal valorAdicionalKmExcedentes, StatusAluguel statusAluguel, Usuario funcionarioDeConfirmacao, Usuario funcionarioDeCheckin,
                    String observacoesCheckin, LocalDateTime criadoEm, LocalDateTime atualizadoEm) {
-        this.idAluguel = idAluguel;
+        this.id = id;
         this.numeroAluguel = numeroAluguel;
         this.clienteId = clienteId;
         this.veiculoId = veiculoId;
@@ -69,7 +69,7 @@ public class Aluguel {
     }
 
     public long getIdAluguel() {
-        return idAluguel;
+        return id;
     }
 
     public int getNumeroAluguel() {
@@ -215,7 +215,7 @@ public class Aluguel {
     @Override
     public String toString() {
         return "Aluguel{" +
-                "idAluguel=" + idAluguel +
+                "id=" + id +
                 ", numeroAluguel=" + numeroAluguel +
                 ", clienteId=" + clienteId +
                 ", veiculoId=" + veiculoId +

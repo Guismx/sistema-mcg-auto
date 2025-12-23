@@ -12,7 +12,7 @@ public class ItemOrdemServico {
 
     @Id
     @GeneratedValue (strategy = GenerationType.IDENTITY)
-    private long idItem;
+    private long id;
     private Produto produto;
     private Servico servico;
     private TipoOrdem tipoOrdem;
@@ -23,8 +23,8 @@ public class ItemOrdemServico {
 
     public ItemOrdemServico (){}
 
-    public ItemOrdemServico(long idItem, Produto produto, Servico servico, TipoOrdem tipoItem, String descricao, int quantidade, BigDecimal precoUnitario, BigDecimal valorTotal) {
-        this.idItem = idItem;
+    public ItemOrdemServico(long id, Produto produto, Servico servico, TipoOrdem tipoItem, String descricao, int quantidade, BigDecimal precoUnitario, BigDecimal valorTotal) {
+        this.id = id;
         this.produto = produto;
         this.servico = servico;
         this.tipoOrdem = tipoOrdem;
@@ -34,8 +34,8 @@ public class ItemOrdemServico {
         this.valorTotal = valorTotal;
     }
 
-    public long getIdItem() {
-        return idItem;
+    public long getId() {
+        return id;
     }
 
     public Produto getProduto() {
@@ -97,7 +97,7 @@ public class ItemOrdemServico {
     @Override
     public String toString() {
         return "ItemOrdemServico{" +
-                "idItem=" + idItem +
+                "id=" + id +
                 ", produto=" + produto +
                 ", servico=" + servico +
                 ", tipoItem=" + tipoOrdem +

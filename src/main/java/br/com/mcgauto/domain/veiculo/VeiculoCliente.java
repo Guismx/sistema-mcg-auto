@@ -9,7 +9,7 @@ public class VeiculoCliente {
 
     @Id
     @GeneratedValue (strategy = GenerationType.IDENTITY)
-    private long idVeiculo;
+    private long id;
     private Usuario dono;
     private String marca;
     private String nome;
@@ -18,8 +18,8 @@ public class VeiculoCliente {
 
     public VeiculoCliente() {}
 
-    public VeiculoCliente(long idVeiculo, Usuario dono, String marca, String nome, String placa, String modelo) {
-        this.idVeiculo = idVeiculo;
+    public VeiculoCliente(long id, Usuario dono, String marca, String nome, String placa, String modelo) {
+        this.id = id;
         this.dono = dono;
         this.marca = marca;
         this.nome = nome;
@@ -27,8 +27,8 @@ public class VeiculoCliente {
         this.modelo = modelo;
     }
 
-    public long getIdVeiculo() {
-        return idVeiculo;
+    public long getId() {
+        return id;
     }
 
     public Usuario getDono() {
@@ -74,7 +74,7 @@ public class VeiculoCliente {
     @Override
     public String toString() {
         return "VeiculoCliente{" +
-                "idVeiculo=" + idVeiculo +
+                "id=" + id +
                 ", dono=" + dono +
                 ", marca='" + marca + '\'' +
                 ", nome='" + nome + '\'' +

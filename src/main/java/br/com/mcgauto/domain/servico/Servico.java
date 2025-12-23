@@ -13,7 +13,7 @@ public class Servico {
 
     @Id
     @GeneratedValue (strategy = GenerationType.IDENTITY)
-    private long idServico;
+    private long id;
     private CategoriaProduto categoriaProduto;
     private int codigoProduto;
     private String nome;
@@ -29,9 +29,9 @@ public class Servico {
     public Servico() {
     }
 
-    public Servico(long idServico, CategoriaProduto categoriaProduto, int codigoProduto, String nome, String descricao, String marca, BigDecimal precoCusto,
+    public Servico(long id, CategoriaProduto categoriaProduto, int codigoProduto, String nome, String descricao, String marca, BigDecimal precoCusto,
                    BigDecimal precoVenda, int qtdEstoque, StatusAtivacao isAtivo, LocalDateTime criadoEm, LocalDateTime atualizadoEm) {
-        this.idServico = idServico;
+        this.id = id;
         this.categoriaProduto = categoriaProduto;
         this.codigoProduto = codigoProduto;
         this.nome = nome;
@@ -45,8 +45,8 @@ public class Servico {
         this.atualizadoEm = atualizadoEm;
     }
 
-    public long getIdServico() {
-        return idServico;
+    public long getId() {
+        return id;
     }
 
     public CategoriaProduto getCategoriaProduto() {
