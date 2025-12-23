@@ -5,6 +5,8 @@ import br.com.mcgauto.domain.servico.Servico;
 import br.com.mcgauto.domain.usuario.Usuario;
 import br.com.mcgauto.domain.veiculo.VeiculoCliente;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.FutureOrPresent;
+import jakarta.validation.constraints.Positive;
 
 import java.time.LocalDateTime;
 
@@ -14,12 +16,17 @@ public class Agendamento {
 
     @Id
     @GeneratedValue (strategy = GenerationType.IDENTITY)
+    @Column (name = "id_agendamento", nullable = false)
     private long idAgendamento;
     private Usuario cliente;
     private Servico servico;
     private VeiculoCliente veiculoCliente;
+    @FutureOrPresent
     private LocalDateTime dataHoraServico;
+    @Column (nullable = false)
+    @Positive
     private int estimativaDeTempo;
+    @Enumerated(EnumType.STRING)
     private StatusAgendamento statusAgendamento;
 
     public Agendamento(){}
