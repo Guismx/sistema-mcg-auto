@@ -6,6 +6,7 @@ import br.com.mcgauto.domain.usuario.Usuario;
 import br.com.mcgauto.domain.veiculo.VeiculoCliente;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.FutureOrPresent;
+import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Positive;
 
 import java.time.LocalDateTime;
@@ -17,16 +18,34 @@ public class Agendamento {
     @Id
     @GeneratedValue (strategy = GenerationType.IDENTITY)
     @Column (name = "id_agendamento", nullable = false)
-    private long id;
+    private Long id;
+
+    @NotNull
+    @ManyToOne (fetch = FetchType.LAZY)
+    @JoinColumn (name = "cliente_id", nullable = false)
     private Usuario cliente;
+
+    @NotNull
+    @ManyToOne (fetch = FetchType.LAZY)
+    @JoinColumn (name = "servico_id", nullable = false)
     private Servico servico;
+
+    @NotNull
+    @ManyToOne (fetch = FetchType.LAZY)
+    @JoinColumn (name = "veiculo_cliente_id")
     private VeiculoCliente veiculoCliente;
+
     @FutureOrPresent
+    @Column (name = "data_hora_servico")
     private LocalDateTime dataHoraServico;
-    @Column (nullable = false)
+
     @Positive
+    @Column (name = "estimativa_tempo",nullable = false)
     private int estimativaDeTempo;
+
+    @NotNull
     @Enumerated(EnumType.STRING)
+    @Column (name = "status_agendamento", nullable = false)
     private StatusAgendamento statusAgendamento;
 
     public Agendamento(){}
@@ -50,16 +69,16 @@ public class Agendamento {
         return cliente;
     }
 
-    public void setCliente(Usuario cliente) {
+    public void setCliente(Usuario clienteId) {
         this.cliente = cliente;
     }
 
-    public Servico getServico() {
+    public Servico getServicoId() {
         return servico;
     }
 
-    public void setServico(Servico servico) {
-        this.servico = servico;
+    public void setServico(Servico servicoId) {
+        this.servico = servicoId;
     }
 
     public VeiculoCliente getVeiculoCliente() {
@@ -100,7 +119,7 @@ public class Agendamento {
                 "id=" + id +
                 ", data=" + dataHoraServico +
                 ", status=" + statusAgendamento +
-                ", clienteId=" + (cliente != null ? cliente.getId() : "null") +
+                ", cliente=" + cliente +
                 "]";
     }
 }
