@@ -1,8 +1,10 @@
 package br.com.mcgauto.domain.servico;
 
 import br.com.mcgauto.domain.produto.CategoriaProduto;
+import br.com.mcgauto.domain.servico.enums.TipoServico;
 import br.com.mcgauto.global.enums.StatusAtivacao;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
@@ -14,55 +16,40 @@ public class Servico {
     @Id
     @GeneratedValue (strategy = GenerationType.IDENTITY)
     private long id;
-    private CategoriaProduto categoriaProduto;
-    private int codigoProduto;
+    private TipoServico tipoServico;
     private String nome;
     private String descricao;
-    private String marca;
-    private BigDecimal precoCusto;
-    private BigDecimal precoVenda;
-    private int qtdEstoque;
-    private StatusAtivacao statusProduto;
-    private LocalDateTime criadoEm;
-    private LocalDateTime atualizadoEm;
+    private BigDecimal preco;
+    private int tempoServico;
+    private StatusAtivacao statusAtivacao;
 
     public Servico() {
     }
 
-    public Servico(long id, CategoriaProduto categoriaProduto, int codigoProduto, String nome, String descricao, String marca, BigDecimal precoCusto,
-                   BigDecimal precoVenda, int qtdEstoque, StatusAtivacao isAtivo, LocalDateTime criadoEm, LocalDateTime atualizadoEm) {
+    public Servico(long id, TipoServico tipoServico, String nome, String descricao, BigDecimal preco, int tempoServico, StatusAtivacao statusAtivacao) {
         this.id = id;
-        this.categoriaProduto = categoriaProduto;
-        this.codigoProduto = codigoProduto;
+        this.tipoServico = tipoServico;
         this.nome = nome;
         this.descricao = descricao;
-        this.marca = marca;
-        this.precoCusto = precoCusto;
-        this.precoVenda = precoVenda;
-        this.qtdEstoque = qtdEstoque;
-        this.statusProduto = StatusAtivacao.ATIVO;
-        this.criadoEm = criadoEm;
-        this.atualizadoEm = atualizadoEm;
+        this.preco = preco;
+        this.tempoServico = tempoServico;
+        this.statusAtivacao = statusAtivacao.ATIVO;
     }
 
     public long getId() {
         return id;
     }
 
-    public CategoriaProduto getCategoriaProduto() {
-        return categoriaProduto;
+    public void setId(long id) {
+        this.id = id;
     }
 
-    public void setCategoriaProduto(CategoriaProduto categoriaProduto) {
-        this.categoriaProduto = categoriaProduto;
+    public TipoServico getTipoServico() {
+        return tipoServico;
     }
 
-    public int getCodigoProduto() {
-        return codigoProduto;
-    }
-
-    public void setCodigoProduto(int codigoProduto) {
-        this.codigoProduto = codigoProduto;
+    public void setTipoServico(TipoServico tipoServico) {
+        this.tipoServico = tipoServico;
     }
 
     public String getNome() {
@@ -81,69 +68,40 @@ public class Servico {
         this.descricao = descricao;
     }
 
-    public String getMarca() {
-        return marca;
+    public BigDecimal getPreco() {
+        return preco;
     }
 
-    public void setMarca(String marca) {
-        this.marca = marca;
+    public void setPreco(BigDecimal preco) {
+        this.preco = preco;
     }
 
-    public BigDecimal getPrecoCusto() {
-        return precoCusto;
+    public int getTempoServico() {
+        return tempoServico;
     }
 
-    public void setPrecoCusto(BigDecimal precoCusto) {
-        this.precoCusto = precoCusto;
+    public void setTempoServico(int tempoServico) {
+        this.tempoServico = tempoServico;
     }
 
-    public BigDecimal getPrecoVenda() {
-        return precoVenda;
+    public StatusAtivacao getStatusAtivacao() {
+        return statusAtivacao;
     }
 
-    public void setPrecoVenda(BigDecimal precoVenda) {
-        this.precoVenda = precoVenda;
-    }
-
-    public int getQtdEstoque() {
-        return qtdEstoque;
-    }
-
-    public void setQtdEstoque(int qtdEstoque) {
-        this.qtdEstoque = qtdEstoque;
-    }
-
-    public StatusAtivacao getStatusProduto() {
-        return statusProduto;
-    }
-
-    public void setStatusProduto(StatusAtivacao statusProduto) {
-        this.statusProduto = statusProduto;
-    }
-
-    public LocalDateTime getCriadoEm() {
-        return criadoEm;
-    }
-
-    public LocalDateTime getAtualizadoEm() {
-        return atualizadoEm;
+    public void setStatusAtivacao(StatusAtivacao statusAtivacao) {
+        this.statusAtivacao = statusAtivacao;
     }
 
     @Override
     public String toString() {
         return "Servico{" +
-                "idServico=" + idServico +
-                ", categoriaProduto=" + categoriaProduto +
-                ", codigoProduto=" + codigoProduto +
+                "id=" + id +
+                ", tipoServico=" + tipoServico +
                 ", nome='" + nome + '\'' +
                 ", descricao='" + descricao + '\'' +
-                ", marca='" + marca + '\'' +
-                ", precoCusto=" + precoCusto +
-                ", precoVenda=" + precoVenda +
-                ", qtdEstoque=" + qtdEstoque +
-                ", isAtivo=" + statusProduto +
-                ", criadoEm=" + criadoEm +
-                ", atualizadoEm=" + atualizadoEm +
+                ", preco=" + preco +
+                ", tempoServico=" + tempoServico +
+                ", statusAtivacao=" + statusAtivacao +
                 '}';
     }
 }
