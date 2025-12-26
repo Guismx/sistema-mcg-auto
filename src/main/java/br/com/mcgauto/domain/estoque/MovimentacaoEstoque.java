@@ -5,6 +5,8 @@ import br.com.mcgauto.domain.produto.Produto;
 import br.com.mcgauto.domain.usuario.Usuario;
 import br.com.mcgauto.domain.estoque.enums.TipoMovimentacao;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.FutureOrPresent;
+import jakarta.validation.constraints.NotNull;
 
 import java.time.LocalDateTime;
 
@@ -14,34 +16,51 @@ public class MovimentacaoEstoque {
 
     @Id
     @GeneratedValue (strategy = GenerationType.IDENTITY)
-    private long idMovimentacao;
+    private long id;
+
+    @OneToOne
+    @JoinColumn(name = "produto_id")
     private Produto produto;
+
+    @ManyToOne
+    @JoinColumn(name = "responsavel_id")
     private Usuario responsavel;
+
+    @Enumerated (EnumType.STRING)
     private TipoMovimentacao tipoMovimentacao;
+
+    @NotNull
     private int quantidade;
-    private LocalDateTime DataHoraMovimentacao;
+
+    @FutureOrPresent
+    private LocalDateTime dataHoraMovimentacao;
+
     private String motivo;
+
+    @NotNull
     private int saldoAnterior;
+
+    @NotNull
     private int saldoAtual;
 
     public MovimentacaoEstoque() {
     }
 
-    public MovimentacaoEstoque(long idMovimentacao, Produto produto, Usuario responsavel, TipoMovimentacao tipoMovimentacao,
+    public MovimentacaoEstoque(long id, Produto produto, Usuario responsavel, TipoMovimentacao tipoMovimentacao,
                                int quantidade, LocalDateTime dataHoraMovimentacao, String motivo, int saldoAnterior, int saldoAtual) {
-        this.idMovimentacao = idMovimentacao;
+        this.id = id;
         this.produto = produto;
         this.responsavel = responsavel;
         this.tipoMovimentacao = tipoMovimentacao;
         this.quantidade = quantidade;
-        DataHoraMovimentacao = dataHoraMovimentacao;
+        this.dataHoraMovimentacao = dataHoraMovimentacao;
         this.motivo = motivo;
         this.saldoAnterior = saldoAnterior;
         this.saldoAtual = saldoAtual;
     }
 
     public long getIdMovimentacao() {
-        return idMovimentacao;
+        return id;
     }
 
     public Produto getProduto() {
@@ -77,7 +96,7 @@ public class MovimentacaoEstoque {
     }
 
     public LocalDateTime getDataHoraMovimentacao() {
-        return DataHoraMovimentacao;
+        return dataHoraMovimentacao;
     }
 
     public String getMotivo() {
@@ -112,7 +131,7 @@ public class MovimentacaoEstoque {
                 ", responsavel=" + responsavel +
                 ", tipoMovimentacao=" + tipoMovimentacao +
                 ", quantidade=" + quantidade +
-                ", DataHoraMovimentacao=" + DataHoraMovimentacao +
+                ", DataHoraMovimentacao=" + dataHoraMovimentacao +
                 ", motivo='" + motivo + '\'' +
                 ", saldoAnterior=" + saldoAnterior +
                 ", saldoAtual=" + saldoAtual +
