@@ -5,6 +5,9 @@ import br.com.mcgauto.domain.financeiro.enums.TipoOrigem;
 import br.com.mcgauto.domain.financeiro.enums.TipoPagamento;
 import br.com.mcgauto.domain.venda.Venda;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.FutureOrPresent;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Positive;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
@@ -16,13 +19,35 @@ public class Pagamento {
     @Id
     @GeneratedValue (strategy = GenerationType.IDENTITY)
     private long id;
+
+    @NotNull
+    @OneToOne
+    @JoinColumn (name = "venda_id")
     private Venda origem;
+
+    @NotNull
+    @Enumerated (EnumType.STRING)
     private TipoOrigem tipoOrigem;
+
+    @NotNull
+    @FutureOrPresent
     private LocalDateTime dataPagamento;
+
+    @NotNull
+    @Positive
     private BigDecimal valorPago;
+
+    @NotNull
+    @Enumerated (EnumType.STRING)
     private TipoPagamento formaPagamento;
+
+    @NotNull
+    @Enumerated (EnumType.STRING)
     private StatusPagamento statusPagamento;
     private String transacaoGateway;
+
+    @NotNull
+    @Positive
     private int parcelas;
 
     public Pagamento() {}
