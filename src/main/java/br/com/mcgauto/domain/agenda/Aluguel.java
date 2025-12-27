@@ -4,6 +4,9 @@ import br.com.mcgauto.domain.agenda.enums.StatusAluguel;
 import br.com.mcgauto.domain.usuario.Usuario;
 import br.com.mcgauto.domain.veiculo.Veiculo;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.FutureOrPresent;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Positive;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
@@ -16,25 +19,79 @@ public class Aluguel {
     @Id
     @GeneratedValue (strategy = GenerationType.AUTO)
     private long id;
+
+    @NotNull
+    @Positive
     private int numeroAluguel;
+
+    @ManyToOne
+    @JoinColumn (name = "usuario_id")
     private Usuario clienteId;
+
+    @ManyToOne
+    @JoinColumn (name = "veiculo_id")
     private Veiculo veiculoId;
+
+    @NotNull
+    @FutureOrPresent
+    @Column (name = "data_retirada_prevista")
     private LocalDate dataRetiradaPrevista;
+
+    @NotNull
+    @FutureOrPresent
+    @Column (name = "data_devolucao_prevista")
     private LocalDate dateDevolucaoPrevista;
+
+    @NotNull
+    @FutureOrPresent
+    @Column (name = "data_retirada")
     private LocalDate dataDaRetirada;
+
+    @NotNull
+    @FutureOrPresent
+    @Column (name = "data_retirada")
     private LocalDate dataDeDevolucao;
+
+    @NotNull
+    @Positive
     private int kmRetirada;
+
+    @NotNull
+    @Positive
     private int kmDevolucao;
+
+    @Positive
     private BigDecimal valorDiaria;
+
+    @Positive
     private BigDecimal valorCaucao;
+
+    @Positive
     private BigDecimal valorTotalPrevisto;
+
+    @Positive
     private BigDecimal valorAdicionalAvarias;
+
+    @Positive
     private BigDecimal valorAdicionalKmExcedentes;
+
+    @Enumerated (EnumType.STRING)
+    @Column (name = "status_aluguel")
     private StatusAluguel statusAluguel;
+
+    @ManyToOne
+    @JoinColumn (name = "funcionario_aprovou")
     private Usuario funcionarioDeConfirmacao;
+
+    @ManyToOne
+    @JoinColumn (name = "funcionario_checkin")
     private Usuario funcionarioDeCheckin;
     private String observacoesCheckin;
+
+    @NotNull
     private LocalDateTime criadoEm;
+
+    @NotNull
     private LocalDateTime atualizadoEm;
 
     public Aluguel(){
@@ -217,8 +274,8 @@ public class Aluguel {
         return "Aluguel{" +
                 "id=" + id +
                 ", numeroAluguel=" + numeroAluguel +
-                ", clienteId=" + clienteId +
-                ", veiculoId=" + veiculoId +
+                ", clienteId=" + (clienteId != null ? clienteId.getNome() : null) +
+                ", veiculoId=" + (veiculoId != null ? veiculoId.getId() : null) +
                 ", dataRetiradaPrevista=" + dataRetiradaPrevista +
                 ", dateDevolucaoPrevista=" + dateDevolucaoPrevista +
                 ", dataDaRetirada=" + dataDaRetirada +
@@ -231,8 +288,8 @@ public class Aluguel {
                 ", valorAdicionalAvarias=" + valorAdicionalAvarias +
                 ", valorAdicionalKmExcedentes=" + valorAdicionalKmExcedentes +
                 ", statusAluguel=" + statusAluguel +
-                ", funcionarioDeConfirmacao=" + funcionarioDeConfirmacao +
-                ", funcionarioDeCheckin=" + funcionarioDeCheckin +
+                ", funcionarioDeConfirmacao=" + (funcionarioDeConfirmacao != null ? funcionarioDeConfirmacao.getNome() : null) +
+                ", funcionarioDeCheckin=" + (funcionarioDeCheckin != null ? funcionarioDeCheckin.getNome() : null) +
                 ", observacoesCheckin='" + observacoesCheckin + '\'' +
                 ", criadoEm=" + criadoEm +
                 ", atualizadoEm=" + atualizadoEm +
