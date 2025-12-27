@@ -15,7 +15,6 @@ import java.time.LocalDateTime;
 @Table (name = "movimentacoes_estoque")
 public class MovimentacaoEstoque {
 
-    //TODO: REVISAR CERTINHO OS RELACIONAMENTOS
     @Id
     @GeneratedValue (strategy = GenerationType.IDENTITY)
     private long id;
