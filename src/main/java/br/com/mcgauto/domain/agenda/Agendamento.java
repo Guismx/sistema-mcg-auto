@@ -119,7 +119,8 @@ public class Agendamento {
                 "id=" + id +
                 ", data=" + dataHoraServico +
                 ", status=" + statusAgendamento +
-                ", cliente=" + cliente +
+                ", cliente=" + (cliente != null ? cliente.getNome() : null) +
+                ", servicoId=" + (servico != null ? servico.getId() : null) +
                 "]";
     }
 }

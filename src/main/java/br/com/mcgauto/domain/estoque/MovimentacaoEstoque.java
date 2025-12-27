@@ -7,6 +7,7 @@ import br.com.mcgauto.domain.estoque.enums.TipoMovimentacao;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.FutureOrPresent;
 import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Positive;
 
 import java.time.LocalDateTime;
 
@@ -14,6 +15,7 @@ import java.time.LocalDateTime;
 @Table (name = "movimentacoes_estoque")
 public class MovimentacaoEstoque {
 
+    //TODO: REVISAR CERTINHO OS RELACIONAMENTOS
     @Id
     @GeneratedValue (strategy = GenerationType.IDENTITY)
     private long id;
@@ -38,9 +40,11 @@ public class MovimentacaoEstoque {
     private String motivo;
 
     @NotNull
+    @Positive
     private int saldoAnterior;
 
     @NotNull
+    @Positive
     private int saldoAtual;
 
     public MovimentacaoEstoque() {
