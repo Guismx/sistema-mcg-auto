@@ -133,7 +133,7 @@ public class Pagamento {
     public String toString() {
         return "Pagamento{" +
                 "id=" + id +
-                ", origem=" + origem +
+                ", origem=" + (origem != null ? origem.getId() : null) +
                 ", tipoOrigem=" + tipoOrigem +
                 ", dataPagamento=" + dataPagamento +
                 ", valorPago=" + valorPago +
