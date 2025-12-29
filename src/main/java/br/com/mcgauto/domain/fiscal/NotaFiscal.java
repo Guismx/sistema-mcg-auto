@@ -4,6 +4,8 @@ import br.com.mcgauto.domain.financeiro.Pagamento;
 import br.com.mcgauto.domain.financeiro.enums.TipoOrigem;
 import br.com.mcgauto.domain.fiscal.enums.StatusNotaFiscal;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Positive;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
@@ -15,14 +17,36 @@ public class NotaFiscal {
     @Id
     @GeneratedValue (strategy = GenerationType.IDENTITY)
     private long id;
+    @OneToOne
+    @JoinColumn (name = "pagamento_id")
     private Pagamento origem;
+
+    @NotNull
+    @Enumerated (EnumType.STRING)
     private TipoOrigem tipoOrigem;
+
+    @NotNull
+    @Positive
     private int numeroNotaFiscal;
+
+    @NotNull
+    @Positive
     private String serieNotaFiscal;
+
+    @NotNull
     private LocalDateTime dataEmissao;
+
+    @NotNull
     private String chaveAcesso;
+
+    @NotNull
     private String protocoloAutorizacao;
+
+    @NotNull
+    @Enumerated (EnumType.STRING)
     private StatusNotaFiscal statusNotaFiscal;
+
+    @Positive
     private BigDecimal valorTotal;
     private String caminhoXml;
     private String caminhoDanfe;
