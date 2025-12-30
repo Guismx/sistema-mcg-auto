@@ -2,6 +2,7 @@ package br.com.mcgauto.domain.produto;
 
 import br.com.mcgauto.global.enums.StatusAtivacao;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.*;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
@@ -13,21 +14,47 @@ public class Produto {
     @Id
     @GeneratedValue (strategy = GenerationType.IDENTITY)
     private long id;
-    private int categoriaid;
+
+    @ManyToOne
+    @JoinColumn (name = "categoria_produto", nullable = false)
+    private CategoriaProduto categoriaid;
+
+    @NotNull
+    @Positive
     private int codigoProduto;
+
+    @NotNull
+    @Size (min = 1, max = 60)
     private String nome;
     private String descricao;
+
+    @NotNull
+    @Size (min = 1, max = 60)
     private String marca;
+
+    @NotNull
+    @Positive
     private BigDecimal precoCusto;
+
+    @NotNull
+    @Positive
     private BigDecimal precoVenda;
+
+    @PositiveOrZero
     private int qtdEstoque;
+
+    @Enumerated (EnumType.STRING)
     private StatusAtivacao statusProduto;
+
+    @NotNull
     private LocalDateTime criadoEm;
+
+    @NotNull
     private LocalDateTime atualizadoEm;
 
     public Produto() {}
 
-    public Produto(long id, int categoriaid, int codigoProduto, String nome, String descricao, String marca,
+    public Produto(long id, CategoriaProduto categoriaid, int codigoProduto, String nome, String descricao, String marca,
                    BigDecimal precoCusto, BigDecimal precoVenda, int qtdEstoque, StatusAtivacao ativo,
                    LocalDateTime criadoEm, LocalDateTime atualizadoEm) {
         this.id = id;
@@ -48,11 +75,11 @@ public class Produto {
         return id;
     }
 
-    public int getCategoriaid() {
+    public CategoriaProduto getCategoriaid() {
         return categoriaid;
     }
 
-    public void setCategoriaid(int categoriaid) {
+    public void setCategoriaid(CategoriaProduto categoriaid) {
         this.categoriaid = categoriaid;
     }
 
@@ -119,19 +146,18 @@ public class Produto {
     public void setStatusProduto(StatusAtivacao statusProduto) {
         this.statusProduto = statusProduto;
     }
-    public LocalDateTime getCreatedAt() {
+    public LocalDateTime getCriadoEm() {
         return criadoEm;
     }
 
-    public LocalDateTime getUpdatedAt() {
+    public LocalDateTime getAtualizadoEm() {
         return atualizadoEm;
     }
-
     @Override
     public String toString() {
         return "Produto{" +
                 "id=" + id +
-                ", categoriaid=" + categoriaid +
+                ", categoriaid=" + (categoriaid != null ? categoriaid.getNome() : "sem categoria") +
                 ", codigoProduto=" + codigoProduto +
                 ", nome='" + nome + '\'' +
                 ", descricao='" + descricao + '\'' +
