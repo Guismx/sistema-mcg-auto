@@ -20,9 +20,8 @@ public class Pagamento {
     @GeneratedValue (strategy = GenerationType.IDENTITY)
     private long id;
 
-    @NotNull
     @OneToOne
-    @JoinColumn (name = "venda_id")
+    @JoinColumn (name = "venda_id", nullable = false)
     private Venda origem;
 
     @NotNull

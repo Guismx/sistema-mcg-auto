@@ -17,8 +17,9 @@ public class NotaFiscal {
     @Id
     @GeneratedValue (strategy = GenerationType.IDENTITY)
     private long id;
+
     @OneToOne
-    @JoinColumn (name = "pagamento_id")
+    @JoinColumn (name = "pagamento_id", nullable = false)
     private Pagamento origem;
 
     @NotNull

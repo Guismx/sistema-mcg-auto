@@ -20,11 +20,11 @@ public class MovimentacaoEstoque {
     private long id;
 
     @OneToOne
-    @JoinColumn(name = "produto_id")
+    @JoinColumn(name = "produto_id", nullable = false)
     private Produto produto;
 
     @ManyToOne
-    @JoinColumn(name = "responsavel_id")
+    @JoinColumn(name = "responsavel_id", nullable = false)
     private Usuario responsavel;
 
     @Enumerated (EnumType.STRING)

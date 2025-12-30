@@ -20,19 +20,16 @@ public class Agendamento {
     @Column (name = "id_agendamento", nullable = false)
     private Long id;
 
-    @NotNull
     @ManyToOne (fetch = FetchType.LAZY)
     @JoinColumn (name = "cliente_id", nullable = false)
     private Usuario cliente;
 
-    @NotNull
     @ManyToOne (fetch = FetchType.LAZY)
     @JoinColumn (name = "servico_id", nullable = false)
     private Servico servico;
 
-    @NotNull
     @ManyToOne (fetch = FetchType.LAZY)
-    @JoinColumn (name = "veiculo_cliente_id")
+    @JoinColumn (name = "veiculo_cliente_id", nullable = false)
     private VeiculoCliente veiculoCliente;
 
     @FutureOrPresent

@@ -25,11 +25,11 @@ public class Aluguel {
     private int numeroAluguel;
 
     @ManyToOne
-    @JoinColumn (name = "usuario_id")
+    @JoinColumn (name = "usuario_id", nullable = false)
     private Usuario clienteId;
 
     @ManyToOne
-    @JoinColumn (name = "veiculo_id")
+    @JoinColumn (name = "veiculo_id", nullable = false)
     private Veiculo veiculoId;
 
     @NotNull
