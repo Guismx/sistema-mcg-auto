@@ -3,6 +3,9 @@ package br.com.mcgauto.domain.servico;
 import br.com.mcgauto.domain.produto.Produto;
 import br.com.mcgauto.domain.servico.enums.TipoOrdem;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Positive;
+import jakarta.validation.constraints.PositiveOrZero;
 
 import java.math.BigDecimal;
 
@@ -13,17 +16,35 @@ public class ItemOrdemServico {
     @Id
     @GeneratedValue (strategy = GenerationType.IDENTITY)
     private long id;
+
+    @OneToOne
+    @JoinColumn (name = "produto_id", nullable = false)
     private Produto produto;
+
+    @OneToOne
+    @JoinColumn (name = "servico_id", nullable = false)
     private Servico servico;
+
+    @NotNull
+    @Enumerated (EnumType.STRING)
     private TipoOrdem tipoOrdem;
     private String descricao;
+
+    @NotNull
+    @PositiveOrZero
     private int quantidade;
+
+    @NotNull
+    @Positive
     private BigDecimal precoUnitario;
+
+    @NotNull
+    @Positive
     private BigDecimal valorTotal;
 
     public ItemOrdemServico (){}
 
-    public ItemOrdemServico(long id, Produto produto, Servico servico, TipoOrdem tipoItem, String descricao, int quantidade, BigDecimal precoUnitario, BigDecimal valorTotal) {
+    public ItemOrdemServico(long id, Produto produto, Servico servico, TipoOrdem tipoOrdem, String descricao, int quantidade, BigDecimal precoUnitario, BigDecimal valorTotal) {
         this.id = id;
         this.produto = produto;
         this.servico = servico;
@@ -98,8 +119,8 @@ public class ItemOrdemServico {
     public String toString() {
         return "ItemOrdemServico{" +
                 "id=" + id +
-                ", produto=" + produto +
-                ", servico=" + servico +
+                ", produto=" + (produto != null ? produto.getNome() : null) +
+                ", servico=" + (servico != null ? servico.getNome() : null) +
                 ", tipoItem=" + tipoOrdem +
                 ", descricao='" + descricao + '\'' +
                 ", quantidade=" + quantidade +
