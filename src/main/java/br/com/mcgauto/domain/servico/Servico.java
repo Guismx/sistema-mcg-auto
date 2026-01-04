@@ -5,6 +5,9 @@ import br.com.mcgauto.domain.servico.enums.TipoServico;
 import br.com.mcgauto.global.enums.StatusAtivacao;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Positive;
+import jakarta.validation.constraints.PositiveOrZero;
+import jakarta.validation.constraints.Size;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
@@ -16,11 +19,25 @@ public class Servico {
     @Id
     @GeneratedValue (strategy = GenerationType.IDENTITY)
     private long id;
+
+    @NotNull
+    @Enumerated (EnumType.STRING)
     private TipoServico tipoServico;
+
+    @NotNull
+    @Size (max = 60)
     private String nome;
     private String descricao;
+
+    @NotNull
+    @PositiveOrZero
     private BigDecimal preco;
+
+    @NotNull
+    @Positive
     private int tempoServico;
+
+    @Enumerated (EnumType.STRING)
     private StatusAtivacao statusAtivacao;
 
     public Servico() {
