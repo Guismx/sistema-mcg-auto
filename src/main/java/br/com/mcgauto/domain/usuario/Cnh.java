@@ -1,6 +1,8 @@
 package br.com.mcgauto.domain.usuario;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Positive;
 
 import java.time.LocalDate;
 
@@ -11,8 +13,16 @@ public class Cnh {
     @Id
     @GeneratedValue (strategy = GenerationType.IDENTITY)
     private long id;
+
+    @OneToOne
+    @JoinColumn (name = "usuario_id", nullable = false)
     private Usuario titular;
+
+    @NotNull
+    @Positive
     private int numeroCnh;
+
+    @NotNull
     private LocalDate validade;
 
     public Cnh(){}
@@ -56,7 +66,7 @@ public class Cnh {
     public String toString() {
         return "Cnh{" +
                 "id=" + id +
-                ", titular=" + titular +
+                ", titular=" + (titular != null ? titular.getNome() : null) +
                 ", numeroCnh=" + numeroCnh +
                 ", validade=" + validade +
                 '}';
