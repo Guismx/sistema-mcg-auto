@@ -2,6 +2,7 @@ package br.com.mcgauto.domain.usuario;
 
 import br.com.mcgauto.domain.usuario.enums.TipoConta;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.*;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -13,13 +14,27 @@ public class Usuario {
     @Id
     @GeneratedValue (strategy = GenerationType.IDENTITY)
     private long id;
+
+    @NotBlank
+    @Size (min = 4, max = 70)
     private String nome;
+
+    @NotBlank
+    @Size (min = 4, max = 70)
     private String sobrenome;
+
+    @NotNull
+    @Past
     private LocalDate dataNascimento;
     private String telefonePrincipal;
     private String telefoneSecundario;
+
+    @NotBlank
+    @Email
     private String email;
     private String senha;
+
+    @Enumerated (EnumType.STRING)
     private TipoConta tipoConta;
     private LocalDateTime dataCadastro;
     private boolean emailValidado;
