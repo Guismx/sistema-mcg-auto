@@ -3,6 +3,9 @@ package br.com.mcgauto.domain.usuario;
 
 import br.com.mcgauto.domain.usuario.enums.TipoEndereco;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Positive;
 
 @Entity
 @Table(name = "enderecos")
@@ -11,13 +14,25 @@ public class Endereco {
     @Id
     @GeneratedValue (strategy = GenerationType.IDENTITY)
     private long id;
+
+    @ManyToOne
+    @JoinColumn (name = "usuario_id", nullable = false)
     private Usuario proprietario;
+
+    @NotNull
+    @Enumerated (EnumType.STRING)
     private TipoEndereco tipoEndereco;
     private String logradouro;
     private int numero;
     private String complemento;
+
+    @NotBlank
     private String bairro;
+
+    @NotBlank
     private String cidade;
+
+    @Positive
     private String cep;
     private boolean ativo;
     //TODO: Implementar UF
