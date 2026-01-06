@@ -3,6 +3,7 @@ package br.com.mcgauto.domain.veiculo;
 
 import br.com.mcgauto.domain.veiculo.enums.TipoVeiculo;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
 
 @Entity
 @Table (name = "modelo_veiculo")
@@ -11,9 +12,16 @@ public class ModeloVeiculo {
     @Id
     @GeneratedValue (strategy = GenerationType.IDENTITY)
     private long id;
+
+    @ManyToOne (fetch = FetchType.LAZY)
+    @JoinColumn (name =  "marca_id", nullable = false)
     private MarcaVeiculo marca;
+
+    @NotBlank
     private String nome;
-    private TipoVeiculo tipoVeiculo;
+
+    @Enumerated (EnumType.STRING)
+    private TipoVeiculo tipoVeiculo; //TODO: Alterar nome para categoria
 
     public ModeloVeiculo(){
     }
@@ -57,7 +65,7 @@ public class ModeloVeiculo {
     public String toString() {
         return "ModeloVeiculo{" +
                 "id=" + id +
-                ", marca=" + marca +
+                ", marca=" + (marca != null ? marca.getNome() : null) +
                 ", nome='" + nome + '\'' +
                 ", tipoVeiculo=" + tipoVeiculo +
                 '}';
