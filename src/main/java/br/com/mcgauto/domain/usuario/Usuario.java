@@ -3,6 +3,7 @@ package br.com.mcgauto.domain.usuario;
 import br.com.mcgauto.domain.usuario.enums.TipoConta;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.*;
+import org.hibernate.validator.constraints.br.CPF;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -23,19 +24,24 @@ public class Usuario {
     @Size (min = 4, max = 70)
     private String sobrenome;
 
+    @CPF
+    private String cpf;
+
     @NotNull
     @Past
     private LocalDate dataNascimento;
-    private String telefonePrincipal;
-    private String telefoneSecundario;
 
     @NotBlank
     @Email
     private String email;
+
+    @NotNull
     private String senha;
 
     @Enumerated (EnumType.STRING)
     private TipoConta tipoConta;
+    private String telefonePrincipal;
+    private String telefoneSecundario;
     private LocalDateTime dataCadastro;
     private boolean emailValidado;
 
@@ -44,7 +50,7 @@ public class Usuario {
     }
 
     public Usuario(long id, String nome, String sobrenome, LocalDate dataNascimento, String telefonePrincipal, String telefoneSecundario,
-                   String email, String senha, LocalDateTime dataCadastro, boolean emailValidado) {
+                   String email, String senha, TipoConta tipoConta , LocalDateTime dataCadastro, boolean emailValidado) {
         this.id = id;
         this.nome = nome;
         this.sobrenome = sobrenome;
@@ -53,6 +59,7 @@ public class Usuario {
         this.telefoneSecundario = telefoneSecundario;
         this.email = email;
         this.senha = senha;
+        this.tipoConta = tipoConta;
         this.dataCadastro = dataCadastro;
         this.emailValidado = emailValidado;
     }
@@ -115,6 +122,14 @@ public class Usuario {
 
     public void setSenha(String senha) {
         this.senha = senha;
+    }
+
+    public TipoConta getTipoConta() {
+        return tipoConta;
+    }
+
+    public void setTipoConta(TipoConta tipoConta) {
+        this.tipoConta = tipoConta;
     }
 
     public LocalDateTime getDataCadastro() {
