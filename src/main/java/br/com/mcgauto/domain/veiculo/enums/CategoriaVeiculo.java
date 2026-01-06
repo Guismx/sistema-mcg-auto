@@ -1,6 +1,6 @@
 package br.com.mcgauto.domain.veiculo.enums;
 
-public enum TipoVeiculo {
+public enum CategoriaVeiculo {
     CARRO,
     MOTO,
     UTILITARIO

@@ -1,7 +1,7 @@
 package br.com.mcgauto.domain.veiculo;
 
 
-import br.com.mcgauto.domain.veiculo.enums.TipoVeiculo;
+import br.com.mcgauto.domain.veiculo.enums.CategoriaVeiculo;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 
@@ -21,12 +21,12 @@ public class ModeloVeiculo {
     private String nome;
 
     @Enumerated (EnumType.STRING)
-    private TipoVeiculo tipoVeiculo; //TODO: Alterar nome para categoria
+    private CategoriaVeiculo tipoVeiculo; //TODO: Alterar nome para categoria
 
     public ModeloVeiculo(){
     }
 
-    public ModeloVeiculo(long id, MarcaVeiculo marca, String nome, TipoVeiculo tipoVeiculo) {
+    public ModeloVeiculo(long id, MarcaVeiculo marca, String nome, CategoriaVeiculo tipoVeiculo) {
         this.id = id;
         this.marca = marca;
         this.nome = nome;
@@ -53,11 +53,11 @@ public class ModeloVeiculo {
         this.nome = nome;
     }
 
-    public TipoVeiculo getTipoVeiculo() {
+    public CategoriaVeiculo getTipoVeiculo() {
         return tipoVeiculo;
     }
 
-    public void setTipoVeiculo(TipoVeiculo tipoVeiculo) {
+    public void setTipoVeiculo(CategoriaVeiculo tipoVeiculo) {
         this.tipoVeiculo = tipoVeiculo;
     }
 
