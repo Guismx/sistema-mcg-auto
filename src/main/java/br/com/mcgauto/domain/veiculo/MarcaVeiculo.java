@@ -5,22 +5,26 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 
 @Entity
-@Table (name = "marca_veiculo")
+@Table (name = "marcas_veiculo")
 public class MarcaVeiculo {
 
     @Id
     @GeneratedValue (strategy = GenerationType.IDENTITY)
     private long id;
 
-    @NotBlank
-    @Size (min = 3, max = 50)
+    @NotBlank (message = "Nome da marca é obrigatório")
+    @Column (unique = true, length = 50)
     private String nome;
+
+    @Column (name = "pais_origem", nullable = false)
+    private String paisOrigem;
 
     public MarcaVeiculo(){}
 
-    public MarcaVeiculo(long id, String nome) {
+    public MarcaVeiculo(long id, String nome, String paisOrigem) {
         this.id = id;
         this.nome = nome;
+        this.paisOrigem = paisOrigem;
     }
 
     public long getId() {
@@ -35,11 +39,20 @@ public class MarcaVeiculo {
         this.nome = nome;
     }
 
+    public String getPaisOrigem() {
+        return paisOrigem;
+    }
+
+    public void setPaisOrigem(String paisOrigem) {
+        this.paisOrigem = paisOrigem;
+    }
+
     @Override
     public String toString() {
         return "MarcaVeiculo{" +
                 "id=" + id +
                 ", nome='" + nome + '\'' +
+                ", paisOrigem='" + paisOrigem + '\'' +
                 '}';
     }
 }
