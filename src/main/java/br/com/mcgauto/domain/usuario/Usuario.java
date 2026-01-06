@@ -49,11 +49,12 @@ public class Usuario {
 
     }
 
-    public Usuario(long id, String nome, String sobrenome, LocalDate dataNascimento, String telefonePrincipal, String telefoneSecundario,
+    public Usuario(long id, String nome, String sobrenome, String CPF, LocalDate dataNascimento, String telefonePrincipal, String telefoneSecundario,
                    String email, String senha, TipoConta tipoConta , LocalDateTime dataCadastro, boolean emailValidado) {
         this.id = id;
         this.nome = nome;
         this.sobrenome = sobrenome;
+        this.cpf = cpf;
         this.dataNascimento = dataNascimento;
         this.telefonePrincipal = telefonePrincipal;
         this.telefoneSecundario = telefoneSecundario;
@@ -82,6 +83,14 @@ public class Usuario {
 
     public void setSobrenome(String sobrenome) {
         this.sobrenome = sobrenome;
+    }
+
+    public @CPF String getCpf() {
+        return cpf;
+    }
+
+    public void setCpf(@CPF String cpf) {
+        this.cpf = cpf;
     }
 
     public LocalDate getDataNascimento() {
