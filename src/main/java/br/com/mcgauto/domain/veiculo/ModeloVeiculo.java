@@ -25,16 +25,16 @@ public class ModeloVeiculo {
 
     @NotNull
     @Enumerated (EnumType.STRING)
-    private CategoriaVeiculo tipoVeiculo; //TODO: Alterar nome para categoria
+    private CategoriaVeiculo categoriaVeiculo; //TODO: Alterar nome para categoria
 
     public ModeloVeiculo(){
     }
 
-    public ModeloVeiculo(long id, MarcaVeiculo marca, String nome, CategoriaVeiculo tipoVeiculo) {
+    public ModeloVeiculo(long id, MarcaVeiculo marca, String nome, CategoriaVeiculo categoriaVeiculo) {
         this.id = id;
         this.marca = marca;
         this.nome = nome;
-        this.tipoVeiculo = tipoVeiculo;
+        this.categoriaVeiculo = categoriaVeiculo;
     }
 
     public long getId() {
@@ -58,11 +58,11 @@ public class ModeloVeiculo {
     }
 
     public CategoriaVeiculo getTipoVeiculo() {
-        return tipoVeiculo;
+        return categoriaVeiculo;
     }
 
     public void setTipoVeiculo(CategoriaVeiculo tipoVeiculo) {
-        this.tipoVeiculo = tipoVeiculo;
+        this.categoriaVeiculo = tipoVeiculo;
     }
 
     @Override
@@ -71,7 +71,7 @@ public class ModeloVeiculo {
                 "id=" + id +
                 ", marca=" + (marca != null ? marca.getNome() : null) +
                 ", nome='" + nome + '\'' +
-                ", tipoVeiculo=" + tipoVeiculo +
+                ", tipoVeiculo=" + categoriaVeiculo +
                 '}';
     }
 }
