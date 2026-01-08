@@ -4,6 +4,7 @@ package br.com.mcgauto.domain.veiculo;
 import br.com.mcgauto.domain.veiculo.enums.CategoriaVeiculo;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 
 @Entity
 @Table (name = "modelo_veiculo")
@@ -13,13 +14,16 @@ public class ModeloVeiculo {
     @GeneratedValue (strategy = GenerationType.IDENTITY)
     private long id;
 
+    @NotBlank
     @ManyToOne (fetch = FetchType.LAZY)
     @JoinColumn (name =  "marca_id", nullable = false)
     private MarcaVeiculo marca;
 
     @NotBlank
+    @Column (length = 50, nullable = false)
     private String nome;
 
+    @NotNull
     @Enumerated (EnumType.STRING)
     private CategoriaVeiculo tipoVeiculo; //TODO: Alterar nome para categoria
 
