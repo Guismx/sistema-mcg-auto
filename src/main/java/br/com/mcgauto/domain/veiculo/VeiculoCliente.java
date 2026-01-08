@@ -2,6 +2,8 @@ package br.com.mcgauto.domain.veiculo;
 
 import br.com.mcgauto.domain.usuario.Usuario;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotBlank;
 
 @Entity
 @Table (name = "veiculo_cliente")
@@ -10,10 +12,26 @@ public class VeiculoCliente {
     @Id
     @GeneratedValue (strategy = GenerationType.IDENTITY)
     private long id;
+
+    @OneToOne (fetch = FetchType.LAZY)
+    @JoinColumn (name = "usuario_id")
     private Usuario dono;
+
+    @NotBlank (message = "O nome da marca deve ser informado")
+    @Column (length = 50, nullable = false)
     private String marca;
+
+    @NotBlank (message = "O nome do veículo deve ser informado")
+    @Column (length = 50, nullable = false)
     private String nome;
+
+    @NotBlank (message = "O número da placa deve ser informado")
+    @Column (length = 7, nullable = false, unique = true)
+    @Min(7)
     private String placa;
+
+    @NotBlank (message = "O modelo do veículo deve ser informado")
+    @Column (length = 50, nullable = false)
     private String modelo;
 
     public VeiculoCliente() {}
@@ -75,7 +93,7 @@ public class VeiculoCliente {
     public String toString() {
         return "VeiculoCliente{" +
                 "id=" + id +
-                ", dono=" + dono +
+                ", dono=" + (dono != null ? dono.getNome() : null) +
                 ", marca='" + marca + '\'' +
                 ", nome='" + nome + '\'' +
                 ", placa='" + placa + '\'' +
