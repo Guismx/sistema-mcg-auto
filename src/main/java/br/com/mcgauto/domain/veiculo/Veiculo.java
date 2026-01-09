@@ -18,6 +18,10 @@ public class Veiculo {
     @GeneratedValue (strategy = GenerationType.IDENTITY)
     private long id;
 
+    @NotBlank
+    @Column (length = 50, nullable = false)
+    private String nome;
+
     @ManyToOne (fetch = FetchType.LAZY)
     @JoinColumn (name = "modelo_id", nullable = false)
     private ModeloVeiculo modeloId;
@@ -80,12 +84,13 @@ public class Veiculo {
 
     public Veiculo() {}
 
-    public Veiculo(long id, ModeloVeiculo modeloId, int anoModelo, String cor, String placa, String chassi, String tipoModelo,
+    public Veiculo(long id, String nome, ModeloVeiculo modeloId, int anoModelo, String cor, String placa, String chassi, String tipoModelo,
                    int quilometragem, TipoCombustivel tipoCombustivel, BigDecimal precoCusto, BigDecimal precoVenda,
                    EstadoVeiculo estadoVeiculo, StatusVeiculo statusVeiculo, TipoPropriedade tipoPropriedade,
                    String descricaoDetalhada, LocalDateTime dataEntradaEstoque, LocalDateTime dataBaixaEstoque,
                    LocalDateTime criadoEm, LocalDateTime atualizadoEm) {
         this.id = id;
+        this.nome = nome;
         this.modeloId = modeloId;
         this.anoModelo = anoModelo;
         this.cor = cor;
@@ -108,6 +113,14 @@ public class Veiculo {
 
     public long getId() {
         return id;
+    }
+
+    public String getNome() {
+        return nome;
+    }
+
+    public void setNome(String nome) {
+        this.nome = nome;
     }
 
     public ModeloVeiculo getModeloId() {
