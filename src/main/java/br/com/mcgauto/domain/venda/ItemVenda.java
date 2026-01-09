@@ -4,6 +4,8 @@ import br.com.mcgauto.domain.produto.Produto;
 import br.com.mcgauto.domain.veiculo.Veiculo;
 import br.com.mcgauto.domain.venda.enums.VendaItem;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.PositiveOrZero;
 
 import java.math.BigDecimal;
 
@@ -14,13 +16,33 @@ public class ItemVenda {
     @Id
     @GeneratedValue (strategy = GenerationType.IDENTITY)
     private long id;
+
+    @NotNull
+    @Enumerated (EnumType.STRING)
+    @Column (name = "tipo_item", nullable = false)
     private VendaItem tipoItem;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn (name = "produto_id")
     private Produto produto;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn (name = "veiculo_id")
     private Veiculo veiculo;
+
+    @PositiveOrZero
     private int quantidade;
+
+    @NotNull
     private BigDecimal precoUnitario;
+
+    @NotNull
     private BigDecimal precoVenda;
+
+    @NotNull
     private BigDecimal valorDesconto;
+
+    @NotNull
     private BigDecimal valorTotal;
 
     public ItemVenda(){}
@@ -111,8 +133,8 @@ public class ItemVenda {
         return "ItemVenda{" +
                 "id=" + id +
                 ", tipoItem=" + tipoItem +
-                ", produto=" + produto +
-                ", veiculo=" + veiculo +
+                ", produto=" + (produto != null ? produto.getNome() : null) +
+                ", veiculo=" + (veiculo != null ? veiculo.getNome() : null) +
                 ", quantidade=" + quantidade +
                 ", precoUnitario=" + precoUnitario +
                 ", precoVenda=" + precoVenda +
