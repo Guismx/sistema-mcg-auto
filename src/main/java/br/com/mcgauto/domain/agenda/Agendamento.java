@@ -18,7 +18,7 @@ public class Agendamento {
     @Id
     @GeneratedValue (strategy = GenerationType.IDENTITY)
     @Column (name = "id_agendamento", nullable = false)
-    private Long id;
+    private long id;
 
     @ManyToOne (fetch = FetchType.LAZY)
     @JoinColumn (name = "cliente_id", nullable = false)
