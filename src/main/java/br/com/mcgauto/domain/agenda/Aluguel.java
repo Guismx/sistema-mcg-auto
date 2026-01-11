@@ -18,7 +18,7 @@ public class Aluguel {
 
     @Id
     @GeneratedValue (strategy = GenerationType.AUTO)
-    private long id;
+    private Long id;
 
     @NotNull
     @Positive
