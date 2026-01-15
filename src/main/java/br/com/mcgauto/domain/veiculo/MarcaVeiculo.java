@@ -11,9 +11,6 @@ public class MarcaVeiculo {
     @Id
     @GeneratedValue (strategy = GenerationType.IDENTITY)
     private long id;
-
-    @NotBlank (message = "Nome da marca é obrigatório")
-    @Column (unique = true, length = 50)
     private String nome;
 
     @Column (name = "pais_origem", nullable = false)

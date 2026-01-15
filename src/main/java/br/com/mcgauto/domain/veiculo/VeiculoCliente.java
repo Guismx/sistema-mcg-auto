@@ -17,20 +17,15 @@ public class VeiculoCliente {
     @JoinColumn (name = "usuario_id")
     private Usuario dono;
 
-    @NotBlank (message = "O nome da marca deve ser informado")
     @Column (length = 50, nullable = false)
     private String marca;
 
-    @NotBlank (message = "O nome do veículo deve ser informado")
     @Column (length = 50, nullable = false)
     private String nome;
 
-    @NotBlank (message = "O número da placa deve ser informado")
     @Column (length = 7, nullable = false, unique = true)
-    @Min(7)
     private String placa;
 
-    @NotBlank (message = "O modelo do veículo deve ser informado")
     @Column (length = 50, nullable = false)
     private String modelo;
 

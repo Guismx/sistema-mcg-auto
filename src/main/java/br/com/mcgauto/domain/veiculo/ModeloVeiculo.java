@@ -14,16 +14,12 @@ public class ModeloVeiculo {
     @GeneratedValue (strategy = GenerationType.IDENTITY)
     private long id;
 
-    @NotBlank
     @ManyToOne (fetch = FetchType.LAZY)
     @JoinColumn (name =  "marca_id", nullable = false)
     private MarcaVeiculo marca;
 
-    @NotBlank
-    @Column (length = 50, nullable = false)
     private String nome;
 
-    @NotNull
     @Enumerated (EnumType.STRING)
     private CategoriaVeiculo categoriaVeiculo; //TODO: Alterar nome para categoria
 

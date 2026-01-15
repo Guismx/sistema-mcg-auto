@@ -17,70 +17,35 @@ public class Veiculo {
     @Id
     @GeneratedValue (strategy = GenerationType.IDENTITY)
     private long id;
-
-    @NotBlank
-    @Column (length = 50, nullable = false)
     private String nome;
-
     @ManyToOne (fetch = FetchType.LAZY)
     @JoinColumn (name = "modelo_id", nullable = false)
     private ModeloVeiculo modeloId;
-
-    @NotNull (message = "O ano do veículo deve ser informado")
-    @Positive
     private int anoModelo;
-
-    @NotBlank (message = "A cor deve ser informada")
-    @Size (min = 3, max = 20)
     private String cor;
-
-    @Min(7)
-    @NotBlank (message = "O número da placa deve ser informado")
-    @Column (length = 7, nullable = false, unique = true)
     private String placa;
-
-    @NotBlank (message = "O chassi deve ser informado")
     private String chassi;
     private String tipoModelo;
-
-    @NotNull (message = "A quilometragem deve ser informada")
-    @PositiveOrZero
     private int quilometragem;
+    private BigDecimal precoCusto;
+    private BigDecimal precoVenda;
+    private String descricaoDetalhada;
+    private LocalDateTime dataEntradaEstoque;
+    private LocalDateTime dataBaixaEstoque;
+    private LocalDateTime criadoEm;
+    private LocalDateTime atualizadoEm;
 
-    @NotNull (message = "O tipo de combustivel deve ser informado")
     @Enumerated (EnumType.STRING)
     private TipoCombustivel tipoCombustivel;
 
-    @NotNull
-    private BigDecimal precoCusto;
-
-    @NotNull
-    private BigDecimal precoVenda;
-
-    @NotNull (message = "O estado do veículo deve ser informado")
     @Enumerated (EnumType.STRING)
     private EstadoVeiculo estadoVeiculo;
 
-    @NotNull (message = "O status do veículo deve ser informado")
     @Enumerated (EnumType.STRING)
     private StatusVeiculo statusVeiculo;
 
-    @NotNull (message = "O tipo de propriedade deve ser informado")
     @Enumerated (EnumType.STRING)
     private TipoPropriedade tipoPropriedade;
-    private String descricaoDetalhada;
-
-    @NotNull
-    private LocalDateTime dataEntradaEstoque;
-
-    @NotNull
-    private LocalDateTime dataBaixaEstoque;
-
-    @NotNull
-    private LocalDateTime criadoEm;
-
-    @NotNull
-    private LocalDateTime atualizadoEm;
 
     public Veiculo() {}
 
