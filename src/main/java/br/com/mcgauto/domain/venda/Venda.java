@@ -18,47 +18,33 @@ public class Venda {
     @GeneratedValue (strategy = GenerationType.IDENTITY)
     private long id;
 
-    @Positive
-    @NotNull (message = "O numero do pedido não pode esta vazio")
     @Column (name = "numero_pedido", nullable = false)
     private int numeroPedido;
 
-    @NotNull (message = "O cliente deve ser informado")
     @ManyToOne (fetch = FetchType.LAZY)
     @JoinColumn (name = "cliente_id", nullable = false)
     private Usuario cliente;
 
-    @NotNull (message = "O vendedor deve ser informado")
     @ManyToOne (fetch = FetchType.LAZY)
     @JoinColumn (name = "vendedor_id", nullable = false)
     private Usuario vendedor;
 
-    @NotNull (message = "O aprovador da venda deve ser informado")
     @ManyToOne (fetch = FetchType.LAZY)
     @JoinColumn (name = "gestor_aprovador_id", nullable = false)
     private Usuario gestorAprovador;
 
-    @NotNull (message = "O item deve ser informado")
     @ManyToOne (fetch = FetchType.LAZY)
     @JoinColumn (name = "item_venda_id", nullable = false)
     private ItemVenda itemVenda;
 
-    @NotNull
     private LocalDateTime dataVenda;
-
-    @NotNull
-    @Positive
     private BigDecimal valorVenda;
-
-    @NotBlank (message = "A forma de pagamento deve ser informada")
     private String formaPagamento;
-
-    @NotNull
-    @Enumerated (EnumType.STRING)
-    private StatusVenda statusVenda;
     private String observacoes;
     private LocalDateTime criadoEm;
     private LocalDateTime atualizadoEm;
+    @Enumerated (EnumType.STRING)
+    private StatusVenda statusVenda;
 
     public Venda() {}
 

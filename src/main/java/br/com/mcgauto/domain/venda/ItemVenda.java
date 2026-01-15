@@ -17,7 +17,6 @@ public class ItemVenda {
     @GeneratedValue (strategy = GenerationType.IDENTITY)
     private long id;
 
-    @NotNull
     @Enumerated (EnumType.STRING)
     @Column (name = "tipo_item", nullable = false)
     private VendaItem tipoItem;
@@ -30,19 +29,10 @@ public class ItemVenda {
     @JoinColumn (name = "veiculo_id")
     private Veiculo veiculo;
 
-    @PositiveOrZero
     private int quantidade;
-
-    @NotNull
     private BigDecimal precoUnitario;
-
-    @NotNull
     private BigDecimal precoVenda;
-
-    @NotNull
     private BigDecimal valorDesconto;
-
-    @NotNull
     private BigDecimal valorTotal;
 
     public ItemVenda(){}
