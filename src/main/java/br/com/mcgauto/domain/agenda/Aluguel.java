@@ -19,79 +19,46 @@ public class Aluguel {
     @Id
     @GeneratedValue (strategy = GenerationType.AUTO)
     private long id;
-
-    @NotNull
-    @Positive
+    @Column (name = "numero_aluguel", nullable = false)
     private int numeroAluguel;
-
-    @ManyToOne
+    @ManyToOne (fetch = FetchType.LAZY)
     @JoinColumn (name = "usuario_id", nullable = false)
     private Usuario clienteId;
-
-    @ManyToOne
+    @ManyToOne (fetch = FetchType.LAZY)
     @JoinColumn (name = "veiculo_id", nullable = false)
     private Veiculo veiculoId;
-
-    @NotNull
-    @FutureOrPresent
     @Column (name = "data_retirada_prevista")
     private LocalDate dataRetiradaPrevista;
-
-    @NotNull
-    @FutureOrPresent
     @Column (name = "data_devolucao_prevista")
     private LocalDate dateDevolucaoPrevista;
-
-    @NotNull
-    @FutureOrPresent
     @Column (name = "data_retirada")
     private LocalDate dataDaRetirada;
-
-    @NotNull
-    @FutureOrPresent
-    @Column (name = "data_retirada")
+    @Column (name = "data_devolucao")
     private LocalDate dataDeDevolucao;
-
-    @NotNull
-    @Positive
     private int kmRetirada;
-
-    @NotNull
-    @Positive
     private int kmDevolucao;
-
-    @Positive
+    @Column (name = "valor_diaria", nullable = false)
     private BigDecimal valorDiaria;
-
-    @Positive
+    @Column (name = "valor_caucao")
     private BigDecimal valorCaucao;
-
-    @Positive
+    @Column (name = "valor_total_previsto", nullable = false)
     private BigDecimal valorTotalPrevisto;
-
-    @Positive
+    @Column (name = "valor_adicional_avarias")
     private BigDecimal valorAdicionalAvarias;
-
-    @Positive
+    @Column (name = "valor_adicional_km_excedentes")
     private BigDecimal valorAdicionalKmExcedentes;
-
     @Enumerated (EnumType.STRING)
     @Column (name = "status_aluguel")
     private StatusAluguel statusAluguel;
-
-    @ManyToOne
+    @ManyToOne (fetch = FetchType.LAZY)
     @JoinColumn (name = "funcionario_aprovou")
     private Usuario funcionarioDeConfirmacao;
-
-    @ManyToOne
+    @ManyToOne (fetch = FetchType.LAZY)
     @JoinColumn (name = "funcionario_checkin")
     private Usuario funcionarioDeCheckin;
+    @Column (name = "observacoes_checkin")
     private String observacoesCheckin;
-
-    @NotNull
     private LocalDateTime criadoEm;
-
-    @NotNull
     private LocalDateTime atualizadoEm;
 
     public Aluguel(){

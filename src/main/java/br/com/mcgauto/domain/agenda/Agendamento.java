@@ -19,28 +19,19 @@ public class Agendamento {
     @GeneratedValue (strategy = GenerationType.IDENTITY)
     @Column (name = "id_agendamento", nullable = false)
     private long id;
-
     @ManyToOne (fetch = FetchType.LAZY)
     @JoinColumn (name = "cliente_id", nullable = false)
     private Usuario cliente;
-
     @ManyToOne (fetch = FetchType.LAZY)
     @JoinColumn (name = "servico_id", nullable = false)
     private Servico servico;
-
     @ManyToOne (fetch = FetchType.LAZY)
     @JoinColumn (name = "veiculo_cliente_id", nullable = false)
     private VeiculoCliente veiculoCliente;
-
-    @FutureOrPresent
     @Column (name = "data_hora_servico")
     private LocalDateTime dataHoraServico;
-
-    @Positive
     @Column (name = "estimativa_tempo",nullable = false)
     private int estimativaDeTempo;
-
-    @NotNull
     @Enumerated(EnumType.STRING)
     @Column (name = "status_agendamento", nullable = false)
     private StatusAgendamento statusAgendamento;
