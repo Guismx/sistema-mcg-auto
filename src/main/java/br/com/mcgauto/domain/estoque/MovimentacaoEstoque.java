@@ -18,10 +18,10 @@ public class MovimentacaoEstoque {
     @Id
     @GeneratedValue (strategy = GenerationType.IDENTITY)
     private long id;
-    @OneToOne
+    @OneToOne (fetch = FetchType.LAZY)
     @JoinColumn(name = "produto_id", nullable = false)
     private Produto produto;
-    @ManyToOne
+    @ManyToOne (fetch = FetchType.LAZY)
     @JoinColumn(name = "responsavel_id", nullable = false)
     private Usuario responsavel;
     @Enumerated (EnumType.STRING)

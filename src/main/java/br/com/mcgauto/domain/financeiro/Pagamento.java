@@ -19,7 +19,7 @@ public class Pagamento {
     @Id
     @GeneratedValue (strategy = GenerationType.IDENTITY)
     private long id;
-    @OneToOne
+    @OneToOne (fetch = FetchType.LAZY)
     @JoinColumn (name = "venda_id", nullable = false)
     private Venda origem;
     @Enumerated (EnumType.STRING)

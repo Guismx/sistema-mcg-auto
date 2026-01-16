@@ -20,7 +20,7 @@ public class OrdemServico {
     private long id;
     @Column (name = "numero_ordem", nullable = false)
     private int numeroOrdem;
-    @ManyToOne(optional = true, fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "agendamento_id")
     private Agendamento agendamento;
     @ManyToOne(fetch = FetchType.LAZY)

@@ -14,7 +14,7 @@ public class Endereco {
     @Id
     @GeneratedValue (strategy = GenerationType.IDENTITY)
     private long id;
-    @ManyToOne
+    @OneToOne (fetch = FetchType.LAZY)
     @JoinColumn (name = "usuario_id", nullable = false)
     private Usuario proprietario;
     @Enumerated (EnumType.STRING)

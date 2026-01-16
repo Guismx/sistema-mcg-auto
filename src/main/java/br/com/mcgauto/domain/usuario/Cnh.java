@@ -13,7 +13,7 @@ public class Cnh {
     @Id
     @GeneratedValue (strategy = GenerationType.IDENTITY)
     private long id;
-    @OneToOne
+    @OneToOne (fetch = FetchType.LAZY)
     @JoinColumn (name = "usuario_id", nullable = false)
     private Usuario titular;
     @Column (name = "numero_cnh", nullable = false)

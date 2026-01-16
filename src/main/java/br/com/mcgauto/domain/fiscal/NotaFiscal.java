@@ -17,7 +17,7 @@ public class NotaFiscal {
     @Id
     @GeneratedValue (strategy = GenerationType.IDENTITY)
     private long id;
-    @OneToOne
+    @OneToOne (fetch = FetchType.LAZY)
     @JoinColumn (name = "pagamento_id", nullable = false)
     private Pagamento origem;
     @Enumerated (EnumType.STRING)

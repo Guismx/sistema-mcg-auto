@@ -12,8 +12,7 @@ public class MarcaVeiculo {
     @GeneratedValue (strategy = GenerationType.IDENTITY)
     private long id;
     private String nome;
-
-    @Column (name = "pais_origem", nullable = false)
+    @Column (name = "pais_origem")
     private String paisOrigem;
 
     public MarcaVeiculo(){}

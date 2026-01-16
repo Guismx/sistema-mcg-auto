@@ -16,10 +16,10 @@ public class ItemOrdemServico {
     @Id
     @GeneratedValue (strategy = GenerationType.IDENTITY)
     private long id;
-    @OneToOne
+    @OneToOne (fetch = FetchType.LAZY)
     @JoinColumn (name = "produto_id", nullable = false)
     private Produto produto;
-    @OneToOne
+    @OneToOne (fetch = FetchType.LAZY)
     @JoinColumn (name = "servico_id", nullable = false)
     private Servico servico;
     @Enumerated (EnumType.STRING)
