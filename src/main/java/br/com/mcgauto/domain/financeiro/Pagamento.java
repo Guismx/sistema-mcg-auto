@@ -19,37 +19,29 @@ public class Pagamento {
     @Id
     @GeneratedValue (strategy = GenerationType.IDENTITY)
     private long id;
-
     @OneToOne
     @JoinColumn (name = "venda_id", nullable = false)
     private Venda origem;
-
-    @NotNull
     @Enumerated (EnumType.STRING)
+    @Column (name = "tipo_origem")
     private TipoOrigem tipoOrigem;
-
-    @NotNull
-    @FutureOrPresent
+    @Column (name = "data_pagamento", nullable = false, updatable = false)
     private LocalDateTime dataPagamento;
-
-    @NotNull
-    @Positive
+    @Column (name = "valor_pago", nullable = false)
     private BigDecimal valorPago;
-
-    @NotNull
     @Enumerated (EnumType.STRING)
+    @Column (name = "forma_pagamento", nullable = false)
     private TipoPagamento formaPagamento;
-
-    @NotNull
     @Enumerated (EnumType.STRING)
+    @Column (name = "status_pagamento", nullable = false)
     private StatusPagamento statusPagamento;
+    @Column (name = "transacao_gateway")
     private String transacaoGateway;
-
-    @NotNull
-    @Positive
     private int parcelas;
 
-    public Pagamento() {}
+    public Pagamento() {
+
+    }
 
     public Pagamento(long id, Venda origem, TipoOrigem tipoOrigem, LocalDateTime dataPagamento, BigDecimal valorPago,
                      TipoPagamento formaPagamento, StatusPagamento statusPagamento, String transacaoGateway, int parcelas) {
