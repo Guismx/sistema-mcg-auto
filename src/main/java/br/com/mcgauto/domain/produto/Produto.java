@@ -14,45 +14,31 @@ public class Produto {
     @Id
     @GeneratedValue (strategy = GenerationType.IDENTITY)
     private long id;
-
     @ManyToOne
     @JoinColumn (name = "categoria_produto", nullable = false)
     private CategoriaProduto categoriaid;
-
-    @NotNull
-    @Positive
+    @Column (name = "codigo_produto", nullable = false)
     private int codigoProduto;
-
-    @NotNull
-    @Size (min = 1, max = 60)
     private String nome;
     private String descricao;
-
-    @NotNull
-    @Size (min = 1, max = 60)
     private String marca;
-
-    @NotNull
-    @Positive
+    @Column (name = "preco_custo")
     private BigDecimal precoCusto;
-
-    @NotNull
-    @Positive
+    @Column (name = "preco_venda")
     private BigDecimal precoVenda;
-
-    @PositiveOrZero
+    @Column (name = "quantidade_estoque")
     private int qtdEstoque;
-
     @Enumerated (EnumType.STRING)
+    @Column (name = "status_produto")
     private StatusAtivacao statusProduto;
-
-    @NotNull
+    @Column (name = "criado_em", nullable = false, updatable = false)
     private LocalDateTime criadoEm;
-
-    @NotNull
+    @Column (name = "atualizado_em")
     private LocalDateTime atualizadoEm;
 
-    public Produto() {}
+    public Produto() {
+
+    }
 
     public Produto(long id, CategoriaProduto categoriaid, int codigoProduto, String nome, String descricao, String marca,
                    BigDecimal precoCusto, BigDecimal precoVenda, int qtdEstoque, StatusAtivacao ativo,

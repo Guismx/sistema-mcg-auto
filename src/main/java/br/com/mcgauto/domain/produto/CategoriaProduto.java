@@ -11,9 +11,6 @@ public class CategoriaProduto {
     @Id
     @GeneratedValue (strategy = GenerationType.IDENTITY)
     private long id;
-
-    @NotNull
-    @Size (max = 50)
     private String nome;
 
     public CategoriaProduto (){
