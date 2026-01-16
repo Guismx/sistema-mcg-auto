@@ -17,33 +17,31 @@ public class Venda {
     @Id
     @GeneratedValue (strategy = GenerationType.IDENTITY)
     private long id;
-
     @Column (name = "numero_pedido", nullable = false)
     private int numeroPedido;
-
     @ManyToOne (fetch = FetchType.LAZY)
     @JoinColumn (name = "cliente_id", nullable = false)
     private Usuario cliente;
-
     @ManyToOne (fetch = FetchType.LAZY)
     @JoinColumn (name = "vendedor_id", nullable = false)
     private Usuario vendedor;
-
     @ManyToOne (fetch = FetchType.LAZY)
     @JoinColumn (name = "gestor_aprovador_id", nullable = false)
     private Usuario gestorAprovador;
-
     @ManyToOne (fetch = FetchType.LAZY)
     @JoinColumn (name = "item_venda_id", nullable = false)
     private ItemVenda itemVenda;
-
+    @Column (name = "data_venda", nullable = false)
     private LocalDateTime dataVenda;
+    @Column (name = "valor_venda", nullable = false)
     private BigDecimal valorVenda;
+    @Column (name = "forma_pagamento")
     private String formaPagamento;
     private String observacoes;
     private LocalDateTime criadoEm;
     private LocalDateTime atualizadoEm;
     @Enumerated (EnumType.STRING)
+    @Column (name = "status_venda", nullable = false)
     private StatusVenda statusVenda;
 
     public Venda() {}

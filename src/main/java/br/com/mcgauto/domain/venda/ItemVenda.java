@@ -16,23 +16,23 @@ public class ItemVenda {
     @Id
     @GeneratedValue (strategy = GenerationType.IDENTITY)
     private long id;
-
     @Enumerated (EnumType.STRING)
     @Column (name = "tipo_item", nullable = false)
     private VendaItem tipoItem;
-
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn (name = "produto_id")
     private Produto produto;
-
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn (name = "veiculo_id")
     private Veiculo veiculo;
-
     private int quantidade;
+    @Column (name = "preco_unitario")
     private BigDecimal precoUnitario;
+    @Column (name = "preco_venda")
     private BigDecimal precoVenda;
+    @Column (name = "valor_desconto")
     private BigDecimal valorDesconto;
+    @Column (name = "valor_total", nullable = false)
     private BigDecimal valorTotal;
 
     public ItemVenda(){}
