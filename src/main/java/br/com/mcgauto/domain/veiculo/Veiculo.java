@@ -21,30 +21,37 @@ public class Veiculo {
     @ManyToOne (fetch = FetchType.LAZY)
     @JoinColumn (name = "modelo_id", nullable = false)
     private ModeloVeiculo modeloId;
+    @Column (name = "ano_modelo", nullable = false)
     private int anoModelo;
     private String cor;
     private String placa;
     private String chassi;
+    @Column (name = "tipo_modelo")
     private String tipoModelo;
     private int quilometragem;
+    @Column (name = "preco_custo", nullable = false)
     private BigDecimal precoCusto;
+    @Column (name = "preco_venda", nullable = false)
     private BigDecimal precoVenda;
+    @Column (name = "descricao_detalhada")
     private String descricaoDetalhada;
+    @Column (name = "data_entrada_estoque", nullable = false)
     private LocalDateTime dataEntradaEstoque;
+    @Column (name = "data_baixa_estoque")
     private LocalDateTime dataBaixaEstoque;
     private LocalDateTime criadoEm;
     private LocalDateTime atualizadoEm;
-
     @Enumerated (EnumType.STRING)
+    @Column (name = "tipo_combustivel", nullable = false)
     private TipoCombustivel tipoCombustivel;
-
     @Enumerated (EnumType.STRING)
+    @Column (name = "estado_veiculo", nullable = false)
     private EstadoVeiculo estadoVeiculo;
-
     @Enumerated (EnumType.STRING)
+    @Column (name = "status_veiculo", nullable = false)
     private StatusVeiculo statusVeiculo;
-
     @Enumerated (EnumType.STRING)
+    @Column (name = "tipo_propriedade")
     private TipoPropriedade tipoPropriedade;
 
     public Veiculo() {}
