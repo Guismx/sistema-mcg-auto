@@ -16,33 +16,24 @@ public class ItemOrdemServico {
     @Id
     @GeneratedValue (strategy = GenerationType.IDENTITY)
     private long id;
-
     @OneToOne
     @JoinColumn (name = "produto_id", nullable = false)
     private Produto produto;
-
     @OneToOne
     @JoinColumn (name = "servico_id", nullable = false)
     private Servico servico;
-
-    @NotNull
     @Enumerated (EnumType.STRING)
+    @Column (name = "tipo_ordem")
     private TipoOrdem tipoOrdem;
     private String descricao;
-
-    @NotNull
-    @PositiveOrZero
     private int quantidade;
-
-    @NotNull
-    @Positive
+    @Column (name = "preco_unitario", nullable = false)
     private BigDecimal precoUnitario;
-
-    @NotNull
-    @Positive
     private BigDecimal valorTotal;
 
-    public ItemOrdemServico (){}
+    public ItemOrdemServico (){
+
+    }
 
     public ItemOrdemServico(long id, Produto produto, Servico servico, TipoOrdem tipoOrdem, String descricao, int quantidade, BigDecimal precoUnitario, BigDecimal valorTotal) {
         this.id = id;

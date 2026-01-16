@@ -18,33 +18,22 @@ public class OrdemServico {
     @Id
     @GeneratedValue (strategy = GenerationType.IDENTITY)
     private long id;
-
-    @NotNull
-    @Column (name = "numer_ordem", nullable = false)
+    @Column (name = "numero_ordem", nullable = false)
     private int numeroOrdem;
-
     @ManyToOne(optional = true, fetch = FetchType.LAZY)
     @JoinColumn(name = "agendamento_id")
     private Agendamento agendamento;
-
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "cliente_id", nullable = false)
     private Usuario cliente;
-
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "item_servico_id", nullable = false)
     private ItemOrdemServico itemOrdemServico;
-
     @Column(name = "data_abertura", nullable = false, updatable = false)
     private LocalDateTime dataAbertura;
-
     @Column(name = "data_fechamento")
     private LocalDateTime dataFechamento;
-
-    @Size(max = 500)
     private String descricao;
-
-    @PositiveOrZero
     @Column (name = "valor_servico", nullable = false)
     private BigDecimal valorServico;
     private String status; //Aberta, Andamento, Concluida...

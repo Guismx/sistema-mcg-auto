@@ -19,25 +19,16 @@ public class Servico {
     @Id
     @GeneratedValue (strategy = GenerationType.IDENTITY)
     private long id;
-
-    @NotNull
     @Enumerated (EnumType.STRING)
+    @Column (name = "tipo_servico", nullable = false)
     private TipoServico tipoServico;
-
-    @NotNull
-    @Size (max = 60)
     private String nome;
     private String descricao;
-
-    @NotNull
-    @PositiveOrZero
     private BigDecimal preco;
-
-    @NotNull
-    @Positive
+    @Column (name = "tempo_servico")
     private int tempoServico;
-
     @Enumerated (EnumType.STRING)
+    @Column (name = "status_ativacao")
     private StatusAtivacao statusAtivacao;
 
     public Servico() {
