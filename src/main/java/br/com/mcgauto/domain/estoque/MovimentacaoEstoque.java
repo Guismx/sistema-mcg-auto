@@ -18,32 +18,21 @@ public class MovimentacaoEstoque {
     @Id
     @GeneratedValue (strategy = GenerationType.IDENTITY)
     private long id;
-
     @OneToOne
     @JoinColumn(name = "produto_id", nullable = false)
     private Produto produto;
-
     @ManyToOne
     @JoinColumn(name = "responsavel_id", nullable = false)
     private Usuario responsavel;
-
     @Enumerated (EnumType.STRING)
+    @Column (name = "tipo_movimentacao")
     private TipoMovimentacao tipoMovimentacao;
-
-    @NotNull
     private int quantidade;
-
-    @FutureOrPresent
+    @Column (name = "data_hora_movimentacao")
     private LocalDateTime dataHoraMovimentacao;
-
     private String motivo;
-
-    @NotNull
-    @Positive
+    @Column (name = "saldo_anterior")
     private int saldoAnterior;
-
-    @NotNull
-    @Positive
     private int saldoAtual;
 
     public MovimentacaoEstoque() {
