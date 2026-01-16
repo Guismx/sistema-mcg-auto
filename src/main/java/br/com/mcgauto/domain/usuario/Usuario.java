@@ -15,34 +15,23 @@ public class Usuario {
     @Id
     @GeneratedValue (strategy = GenerationType.IDENTITY)
     private long id;
-
-    @NotBlank
-    @Size (min = 4, max = 70)
     private String nome;
-
-    @NotBlank
-    @Size (min = 4, max = 70)
     private String sobrenome;
-
-    @CPF
     private String cpf;
-
-    @NotNull
-    @Past
-    private LocalDate dataNascimento;
-
-    @NotBlank
-    @Email
     private String email;
-
-    @NotNull
     private String senha;
-
+    @Column (name = "data_nascimento")
+    private LocalDate dataNascimento;
     @Enumerated (EnumType.STRING)
+    @Column (name = "tipo_conta")
     private TipoConta tipoConta;
+    @Column (name = "telefone_principal")
     private String telefonePrincipal;
+    @Column (name = "telefone_secundario")
     private String telefoneSecundario;
+    @Column (name = "data_cadastro")
     private LocalDateTime dataCadastro;
+    @Column (name = "email_validado")
     private boolean emailValidado;
 
     public Usuario(){

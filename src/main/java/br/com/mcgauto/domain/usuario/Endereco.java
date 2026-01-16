@@ -14,25 +14,17 @@ public class Endereco {
     @Id
     @GeneratedValue (strategy = GenerationType.IDENTITY)
     private long id;
-
     @ManyToOne
     @JoinColumn (name = "usuario_id", nullable = false)
     private Usuario proprietario;
-
-    @NotNull
     @Enumerated (EnumType.STRING)
+    @Column (name = "tipo_endereco", nullable = false)
     private TipoEndereco tipoEndereco;
     private String logradouro;
     private int numero;
     private String complemento;
-
-    @NotBlank
     private String bairro;
-
-    @NotBlank
     private String cidade;
-
-    @Positive
     private String cep;
     private boolean ativo;
     //TODO: Implementar UF

@@ -13,19 +13,16 @@ public class Cnh {
     @Id
     @GeneratedValue (strategy = GenerationType.IDENTITY)
     private long id;
-
     @OneToOne
     @JoinColumn (name = "usuario_id", nullable = false)
     private Usuario titular;
-
-    @NotNull
-    @Positive
+    @Column (name = "numero_cnh", nullable = false)
     private int numeroCnh;
-
-    @NotNull
     private LocalDate validade;
 
-    public Cnh(){}
+    public Cnh(){
+
+    }
 
     public Cnh(long id, Usuario titular, int numeroCnh, LocalDate validade) {
         this.id = id;
