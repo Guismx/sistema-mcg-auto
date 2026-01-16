@@ -12,20 +12,15 @@ public class VeiculoCliente {
     @Id
     @GeneratedValue (strategy = GenerationType.IDENTITY)
     private long id;
-
     @OneToOne (fetch = FetchType.LAZY)
     @JoinColumn (name = "usuario_id")
     private Usuario dono;
-
     @Column (length = 50, nullable = false)
     private String marca;
-
     @Column (length = 50, nullable = false)
     private String nome;
-
     @Column (length = 7, nullable = false, unique = true)
     private String placa;
-
     @Column (length = 50, nullable = false)
     private String modelo;
 
