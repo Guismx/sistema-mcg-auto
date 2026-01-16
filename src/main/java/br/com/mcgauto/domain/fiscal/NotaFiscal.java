@@ -17,41 +17,34 @@ public class NotaFiscal {
     @Id
     @GeneratedValue (strategy = GenerationType.IDENTITY)
     private long id;
-
     @OneToOne
     @JoinColumn (name = "pagamento_id", nullable = false)
     private Pagamento origem;
-
-    @NotNull
     @Enumerated (EnumType.STRING)
+    @Column (name = "tipo_origem")
     private TipoOrigem tipoOrigem;
-
-    @NotNull
-    @Positive
+    @Column (name = "numero_nota_fiscal", nullable = false)
     private int numeroNotaFiscal;
-
-    @NotNull
-    @Positive
+    @Column (name = "serie_nota_fiscal")
     private String serieNotaFiscal;
-
-    @NotNull
+    @Column (name = "data_emissao", nullable = false)
     private LocalDateTime dataEmissao;
-
-    @NotNull
+    @Column (name = "chave_acesso")
     private String chaveAcesso;
-
-    @NotNull
+    @Column (name = "protocolo_autorizacao")
     private String protocoloAutorizacao;
-
-    @NotNull
     @Enumerated (EnumType.STRING)
+    @Column (name = "status_nota_fiscal")
     private StatusNotaFiscal statusNotaFiscal;
-
-    @Positive
+    @Column (name = "valor_total")
     private BigDecimal valorTotal;
+    @Column (name = "caminho_xml")
     private String caminhoXml;
+    @Column (name = "caminho_danfe")
     private String caminhoDanfe;
+    @Column (name = "data_cancelamento")
     private LocalDateTime dataCancelamento;
+    @Column (name = "motivo_cancelamento")
     private String motivoCancelamento;
 
     public NotaFiscal() {}
