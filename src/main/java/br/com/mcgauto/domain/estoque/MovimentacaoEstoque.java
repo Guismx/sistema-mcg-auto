@@ -5,9 +5,6 @@ import br.com.mcgauto.domain.produto.Produto;
 import br.com.mcgauto.domain.usuario.Usuario;
 import br.com.mcgauto.domain.estoque.enums.TipoMovimentacao;
 import jakarta.persistence.*;
-import jakarta.validation.constraints.FutureOrPresent;
-import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Positive;
 import org.hibernate.annotations.CreationTimestamp;
 
 import java.time.LocalDateTime;
