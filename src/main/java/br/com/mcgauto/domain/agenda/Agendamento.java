@@ -5,9 +5,6 @@ import br.com.mcgauto.domain.servico.Servico;
 import br.com.mcgauto.domain.usuario.Usuario;
 import br.com.mcgauto.domain.veiculo.VeiculoCliente;
 import jakarta.persistence.*;
-import jakarta.validation.constraints.FutureOrPresent;
-import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Positive;
 
 import java.time.LocalDateTime;
 
@@ -19,28 +16,33 @@ public class Agendamento {
     @GeneratedValue (strategy = GenerationType.IDENTITY)
     @Column (name = "id_agendamento", nullable = false)
     private long id;
+
     @ManyToOne (fetch = FetchType.LAZY)
     @JoinColumn (name = "cliente_id", nullable = false)
     private Usuario cliente;
+
     @ManyToOne (fetch = FetchType.LAZY)
     @JoinColumn (name = "servico_id", nullable = false)
     private Servico servico;
+
     @ManyToOne (fetch = FetchType.LAZY)
     @JoinColumn (name = "veiculo_cliente_id", nullable = false)
     private VeiculoCliente veiculoCliente;
+
     @Column (name = "data_hora_servico")
     private LocalDateTime dataHoraServico;
+
     @Column (name = "estimativa_tempo",nullable = false)
     private int estimativaDeTempo;
+
     @Enumerated(EnumType.STRING)
     @Column (name = "status_agendamento", nullable = false)
     private StatusAgendamento statusAgendamento;
 
     public Agendamento(){}
 
-    public Agendamento(long id, Usuario cliente, Servico servico, VeiculoCliente veiculoCliente,
+    public Agendamento(Usuario cliente, Servico servico, VeiculoCliente veiculoCliente,
                        LocalDateTime dataHoraServico, int estimativaDeTempo, StatusAgendamento statusAgendamento) {
-        this.id = id;
         this.cliente = cliente;
         this.servico = servico;
         this.veiculoCliente = veiculoCliente;
@@ -49,7 +51,7 @@ public class Agendamento {
         this.statusAgendamento = statusAgendamento;
     }
 
-    public long getIdAgendamento() {
+    public long getId() {
         return id;
     }
 
@@ -61,7 +63,7 @@ public class Agendamento {
         this.cliente = cliente;
     }
 
-    public Servico getServicoId() {
+    public Servico getServico() {
         return servico;
     }
 
@@ -107,8 +109,8 @@ public class Agendamento {
                 "id=" + id +
                 ", data=" + dataHoraServico +
                 ", status=" + statusAgendamento +
-                ", cliente=" + (cliente != null ? cliente.getNome() : null) +
-                ", servicoId=" + (servico != null ? servico.getId() : null) +
+                ", clienteNome=" + (cliente != null ? cliente.getNome() : null) +
+                ", servicoNome=" + (servico != null ? servico.getNome() : null) +
                 "]";
     }
 }

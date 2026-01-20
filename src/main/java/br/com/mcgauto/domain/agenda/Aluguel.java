@@ -4,9 +4,8 @@ import br.com.mcgauto.domain.agenda.enums.StatusAluguel;
 import br.com.mcgauto.domain.usuario.Usuario;
 import br.com.mcgauto.domain.veiculo.Veiculo;
 import jakarta.persistence.*;
-import jakarta.validation.constraints.FutureOrPresent;
-import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Positive;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
@@ -19,77 +18,84 @@ public class Aluguel {
     @Id
     @GeneratedValue (strategy = GenerationType.AUTO)
     private long id;
+
     @Column (name = "numero_aluguel", nullable = false)
     private int numeroAluguel;
+
     @ManyToOne (fetch = FetchType.LAZY)
-    @JoinColumn (name = "usuario_id", nullable = false)
-    private Usuario clienteId;
+    @JoinColumn (name = "cliente_id", nullable = false)
+    private Usuario cliente;
+
     @ManyToOne (fetch = FetchType.LAZY)
     @JoinColumn (name = "veiculo_id", nullable = false)
-    private Veiculo veiculoId;
-    @Column (name = "data_retirada_prevista")
+    private Veiculo veiculo;
+
+    @Column (name = "data_retirada_prevista", nullable = false)
     private LocalDate dataRetiradaPrevista;
-    @Column (name = "data_devolucao_prevista")
-    private LocalDate dateDevolucaoPrevista;
+
+    @Column (name = "data_devolucao_prevista", nullable = false)
+    private LocalDate dataDevolucaoPrevista;
+
     @Column (name = "data_retirada")
     private LocalDate dataDaRetirada;
+
     @Column (name = "data_devolucao")
     private LocalDate dataDeDevolucao;
+
+    @Column (name = "km_retirada", nullable = false)
     private int kmRetirada;
+
+    @Column (name = "km_devolucao")
     private int kmDevolucao;
+
     @Column (name = "valor_diaria", nullable = false)
     private BigDecimal valorDiaria;
+
     @Column (name = "valor_caucao")
     private BigDecimal valorCaucao;
+
     @Column (name = "valor_total_previsto", nullable = false)
     private BigDecimal valorTotalPrevisto;
+
     @Column (name = "valor_adicional_avarias")
     private BigDecimal valorAdicionalAvarias;
+
     @Column (name = "valor_adicional_km_excedentes")
     private BigDecimal valorAdicionalKmExcedentes;
+
     @Enumerated (EnumType.STRING)
     @Column (name = "status_aluguel")
     private StatusAluguel statusAluguel;
+
     @ManyToOne (fetch = FetchType.LAZY)
     @JoinColumn (name = "funcionario_aprovou")
-    private Usuario funcionarioDeConfirmacao;
-    @ManyToOne (fetch = FetchType.LAZY)
-    @JoinColumn (name = "funcionario_checkin")
-    private Usuario funcionarioDeCheckin;
+    private Usuario funcionarioConfirmacao;
+
     @Column (name = "observacoes_checkin")
     private String observacoesCheckin;
+
+    @CreationTimestamp
+    @Column(name = "criado_em", updatable = false)
     private LocalDateTime criadoEm;
+
+    @UpdateTimestamp
+    @Column(name = "atualizado_em")
     private LocalDateTime atualizadoEm;
 
     public Aluguel(){
     }
 
-    public Aluguel(long id, int numeroAluguel, Usuario clienteId, Veiculo veiculoId, LocalDate dataRetiradaPrevista,
-                   LocalDate dateDevolucaoPrevista, LocalDate dataDaRetirada, LocalDate dataDeDevolucao, int kmRetirada,
-                   int kmDevolucao, BigDecimal valorDiaria, BigDecimal valorCaucao, BigDecimal valorTotalPrevisto, BigDecimal valorAdicionalAvarias,
-                   BigDecimal valorAdicionalKmExcedentes, StatusAluguel statusAluguel, Usuario funcionarioDeConfirmacao, Usuario funcionarioDeCheckin,
-                   String observacoesCheckin, LocalDateTime criadoEm, LocalDateTime atualizadoEm) {
-        this.id = id;
+    public Aluguel(int numeroAluguel, Usuario cliente, Veiculo veiculo, LocalDate dataRetiradaPrevista,
+                   LocalDate dataDevolucaoPrevista, BigDecimal valorDiaria, BigDecimal valorTotalPrevisto,
+                   StatusAluguel statusAluguel) {
         this.numeroAluguel = numeroAluguel;
-        this.clienteId = clienteId;
-        this.veiculoId = veiculoId;
+        this.cliente = cliente;
+        this.veiculo = veiculo;
         this.dataRetiradaPrevista = dataRetiradaPrevista;
-        this.dateDevolucaoPrevista = dateDevolucaoPrevista;
-        this.dataDaRetirada = dataDaRetirada;
-        this.dataDeDevolucao = dataDeDevolucao;
-        this.kmRetirada = kmRetirada;
-        this.kmDevolucao = kmDevolucao;
+        this.dataDevolucaoPrevista = dataDevolucaoPrevista;
         this.valorDiaria = valorDiaria;
-        this.valorCaucao = valorCaucao;
         this.valorTotalPrevisto = valorTotalPrevisto;
-        this.valorAdicionalAvarias = valorAdicionalAvarias;
-        this.valorAdicionalKmExcedentes = valorAdicionalKmExcedentes;
         this.statusAluguel = statusAluguel;
-        this.funcionarioDeConfirmacao = funcionarioDeConfirmacao;
-        this.funcionarioDeCheckin = funcionarioDeCheckin;
-        this.observacoesCheckin = observacoesCheckin;
-        this.criadoEm = criadoEm;
-        this.atualizadoEm = atualizadoEm;
     }
 
     public long getIdAluguel() {
@@ -104,20 +110,20 @@ public class Aluguel {
         this.numeroAluguel = numeroAluguel;
     }
 
-    public Usuario getClienteId() {
-        return clienteId;
+    public Usuario getCliente() {
+        return cliente;
     }
 
-    public void setClienteId(Usuario clienteId) {
-        this.clienteId = clienteId;
+    public void setCliente(Usuario cliente) {
+        this.cliente = cliente;
     }
 
-    public Veiculo getVeiculoId() {
-        return veiculoId;
+    public Veiculo getVeiculo() {
+        return veiculo;
     }
 
-    public void setVeiculoId(Veiculo veiculoId) {
-        this.veiculoId = veiculoId;
+    public void setVeiculo(Veiculo veiculo) {
+        this.veiculo = veiculo;
     }
 
     public LocalDate getDataRetiradaPrevista() {
@@ -128,12 +134,12 @@ public class Aluguel {
         this.dataRetiradaPrevista = dataRetiradaPrevista;
     }
 
-    public LocalDate getDateDevolucaoPrevista() {
-        return dateDevolucaoPrevista;
+    public LocalDate getDataDevolucaoPrevista() {
+        return dataDevolucaoPrevista;
     }
 
-    public void setDateDevolucaoPrevista(LocalDate dateDevolucaoPrevista) {
-        this.dateDevolucaoPrevista = dateDevolucaoPrevista;
+    public void setDataDevolucaoPrevista(LocalDate dataDevolucaoPrevista) {
+        this.dataDevolucaoPrevista = dataDevolucaoPrevista;
     }
 
     public LocalDate getDataDaRetirada() {
@@ -212,12 +218,8 @@ public class Aluguel {
         this.statusAluguel = statusAluguel;
     }
 
-    public Usuario getFuncionarioDeConfirmacao() {
-        return funcionarioDeConfirmacao;
-    }
-
-    public Usuario getFuncionarioDeCheckin() {
-        return funcionarioDeCheckin;
+    public Usuario getFuncionarioConfirmacao() {
+        return funcionarioConfirmacao;
     }
 
     public String getObservacoesCheckin() {
@@ -240,26 +242,10 @@ public class Aluguel {
     public String toString() {
         return "Aluguel{" +
                 "id=" + id +
-                ", numeroAluguel=" + numeroAluguel +
-                ", clienteId=" + (clienteId != null ? clienteId.getNome() : null) +
-                ", veiculoId=" + (veiculoId != null ? veiculoId.getId() : null) +
-                ", dataRetiradaPrevista=" + dataRetiradaPrevista +
-                ", dateDevolucaoPrevista=" + dateDevolucaoPrevista +
-                ", dataDaRetirada=" + dataDaRetirada +
-                ", dataDeDevolucao=" + dataDeDevolucao +
-                ", kmRetirada=" + kmRetirada +
-                ", kmDevolucao=" + kmDevolucao +
-                ", valorDiaria=" + valorDiaria +
-                ", valorCaucao=" + valorCaucao +
-                ", valorTotalPrevisto=" + valorTotalPrevisto +
-                ", valorAdicionalAvarias=" + valorAdicionalAvarias +
-                ", valorAdicionalKmExcedentes=" + valorAdicionalKmExcedentes +
-                ", statusAluguel=" + statusAluguel +
-                ", funcionarioDeConfirmacao=" + (funcionarioDeConfirmacao != null ? funcionarioDeConfirmacao.getNome() : null) +
-                ", funcionarioDeCheckin=" + (funcionarioDeCheckin != null ? funcionarioDeCheckin.getNome() : null) +
-                ", observacoesCheckin='" + observacoesCheckin + '\'' +
-                ", criadoEm=" + criadoEm +
-                ", atualizadoEm=" + atualizadoEm +
+                ", num=" + numeroAluguel +
+                ", status=" + statusAluguel +
+                ", cliente=" + (cliente != null ? cliente.getNome() : "null") +
+                ", veiculo=" + (veiculo != null ? veiculo.getPlaca() : "null") +
                 '}';
     }
 }
