@@ -1,12 +1,11 @@
 package br.com.mcgauto.domain.fiscal;
 
-import br.com.mcgauto.domain.financeiro.Pagamento;
+import br.com.mcgauto.domain.agenda.Aluguel;
 import br.com.mcgauto.domain.financeiro.enums.TipoOrigem;
 import br.com.mcgauto.domain.fiscal.enums.StatusNotaFiscal;
+import br.com.mcgauto.domain.servico.OrdemServico;
+import br.com.mcgauto.domain.venda.Venda;
 import jakarta.persistence.*;
-import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Positive;
-
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
@@ -17,76 +16,97 @@ public class NotaFiscal {
     @Id
     @GeneratedValue (strategy = GenerationType.IDENTITY)
     private long id;
-    @OneToOne (fetch = FetchType.LAZY)
-    @JoinColumn (name = "pagamento_id", nullable = false)
-    private Pagamento origem;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "venda_id")
+    private Venda venda;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "aluguel_id")
+    private Aluguel aluguel;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "ordem_servico_id")
+    private OrdemServico ordemServico;
+
     @Enumerated (EnumType.STRING)
     @Column (name = "tipo_origem")
     private TipoOrigem tipoOrigem;
+
     @Column (name = "numero_nota_fiscal", nullable = false)
     private int numeroNotaFiscal;
-    @Column (name = "serie_nota_fiscal")
+
+    @Column (name = "serie_nota_fiscal", length = 3)
     private String serieNotaFiscal;
-    @Column (name = "data_emissao", nullable = false)
+
+    @Column (name = "data_emissao", nullable = false, updatable = false)
     private LocalDateTime dataEmissao;
-    @Column (name = "chave_acesso")
+
+    @Column (name = "chave_acesso", length = 44, unique = true)
     private String chaveAcesso;
+
     @Column (name = "protocolo_autorizacao")
     private String protocoloAutorizacao;
+
     @Enumerated (EnumType.STRING)
-    @Column (name = "status_nota_fiscal")
+    @Column (name = "status_nota_fiscal", nullable = false)
     private StatusNotaFiscal statusNotaFiscal;
-    @Column (name = "valor_total")
+
+    @Column (name = "valor_total", nullable = false)
     private BigDecimal valorTotal;
+
     @Column (name = "caminho_xml")
     private String caminhoXml;
+
     @Column (name = "caminho_danfe")
     private String caminhoDanfe;
+
     @Column (name = "data_cancelamento")
     private LocalDateTime dataCancelamento;
+
     @Column (name = "motivo_cancelamento")
     private String motivoCancelamento;
 
     public NotaFiscal() {}
 
-    public NotaFiscal(long id, Pagamento origem, TipoOrigem tipoOrigem, int numeroNotaFiscal, String serieNotaFiscal,
-                      LocalDateTime dataEmissao, String chaveAcesso, String protocoloAutorizacao, StatusNotaFiscal statusNotaFiscal,
-                      BigDecimal valorTotal, String caminhoXml, String caminhoDanfe, LocalDateTime dataCancelamento,
-                      String motivoCancelamento) {
-        this.id = id;
-        this.origem = origem;
-        this.tipoOrigem = tipoOrigem;
+    //Construtor para VENDA
+    public NotaFiscal(Venda venda, int numeroNotaFiscal, String serieNotaFiscal, BigDecimal valorTotal) {
+        this.venda = venda;
+        this.tipoOrigem = TipoOrigem.VENDA;
         this.numeroNotaFiscal = numeroNotaFiscal;
         this.serieNotaFiscal = serieNotaFiscal;
-        this.dataEmissao = dataEmissao;
-        this.chaveAcesso = chaveAcesso;
-        this.protocoloAutorizacao = protocoloAutorizacao;
-        this.statusNotaFiscal = statusNotaFiscal;
         this.valorTotal = valorTotal;
-        this.caminhoXml = caminhoXml;
-        this.caminhoDanfe = caminhoDanfe;
-        this.dataCancelamento = dataCancelamento;
-        this.motivoCancelamento = motivoCancelamento;
+        this.statusNotaFiscal = StatusNotaFiscal.EMITIDA;
+    }
+
+    //Construtor para SERVIÇO (OS)
+    public NotaFiscal(OrdemServico ordemServico, int numeroNotaFiscal, String serieNotaFiscal, BigDecimal valorTotal) {
+        this.ordemServico = ordemServico;
+        this.tipoOrigem = TipoOrigem.ORDEM_SERVICO;
+        this.numeroNotaFiscal = numeroNotaFiscal;
+        this.serieNotaFiscal = serieNotaFiscal;
+        this.valorTotal = valorTotal;
+        this.statusNotaFiscal = StatusNotaFiscal.EMITIDA;
     }
 
     public long getId() {
         return id;
     }
 
-    public Pagamento getOrigem() {
-        return origem;
+    public Venda getVenda() {
+        return venda;
     }
 
-    public void setOrigem(Pagamento origem) {
-        this.origem = origem;
+    public Aluguel getAluguel() {
+        return aluguel;
+    }
+
+    public OrdemServico getOrdemServico() {
+        return ordemServico;
     }
 
     public TipoOrigem getTipoOrigem() {
         return tipoOrigem;
-    }
-
-    public void setTipoOrigem(TipoOrigem tipoOrigem) {
-        this.tipoOrigem = tipoOrigem;
     }
 
     public int getNumeroNotaFiscal() {
@@ -97,16 +117,14 @@ public class NotaFiscal {
         return serieNotaFiscal;
     }
 
-    public LocalDateTime getDataEmissao() {
-        return dataEmissao;
-    }
-
     public String getChaveAcesso() {
         return chaveAcesso;
     }
 
     public void setChaveAcesso(String chaveAcesso) {
-        this.chaveAcesso = chaveAcesso;
+        if (this.chaveAcesso == null) {
+            this.chaveAcesso = chaveAcesso;
+        }
     }
 
     public String getProtocoloAutorizacao() {
@@ -117,20 +135,16 @@ public class NotaFiscal {
         this.protocoloAutorizacao = protocoloAutorizacao;
     }
 
-    public StatusNotaFiscal getStatusNotaFiscal() {
-        return statusNotaFiscal;
-    }
-
-    public void setStatusNotaFiscal(StatusNotaFiscal statusNotaFiscal) {
-        this.statusNotaFiscal = statusNotaFiscal;
+    public LocalDateTime getDataEmissao() {
+        return dataEmissao;
     }
 
     public BigDecimal getValorTotal() {
         return valorTotal;
     }
 
-    public void setValorTotal(BigDecimal valorTotal) {
-        this.valorTotal = valorTotal;
+    public StatusNotaFiscal getStatusNotaFiscal() {
+        return statusNotaFiscal;
     }
 
     public String getCaminhoXml() {
@@ -149,39 +163,19 @@ public class NotaFiscal {
         this.caminhoDanfe = caminhoDanfe;
     }
 
-    public LocalDateTime getDataCancelamento() {
-        return dataCancelamento;
-    }
-
-    public void setDataCancelamento(LocalDateTime dataCancelamento) {
-        this.dataCancelamento = dataCancelamento;
-    }
-
-    public String getMotivoCancelamento() {
-        return motivoCancelamento;
-    }
-
-    public void setMotivoCancelamento(String motivoCancelamento) {
-        this.motivoCancelamento = motivoCancelamento;
+    public void cancelar(String motivo) {
+        this.statusNotaFiscal = StatusNotaFiscal.CANCELADA;
+        this.dataCancelamento = LocalDateTime.now();
+        this.motivoCancelamento = motivo;
     }
 
     @Override
     public String toString() {
         return "NotaFiscal{" +
                 "id=" + id +
-                ", origem=" + origem +
-                ", tipoOrigem=" + tipoOrigem +
-                ", numeroNotaFiscal=" + numeroNotaFiscal +
-                ", serieNotaFiscal='" + serieNotaFiscal + '\'' +
-                ", dataEmissao=" + dataEmissao +
-                ", chaveAcesso='" + chaveAcesso + '\'' +
-                ", protocoloAutorizacao='" + protocoloAutorizacao + '\'' +
-                ", statusNotaFiscal=" + statusNotaFiscal +
-                ", valorTotal=" + valorTotal +
-                ", caminhoXml='" + caminhoXml + '\'' +
-                ", caminhoDanfe='" + caminhoDanfe + '\'' +
-                ", dataCancelamento=" + dataCancelamento +
-                ", motivoCancelamento='" + motivoCancelamento + '\'' +
+                ", num=" + numeroNotaFiscal +
+                ", status=" + statusNotaFiscal +
+                ", valor=" + valorTotal +
                 '}';
     }
 }
