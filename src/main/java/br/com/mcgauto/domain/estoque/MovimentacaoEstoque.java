@@ -8,6 +8,7 @@ import jakarta.persistence.*;
 import jakarta.validation.constraints.FutureOrPresent;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Positive;
+import org.hibernate.annotations.CreationTimestamp;
 
 import java.time.LocalDateTime;
 
@@ -16,23 +17,34 @@ import java.time.LocalDateTime;
 public class MovimentacaoEstoque {
 
     @Id
-    @GeneratedValue (strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
-    @OneToOne (fetch = FetchType.LAZY)
+
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "produto_id", nullable = false)
     private Produto produto;
-    @ManyToOne (fetch = FetchType.LAZY)
+
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "responsavel_id", nullable = false)
     private Usuario responsavel;
-    @Enumerated (EnumType.STRING)
-    @Column (name = "tipo_movimentacao")
+
+    @Enumerated(EnumType.STRING)
+    @Column(name = "tipo_movimentacao", nullable = false)
     private TipoMovimentacao tipoMovimentacao;
+
+    @Column(nullable = false)
     private int quantidade;
-    @Column (name = "data_hora_movimentacao")
+
+    @CreationTimestamp
+    @Column(name = "data_hora_movimentacao", nullable = false, updatable = false)
     private LocalDateTime dataHoraMovimentacao;
+
     private String motivo;
-    @Column (name = "saldo_anterior")
+
+    @Column(name = "saldo_anterior", nullable = false)
     private int saldoAnterior;
+
+    @Column(name = "saldo_atual", nullable = false)
     private int saldoAtual;
 
     public MovimentacaoEstoque() {
@@ -119,14 +131,10 @@ public class MovimentacaoEstoque {
     public String toString() {
         return "MovimentacaoEstoque{" +
                 "id=" + id +
-                ", produto=" + produto +
-                ", responsavel=" + responsavel +
-                ", tipoMovimentacao=" + tipoMovimentacao +
-                ", quantidade=" + quantidade +
-                ", DataHoraMovimentacao=" + dataHoraMovimentacao +
-                ", motivo='" + motivo + '\'' +
-                ", saldoAnterior=" + saldoAnterior +
-                ", saldoAtual=" + saldoAtual +
+                ", produto=" + (produto != null ? produto.getNome() : "null") +
+                ", tipo=" + tipoMovimentacao +
+                ", qtd=" + quantidade +
+                ", data=" + dataHoraMovimentacao +
                 '}';
     }
 }
