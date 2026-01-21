@@ -1,13 +1,10 @@
 package br.com.mcgauto.domain.servico;
 
-import br.com.mcgauto.domain.produto.CategoriaProduto;
 import br.com.mcgauto.domain.servico.enums.TipoServico;
 import br.com.mcgauto.global.enums.StatusAtivacao;
 import jakarta.persistence.*;
-import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Positive;
-import jakarta.validation.constraints.PositiveOrZero;
-import jakarta.validation.constraints.Size;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
@@ -19,43 +16,54 @@ public class Servico {
     @Id
     @GeneratedValue (strategy = GenerationType.IDENTITY)
     private long id;
+
     @Enumerated (EnumType.STRING)
     @Column (name = "tipo_servico", nullable = false)
     private TipoServico tipoServico;
+
+    @Column (nullable = false)
     private String nome;
+
+    @Column (nullable = false)
     private String descricao;
+
+    @Column (nullable = false)
     private BigDecimal preco;
-    @Column (name = "tempo_servico")
+
+    @Column (name = "tempo_servico", nullable = false)
     private int tempoServico;
+
     @Enumerated (EnumType.STRING)
-    @Column (name = "status_ativacao")
-    private StatusAtivacao statusAtivacao;
+    @Column (name = "status_servico")
+    private StatusAtivacao statusServico;
+
+    @CreationTimestamp
+    @Column(name = "criado_em", nullable = false, updatable = false)
+    private LocalDateTime criadoEm;
+
+    @UpdateTimestamp
+    @Column(name = "atualizado_em")
+    private LocalDateTime atualizadoEm;
 
     public Servico() {
     }
 
-    public Servico(long id, TipoServico tipoServico, String nome, String descricao, BigDecimal preco, int tempoServico, StatusAtivacao statusAtivacao) {
-        this.id = id;
+    public Servico(TipoServico tipoServico, String nome, String descricao, BigDecimal preco, int tempoServico) {
         this.tipoServico = tipoServico;
         this.nome = nome;
         this.descricao = descricao;
         this.preco = preco;
         this.tempoServico = tempoServico;
-        this.statusAtivacao = statusAtivacao.ATIVO;
+        this.statusServico = StatusAtivacao.ATIVO;
     }
 
     public long getId() {
         return id;
     }
 
-    public void setId(long id) {
-        this.id = id;
-    }
-
     public TipoServico getTipoServico() {
         return tipoServico;
     }
-
     public void setTipoServico(TipoServico tipoServico) {
         this.tipoServico = tipoServico;
     }
@@ -63,7 +71,6 @@ public class Servico {
     public String getNome() {
         return nome;
     }
-
     public void setNome(String nome) {
         this.nome = nome;
     }
@@ -71,7 +78,6 @@ public class Servico {
     public String getDescricao() {
         return descricao;
     }
-
     public void setDescricao(String descricao) {
         this.descricao = descricao;
     }
@@ -79,7 +85,6 @@ public class Servico {
     public BigDecimal getPreco() {
         return preco;
     }
-
     public void setPreco(BigDecimal preco) {
         this.preco = preco;
     }
@@ -87,29 +92,32 @@ public class Servico {
     public int getTempoServico() {
         return tempoServico;
     }
-
     public void setTempoServico(int tempoServico) {
         this.tempoServico = tempoServico;
     }
 
     public StatusAtivacao getStatusAtivacao() {
-        return statusAtivacao;
+        return statusServico;
+    }
+    public void setStatusAtivacao(StatusAtivacao statusAtivacao) {
+        this.statusServico = statusAtivacao;
     }
 
-    public void setStatusAtivacao(StatusAtivacao statusAtivacao) {
-        this.statusAtivacao = statusAtivacao;
+    public LocalDateTime getCriadoEm() {
+        return criadoEm;
+    }
+
+    public LocalDateTime getAtualizadoEm() {
+        return atualizadoEm;
     }
 
     @Override
     public String toString() {
         return "Servico{" +
                 "id=" + id +
-                ", tipoServico=" + tipoServico +
                 ", nome='" + nome + '\'' +
-                ", descricao='" + descricao + '\'' +
                 ", preco=" + preco +
-                ", tempoServico=" + tempoServico +
-                ", statusAtivacao=" + statusAtivacao +
+                ", status=" + statusServico +
                 '}';
     }
 }
