@@ -2,8 +2,8 @@ package br.com.mcgauto.domain.produto;
 
 import br.com.mcgauto.global.enums.StatusAtivacao;
 import jakarta.persistence.*;
-import jakarta.validation.constraints.*;
-
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
@@ -14,37 +14,48 @@ public class Produto {
     @Id
     @GeneratedValue (strategy = GenerationType.IDENTITY)
     private long id;
+
     @ManyToOne (fetch = FetchType.LAZY)
     @JoinColumn (name = "categoria_produto", nullable = false)
-    private CategoriaProduto categoriaid;
-    @Column (name = "codigo_produto", nullable = false)
+    private CategoriaProduto categoria;
+
+    @Column (name = "codigo_produto", nullable = false, unique = true)
     private int codigoProduto;
+
+    @Column(nullable = false)
     private String nome;
+
+    @Column(columnDefinition = "TEXT")
     private String descricao;
     private String marca;
-    @Column (name = "preco_custo")
+
+    @Column (name = "preco_custo", nullable = false)
     private BigDecimal precoCusto;
-    @Column (name = "preco_venda")
+
+    @Column (name = "preco_venda", nullable = false)
     private BigDecimal precoVenda;
-    @Column (name = "quantidade_estoque")
+
+    @Column (name = "quantidade_estoque", nullable = false)
     private int qtdEstoque;
+
     @Enumerated (EnumType.STRING)
-    @Column (name = "status_produto")
+    @Column (name = "status_produto", nullable = false)
     private StatusAtivacao statusProduto;
+
+    @CreationTimestamp
     @Column (name = "criado_em", nullable = false, updatable = false)
     private LocalDateTime criadoEm;
+
+    @UpdateTimestamp
     @Column (name = "atualizado_em")
     private LocalDateTime atualizadoEm;
 
     public Produto() {
-
     }
 
-    public Produto(long id, CategoriaProduto categoriaid, int codigoProduto, String nome, String descricao, String marca,
-                   BigDecimal precoCusto, BigDecimal precoVenda, int qtdEstoque, StatusAtivacao ativo,
-                   LocalDateTime criadoEm, LocalDateTime atualizadoEm) {
-        this.id = id;
-        this.categoriaid = categoriaid;
+    public Produto(CategoriaProduto categoria, int codigoProduto, String nome, String descricao, String marca,
+                   BigDecimal precoCusto, BigDecimal precoVenda, int qtdEstoque) {
+        this.categoria = categoria;
         this.codigoProduto = codigoProduto;
         this.nome = nome;
         this.descricao = descricao;
@@ -53,34 +64,26 @@ public class Produto {
         this.precoVenda = precoVenda;
         this.qtdEstoque = qtdEstoque;
         this.statusProduto = StatusAtivacao.ATIVO;
-        this.criadoEm = criadoEm;
-        this.atualizadoEm = atualizadoEm;
     }
 
     public long getId() {
         return id;
     }
 
-    public CategoriaProduto getCategoriaid() {
-        return categoriaid;
+    public CategoriaProduto getCategoria() {
+        return categoria;
     }
-
-    public void setCategoriaid(CategoriaProduto categoriaid) {
-        this.categoriaid = categoriaid;
+    public void setCategoria(CategoriaProduto categoria) {
+        this.categoria = categoria;
     }
 
     public int getCodigoProduto() {
         return codigoProduto;
     }
 
-    public void setCodigoProduto(int codigoProduto) {
-        this.codigoProduto = codigoProduto;
-    }
-
     public String getNome() {
         return nome;
     }
-
     public void setNome(String nome) {
         this.nome = nome;
     }
@@ -88,7 +91,6 @@ public class Produto {
     public String getDescricao() {
         return descricao;
     }
-
     public void setDescricao(String descricao) {
         this.descricao = descricao;
     }
@@ -96,7 +98,6 @@ public class Produto {
     public String getMarca() {
         return marca;
     }
-
     public void setMarca(String marca) {
         this.marca = marca;
     }
@@ -104,7 +105,6 @@ public class Produto {
     public BigDecimal getPrecoCusto() {
         return precoCusto;
     }
-
     public void setPrecoCusto(BigDecimal precoCusto) {
         this.precoCusto = precoCusto;
     }
@@ -112,7 +112,6 @@ public class Produto {
     public BigDecimal getPrecoVenda() {
         return precoVenda;
     }
-
     public void setPrecoVenda(BigDecimal precoVenda) {
         this.precoVenda = precoVenda;
     }
@@ -120,7 +119,6 @@ public class Produto {
     public int getQtdEstoque() {
         return qtdEstoque;
     }
-
     public void setQtdEstoque(int qtdEstoque) {
         this.qtdEstoque = qtdEstoque;
     }
@@ -128,10 +126,10 @@ public class Produto {
     public StatusAtivacao getStatusProduto() {
         return statusProduto;
     }
-
     public void setStatusProduto(StatusAtivacao statusProduto) {
         this.statusProduto = statusProduto;
     }
+
     public LocalDateTime getCriadoEm() {
         return criadoEm;
     }
@@ -139,21 +137,15 @@ public class Produto {
     public LocalDateTime getAtualizadoEm() {
         return atualizadoEm;
     }
+
     @Override
     public String toString() {
         return "Produto{" +
                 "id=" + id +
-                ", categoriaid=" + (categoriaid != null ? categoriaid.getNome() : "sem categoria") +
-                ", codigoProduto=" + codigoProduto +
+                ", codigo=" + codigoProduto +
                 ", nome='" + nome + '\'' +
-                ", descricao='" + descricao + '\'' +
-                ", marca='" + marca + '\'' +
-                ", precoCusto=" + precoCusto +
-                ", precoVenda=" + precoVenda +
-                ", qtdEstoque=" + qtdEstoque +
-                ", ativo=" + statusProduto +
-                ", createdAt=" + criadoEm +
-                ", updatedAt=" + atualizadoEm +
+                ", categoria=" + (categoria != null ? categoria.getNome() : "null") +
+                ", estoque=" + qtdEstoque +
                 '}';
     }
 }
