@@ -1,66 +1,87 @@
 package br.com.mcgauto.domain.servico;
 
-
 import br.com.mcgauto.domain.agenda.Agendamento;
 import br.com.mcgauto.domain.usuario.Usuario;
 import jakarta.persistence.*;
-import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.PositiveOrZero;
-import jakarta.validation.constraints.Size;
-
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
-@Table (name = "ordem_de_servicos")
+@Table (name = "ordens_servico")
 public class OrdemServico {
 
     @Id
     @GeneratedValue (strategy = GenerationType.IDENTITY)
     private long id;
-    @Column (name = "numero_ordem", nullable = false)
+
+    @Column (name = "numero_ordem", nullable = false, unique = true)
     private int numeroOrdem;
-    @ManyToOne(fetch = FetchType.LAZY)
+
+    @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "agendamento_id")
     private Agendamento agendamento;
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "cliente_id", nullable = false)
     private Usuario cliente;
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "item_servico_id", nullable = false)
-    private ItemOrdemServico itemOrdemServico;
-    @Column(name = "data_abertura", nullable = false, updatable = false)
-    private LocalDateTime dataAbertura;
-    @Column(name = "data_fechamento")
-    private LocalDateTime dataFechamento;
+
+    @OneToMany(mappedBy = "ordemServico", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<ItemOrdemServico> itens = new ArrayList<>();
+
     private String descricao;
+
     @Column (name = "valor_servico", nullable = false)
     private BigDecimal valorServico;
+
+    @Column(nullable = false)
     private String status; //Aberta, Andamento, Concluida...
+
+    @CreationTimestamp
+    @Column(name = "data_abertura", nullable = false, updatable = false)
+    private LocalDateTime dataAbertura;
+
+    @Column(name = "data_fechamento")
+    private LocalDateTime dataFechamento;
+
+    @UpdateTimestamp
+    @Column(name = "atualizado_em")
+    private LocalDateTime atualizadoEm;
 
     public OrdemServico () {}
 
-    public OrdemServico(long id, Agendamento agendamento, Usuario cliente, int numeroOrdem, ItemOrdemServico itemOrdemServico, LocalDateTime dataAbertura, LocalDateTime dataFechamento, String descricao, BigDecimal valorServico, String status) {
-        this.id = id;
-        this.agendamento = agendamento;
-        this.cliente = cliente;
+    public OrdemServico(int numeroOrdem, Usuario cliente, String descricao) {
         this.numeroOrdem = numeroOrdem;
-        this.itemOrdemServico = itemOrdemServico;
-        this.dataAbertura = dataAbertura;
-        this.dataFechamento = dataFechamento;
+        this.cliente = cliente;
         this.descricao = descricao;
-        this.valorServico = valorServico;
-        this.status = status;
+        this.status = "ABERTA";
+        this.valorServico = BigDecimal.ZERO;
+    }
+
+    public void adicionarItem(ItemOrdemServico item) {
+        this.itens.add(item);
+        item.setOrdemServico(this);
+    }
+
+    public void removerItem(ItemOrdemServico item) {
+        this.itens.remove(item);
+        item.setOrdemServico(null);
     }
 
     public long getId() {
         return id;
     }
 
+    public int getNumeroOrdem() {
+        return numeroOrdem;
+    }
+
     public Agendamento getAgendamento() {
         return agendamento;
     }
-
     public void setAgendamento(Agendamento agendamento) {
         this.agendamento = agendamento;
     }
@@ -69,20 +90,29 @@ public class OrdemServico {
         return cliente;
     }
 
-    public void setCliente(Usuario cliente) {
-        this.cliente = cliente;
+    public List<ItemOrdemServico> getItens() {
+        return itens;
     }
 
-    public int getNumeroOrdem() {
-        return numeroOrdem;
+    public String getDescricao() {
+        return descricao;
+    }
+    public void setDescricao(String descricao) {
+        this.descricao = descricao;
     }
 
-    public ItemOrdemServico getItemOrdemServico() {
-        return itemOrdemServico;
+    public BigDecimal getValorTotal() {
+        return valorServico;
+    }
+    public void setValorTotal(BigDecimal valorServico) {
+        this.valorServico = valorServico;
     }
 
-    public void setItemOrdemServico(ItemOrdemServico itemOrdemServico) {
-        this.itemOrdemServico = itemOrdemServico;
+    public String getStatus() {
+        return status;
+    }
+    public void setStatus(String status) {
+        this.status = status;
     }
 
     public LocalDateTime getDataAbertura() {
@@ -92,48 +122,23 @@ public class OrdemServico {
     public LocalDateTime getDataFechamento() {
         return dataFechamento;
     }
-
     public void setDataFechamento(LocalDateTime dataFechamento) {
         this.dataFechamento = dataFechamento;
     }
 
-    public String getDescricao() {
-        return descricao;
+    public LocalDateTime getAtualizadoEm() {
+        return atualizadoEm;
     }
 
-    public void setDescricao(String descricao) {
-        this.descricao = descricao;
-    }
-
-    public BigDecimal getValorServico() {
-        return valorServico;
-    }
-
-    public void setValorServico(BigDecimal valorServico) {
-        this.valorServico = valorServico;
-    }
-
-    public String getStatus() {
-        return status;
-    }
-
-    public void setStatus(String status) {
-        this.status = status;
-    }
 
     @Override
     public String toString() {
         return "OrdemServico{" +
                 "id=" + id +
-                ", agendamento=" + agendamento +
-                ", cliente=" + cliente +
-                ", numeroOrdem=" + numeroOrdem +
-                ", itemOrdemServico=" + itemOrdemServico +
-                ", dataAbertura=" + dataAbertura +
-                ", dataFechamento=" + dataFechamento +
-                ", descricao='" + descricao + '\'' +
-                ", valorServico=" + valorServico +
+                ", numero=" + numeroOrdem +
+                ", cliente=" + (cliente != null ? cliente.getNome() : "null") +
                 ", status='" + status + '\'' +
+                ", total=" + valorServico +
                 '}';
     }
 }
