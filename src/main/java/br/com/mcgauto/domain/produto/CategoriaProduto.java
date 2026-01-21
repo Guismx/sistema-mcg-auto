@@ -1,9 +1,6 @@
 package br.com.mcgauto.domain.produto;
 
 import jakarta.persistence.*;
-import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Size;
-
 @Entity
 @Table(name = "categoria_do_produto")
 public class CategoriaProduto {
@@ -11,13 +8,14 @@ public class CategoriaProduto {
     @Id
     @GeneratedValue (strategy = GenerationType.IDENTITY)
     private long id;
+
+    @Column (nullable = false, unique = true)
     private String nome;
 
     public CategoriaProduto (){
     }
 
-    public CategoriaProduto(long id, String nome) {
-        this.id = id;
+    public CategoriaProduto(String nome) {
         this.nome = nome;
     }
 
@@ -31,5 +29,10 @@ public class CategoriaProduto {
 
     public void setNome(String nome) {
         this.nome = nome;
+    }
+
+    @Override
+    public String toString() {
+        return "CategoriaProduto{id=" + id + ", nome='" + nome + "'}";
     }
 }
