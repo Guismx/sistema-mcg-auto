@@ -3,10 +3,6 @@ package br.com.mcgauto.domain.servico;
 import br.com.mcgauto.domain.produto.Produto;
 import br.com.mcgauto.domain.servico.enums.TipoOrdem;
 import jakarta.persistence.*;
-import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Positive;
-import jakarta.validation.constraints.PositiveOrZero;
-
 import java.math.BigDecimal;
 
 @Entity
@@ -16,107 +12,111 @@ public class ItemOrdemServico {
     @Id
     @GeneratedValue (strategy = GenerationType.IDENTITY)
     private long id;
-    @OneToOne (fetch = FetchType.LAZY)
-    @JoinColumn (name = "produto_id", nullable = false)
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "ordem_servico_id", nullable = false)
+    private OrdemServico ordemServico;
+
+    @ManyToOne (fetch = FetchType.LAZY)
+    @JoinColumn (name = "produto_id")
     private Produto produto;
-    @OneToOne (fetch = FetchType.LAZY)
-    @JoinColumn (name = "servico_id", nullable = false)
+
+    @ManyToOne (fetch = FetchType.LAZY)
+    @JoinColumn (name = "servico_id")
     private Servico servico;
+
     @Enumerated (EnumType.STRING)
     @Column (name = "tipo_ordem")
-    private TipoOrdem tipoOrdem;
+    private TipoOrdem tipoItem;
+
     private String descricao;
+
+    @Column (nullable = false)
     private int quantidade;
+
     @Column (name = "preco_unitario", nullable = false)
     private BigDecimal precoUnitario;
+
+    @Column(name = "valor_total", nullable = false)
     private BigDecimal valorTotal;
 
     public ItemOrdemServico (){
-
     }
 
-    public ItemOrdemServico(long id, Produto produto, Servico servico, TipoOrdem tipoOrdem, String descricao, int quantidade, BigDecimal precoUnitario, BigDecimal valorTotal) {
-        this.id = id;
+    //Construtor para PRODUTO
+    public ItemOrdemServico(OrdemServico ordemServico, Produto produto, int quantidade) {
+        this.ordemServico = ordemServico;
         this.produto = produto;
-        this.servico = servico;
-        this.tipoOrdem = tipoOrdem;
-        this.descricao = descricao;
+        this.tipoItem = TipoOrdem.PECA;
+        this.descricao = produto.getNome();
         this.quantidade = quantidade;
-        this.precoUnitario = precoUnitario;
-        this.valorTotal = valorTotal;
+        this.precoUnitario = produto.getPrecoVenda();
+        this.valorTotal = this.precoUnitario.multiply(BigDecimal.valueOf(quantidade));
+    }
+
+    public ItemOrdemServico(OrdemServico ordemServico, Servico servico, int quantidade) {
+        this.ordemServico = ordemServico;
+        this.servico = servico;
+        this.tipoItem = TipoOrdem.SERVICO;
+        this.descricao = servico.getNome();
+        this.quantidade = quantidade;
+        this.precoUnitario = servico.getPreco();
+        this.valorTotal = this.precoUnitario.multiply(BigDecimal.valueOf(quantidade));
     }
 
     public long getId() {
         return id;
     }
 
-    public Produto getProduto() {
-        return produto;
+    public OrdemServico getOrdemServico() {
+        return ordemServico;
+    }
+    public void setOrdemServico(OrdemServico ordemServico) {
+        this.ordemServico = ordemServico;
     }
 
-    public void setProduto(Produto produto) {
-        this.produto = produto;
+    public Produto getProduto() {
+        return produto;
     }
 
     public Servico getServico() {
         return servico;
     }
 
-    public void setServico(Servico servico) {
-        this.servico = servico;
-    }
-
-    public TipoOrdem getTipoOrdem() {
-        return tipoOrdem;
-    }
-
-    public void setTipoOrdem(TipoOrdem tipoOrdem) {
-        this.tipoOrdem = tipoOrdem;
+    public TipoOrdem getTipoItem() {
+        return tipoItem;
     }
 
     public String getDescricao() {
         return descricao;
     }
 
-    public void setDescricao(String descricao) {
-        this.descricao = descricao;
-    }
-
     public int getQuantidade() {
         return quantidade;
     }
-
     public void setQuantidade(int quantidade) {
         this.quantidade = quantidade;
+        if (this.precoUnitario != null) {
+            this.valorTotal = this.precoUnitario.multiply(BigDecimal.valueOf(quantidade));
+        }
     }
 
     public BigDecimal getPrecoUnitario() {
         return precoUnitario;
     }
 
-    public void setPrecoUnitario(BigDecimal precoUnitario) {
-        this.precoUnitario = precoUnitario;
-    }
-
     public BigDecimal getValorTotal() {
         return valorTotal;
-    }
-
-    public void setValorTotal(BigDecimal valorTotal) {
-        this.valorTotal = valorTotal;
     }
 
     @Override
     public String toString() {
         return "ItemOrdemServico{" +
                 "id=" + id +
-                ", produto=" + (produto != null ? produto.getNome() : null) +
-                ", servico=" + (servico != null ? servico.getNome() : null) +
-                ", tipoItem=" + tipoOrdem +
-                ", descricao='" + descricao + '\'' +
-                ", quantidade=" + quantidade +
-                ", precoUnitario=" + precoUnitario +
-                ", valorTotal=" + valorTotal +
+                ", tipo=" + tipoItem +
+                ", desc='" + descricao + '\'' +
+                ", qtd=" + quantidade +
+                ", total=" + valorTotal +
                 '}';
     }
 }
