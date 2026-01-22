@@ -1,34 +1,37 @@
 package br.com.mcgauto.domain.usuario;
 
 import jakarta.persistence.*;
-import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Positive;
-
 import java.time.LocalDate;
 
 @Entity
-@Table (name = "habilitacao_cliente")
+@Table (name = "cnhs")
 public class Cnh {
 
     @Id
     @GeneratedValue (strategy = GenerationType.IDENTITY)
     private long id;
+
     @OneToOne (fetch = FetchType.LAZY)
     @JoinColumn (name = "usuario_id", nullable = false)
     private Usuario titular;
-    @Column (name = "numero_cnh", nullable = false)
-    private int numeroCnh;
+
+    @Column (name = "numero_cnh", nullable = false, unique = true, length = 11)
+    private String numeroCnh;
+
+    @Column (nullable = false)
     private LocalDate validade;
 
-    public Cnh(){
+    @Column(length = 2)
+    private String categoria;
 
+    public Cnh(){
     }
 
-    public Cnh(long id, Usuario titular, int numeroCnh, LocalDate validade) {
-        this.id = id;
+    public Cnh(Usuario titular, String numeroCnh, LocalDate validade, String categoria) {
         this.titular = titular;
         this.numeroCnh = numeroCnh;
         this.validade = validade;
+        this.categoria = categoria;
     }
 
     public long getId() {
@@ -38,25 +41,29 @@ public class Cnh {
     public Usuario getTitular() {
         return titular;
     }
-
     public void setTitular(Usuario titular) {
         this.titular = titular;
     }
 
-    public int getNumeroCnh() {
+    public String getNumeroCnh() {
         return numeroCnh;
     }
-
-    public void setNumeroCnh(int numeroCnh) {
+    public void setNumeroCnh(String numeroCnh) {
         this.numeroCnh = numeroCnh;
     }
 
     public LocalDate getValidade() {
         return validade;
     }
-
     public void setValidade(LocalDate validade) {
         this.validade = validade;
+    }
+
+    public String getCategoria() {
+        return categoria;
+    }
+    public void setCategoria(String categoria) {
+        this.categoria = categoria;
     }
 
     @Override
