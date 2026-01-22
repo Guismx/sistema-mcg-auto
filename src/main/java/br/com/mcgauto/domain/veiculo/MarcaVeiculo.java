@@ -1,8 +1,6 @@
 package br.com.mcgauto.domain.veiculo;
 
 import jakarta.persistence.*;
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.Size;
 
 @Entity
 @Table (name = "marcas_veiculo")
@@ -11,14 +9,17 @@ public class MarcaVeiculo {
     @Id
     @GeneratedValue (strategy = GenerationType.IDENTITY)
     private long id;
+
+    @Column (nullable = false, unique = true)
     private String nome;
+
     @Column (name = "pais_origem")
     private String paisOrigem;
 
-    public MarcaVeiculo(){}
+    public MarcaVeiculo(){
+    }
 
-    public MarcaVeiculo(long id, String nome, String paisOrigem) {
-        this.id = id;
+    public MarcaVeiculo(String nome, String paisOrigem) {
         this.nome = nome;
         this.paisOrigem = paisOrigem;
     }
@@ -48,7 +49,6 @@ public class MarcaVeiculo {
         return "MarcaVeiculo{" +
                 "id=" + id +
                 ", nome='" + nome + '\'' +
-                ", paisOrigem='" + paisOrigem + '\'' +
                 '}';
     }
 }
