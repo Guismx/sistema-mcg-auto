@@ -2,8 +2,10 @@ package br.com.mcgauto.domain.veiculo;
 
 import br.com.mcgauto.domain.usuario.Usuario;
 import jakarta.persistence.*;
-import jakarta.validation.constraints.Min;
-import jakarta.validation.constraints.NotBlank;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
+
+import java.time.LocalDateTime;
 
 @Entity
 @Table (name = "veiculo_cliente")
@@ -12,22 +14,34 @@ public class VeiculoCliente {
     @Id
     @GeneratedValue (strategy = GenerationType.IDENTITY)
     private long id;
-    @OneToOne (fetch = FetchType.LAZY)
-    @JoinColumn (name = "usuario_id")
+
+    @ManyToOne (fetch = FetchType.LAZY)
+    @JoinColumn (name = "usuario_id", nullable = false)
     private Usuario dono;
-    @Column (length = 50, nullable = false)
+
+    @Column (nullable = false, length = 50)
     private String marca;
-    @Column (length = 50, nullable = false)
+
+    @Column (nullable = false, length = 50)
     private String nome;
-    @Column (length = 7, nullable = false, unique = true)
+
+    @Column (nullable = false, unique = true, length = 7)
     private String placa;
+
     @Column (length = 50, nullable = false)
     private String modelo;
 
+    @CreationTimestamp
+    @Column(name = "criado_em", nullable = false, updatable = false)
+    private LocalDateTime criadoEm;
+
+    @UpdateTimestamp
+    @Column(name = "atualizado_em")
+    private LocalDateTime atualizadoEm;
+
     public VeiculoCliente() {}
 
-    public VeiculoCliente(long id, Usuario dono, String marca, String nome, String placa, String modelo) {
-        this.id = id;
+    public VeiculoCliente(Usuario dono, String marca, String nome, String placa, String modelo) {
         this.dono = dono;
         this.marca = marca;
         this.nome = nome;
@@ -55,6 +69,14 @@ public class VeiculoCliente {
         this.marca = marca;
     }
 
+    public String getModelo() {
+        return modelo;
+    }
+
+    public void setModelo(String modelo) {
+        this.modelo = modelo;
+    }
+
     public String getNome() {
         return nome;
     }
@@ -71,21 +93,19 @@ public class VeiculoCliente {
         this.placa = placa;
     }
 
-    public String getModelo() {
-        return modelo;
+    public LocalDateTime getCriadoEm() {
+        return criadoEm;
     }
 
-    public void setModelo(String modelo) {
-        this.modelo = modelo;
+    public LocalDateTime getAtualizadoEm() {
+        return atualizadoEm;
     }
 
     @Override
     public String toString() {
         return "VeiculoCliente{" +
                 "id=" + id +
-                ", dono=" + (dono != null ? dono.getNome() : null) +
-                ", marca='" + marca + '\'' +
-                ", nome='" + nome + '\'' +
+                ", dono=" + (dono != null ? dono.getNome() : "null") +
                 ", placa='" + placa + '\'' +
                 ", modelo='" + modelo + '\'' +
                 '}';
