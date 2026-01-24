@@ -5,7 +5,8 @@ import br.com.mcgauto.domain.veiculo.enums.StatusVeiculo;
 import br.com.mcgauto.domain.veiculo.enums.TipoCombustivel;
 import br.com.mcgauto.domain.veiculo.enums.TipoPropriedade;
 import jakarta.persistence.*;
-import jakarta.validation.constraints.*;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
@@ -17,74 +18,102 @@ public class Veiculo {
     @Id
     @GeneratedValue (strategy = GenerationType.IDENTITY)
     private long id;
+
+    @Column (nullable = false)
     private String nome;
+
     @ManyToOne (fetch = FetchType.LAZY)
     @JoinColumn (name = "modelo_id", nullable = false)
-    private ModeloVeiculo modeloId;
+    private ModeloVeiculo modelo;
+
     @Column (name = "ano_modelo", nullable = false)
     private int anoModelo;
+
+    @Column (nullable = false)
     private String cor;
+
+    @Column (nullable = false, unique = true, length = 7)
     private String placa;
+
+    @Column (nullable = false, unique = true, length = 17)
     private String chassi;
+
     @Column (name = "tipo_modelo")
     private String tipoModelo;
+
+    @Column (nullable = false)
     private int quilometragem;
+
     @Column (name = "preco_custo", nullable = false)
     private BigDecimal precoCusto;
+
     @Column (name = "preco_venda", nullable = false)
     private BigDecimal precoVenda;
+
     @Column (name = "descricao_detalhada")
     private String descricaoDetalhada;
+
     @Column (name = "data_entrada_estoque", nullable = false)
     private LocalDateTime dataEntradaEstoque;
+
     @Column (name = "data_baixa_estoque")
     private LocalDateTime dataBaixaEstoque;
+
+    @CreationTimestamp
+    @Column (name = "criado_em", nullable = false, updatable = false)
     private LocalDateTime criadoEm;
+
+    @UpdateTimestamp
+    @Column (name = "autalizado_em", nullable = false)
     private LocalDateTime atualizadoEm;
+
     @Enumerated (EnumType.STRING)
     @Column (name = "tipo_combustivel", nullable = false)
     private TipoCombustivel tipoCombustivel;
+
     @Enumerated (EnumType.STRING)
     @Column (name = "estado_veiculo", nullable = false)
     private EstadoVeiculo estadoVeiculo;
+
     @Enumerated (EnumType.STRING)
     @Column (name = "status_veiculo", nullable = false)
     private StatusVeiculo statusVeiculo;
+
     @Enumerated (EnumType.STRING)
     @Column (name = "tipo_propriedade")
     private TipoPropriedade tipoPropriedade;
 
     public Veiculo() {}
 
-    public Veiculo(long id, String nome, ModeloVeiculo modeloId, int anoModelo, String cor, String placa, String chassi, String tipoModelo,
+    public Veiculo(ModeloVeiculo modelo, String nome, int anoModelo, String cor, String placa, String chassi,
                    int quilometragem, TipoCombustivel tipoCombustivel, BigDecimal precoCusto, BigDecimal precoVenda,
-                   EstadoVeiculo estadoVeiculo, StatusVeiculo statusVeiculo, TipoPropriedade tipoPropriedade,
-                   String descricaoDetalhada, LocalDateTime dataEntradaEstoque, LocalDateTime dataBaixaEstoque,
-                   LocalDateTime criadoEm, LocalDateTime atualizadoEm) {
-        this.id = id;
+                   TipoPropriedade tipoPropriedade, EstadoVeiculo estadoVeiculo) {
+        this.modelo = modelo;
         this.nome = nome;
-        this.modeloId = modeloId;
         this.anoModelo = anoModelo;
         this.cor = cor;
         this.placa = placa;
         this.chassi = chassi;
-        this.tipoModelo = tipoModelo;
         this.quilometragem = quilometragem;
         this.tipoCombustivel = tipoCombustivel;
         this.precoCusto = precoCusto;
         this.precoVenda = precoVenda;
-        this.estadoVeiculo = estadoVeiculo;
-        this.statusVeiculo = statusVeiculo;
         this.tipoPropriedade = tipoPropriedade;
-        this.descricaoDetalhada = descricaoDetalhada;
-        this.dataEntradaEstoque = dataEntradaEstoque;
-        this.dataBaixaEstoque = dataBaixaEstoque;
-        this.criadoEm = criadoEm;
-        this.atualizadoEm = atualizadoEm;
+        this.estadoVeiculo = estadoVeiculo;
+        this.statusVeiculo = StatusVeiculo.DISPONIVEL;
+        this.dataEntradaEstoque = LocalDateTime.now();
     }
 
     public long getId() {
         return id;
+    }
+
+    public ModeloVeiculo getModelo() {
+        return modelo;
+    }
+
+    public void setModelo(ModeloVeiculo modelo) {
+        this.modelo = modelo;
     }
 
     public String getNome() {
@@ -95,20 +124,8 @@ public class Veiculo {
         this.nome = nome;
     }
 
-    public ModeloVeiculo getModeloId() {
-        return modeloId;
-    }
-
-    public void setModeloId(ModeloVeiculo modeloId) {
-        this.modeloId = modeloId;
-    }
-
     public int getAnoModelo() {
         return anoModelo;
-    }
-
-    public void setAnoModelo(int anoModelo) {
-        this.anoModelo = anoModelo;
     }
 
     public String getCor() {
@@ -155,10 +172,6 @@ public class Veiculo {
         return tipoCombustivel;
     }
 
-    public void setTipoCombustivel(TipoCombustivel tipoCombustivel) {
-        this.tipoCombustivel = tipoCombustivel;
-    }
-
     public BigDecimal getPrecoCusto() {
         return precoCusto;
     }
@@ -175,12 +188,12 @@ public class Veiculo {
         this.precoVenda = precoVenda;
     }
 
-    public EstadoVeiculo getEstadoVeiculo() {
-        return estadoVeiculo;
+    public TipoPropriedade getTipoPropriedade() {
+        return tipoPropriedade;
     }
 
-    public void setEstadoVeiculo(EstadoVeiculo estadoVeiculo) {
-        this.estadoVeiculo = estadoVeiculo;
+    public EstadoVeiculo getEstadoVeiculo() {
+        return estadoVeiculo;
     }
 
     public StatusVeiculo getStatusVeiculo() {
@@ -189,14 +202,6 @@ public class Veiculo {
 
     public void setStatusVeiculo(StatusVeiculo statusVeiculo) {
         this.statusVeiculo = statusVeiculo;
-    }
-
-    public TipoPropriedade getTipoPropriedade() {
-        return tipoPropriedade;
-    }
-
-    public void setTipoPropriedade(TipoPropriedade tipoPropriedade) {
-        this.tipoPropriedade = tipoPropriedade;
     }
 
     public String getDescricaoDetalhada() {
@@ -209,10 +214,6 @@ public class Veiculo {
 
     public LocalDateTime getDataEntradaEstoque() {
         return dataEntradaEstoque;
-    }
-
-    public void setDataEntradaEstoque(LocalDateTime dataEntradaEstoque) {
-        this.dataEntradaEstoque = dataEntradaEstoque;
     }
 
     public LocalDateTime getDataBaixaEstoque() {
@@ -231,30 +232,13 @@ public class Veiculo {
         return atualizadoEm;
     }
 
-    public void setAtualizadoEm(LocalDateTime atualizadoEm) {
-        this.atualizadoEm = atualizadoEm;
-    }
-
     @Override
     public String toString() {
         return "Veiculo{" +
                 "id=" + id +
-                ", anoModelo=" + anoModelo +
-                ", cor='" + cor + '\'' +
+                ", modelo=" + (modelo != null ? modelo.getNome() : "null") +
                 ", placa='" + placa + '\'' +
-                ", chassi='" + chassi + '\'' +
-                ", tipoModelo='" + tipoModelo + '\'' +
-                ", quilometragem=" + quilometragem +
-                ", tipoCombustivel=" + tipoCombustivel +
-                ", precoCusto=" + precoCusto +
-                ", precoVenda=" + precoVenda +
-                ", estadoVeiculo=" + estadoVeiculo +
-                ", statusVeiculo=" + statusVeiculo +
-                ", tipoPropriedade=" + tipoPropriedade +
-                ", dataEntradaEstoque=" + dataEntradaEstoque +
-                ", dataBaixaEstoque=" + dataBaixaEstoque +
-                ", criadoEm=" + criadoEm +
-                ", atualizadoEm=" + atualizadoEm +
+                ", status=" + statusVeiculo +
                 '}';
     }
 
