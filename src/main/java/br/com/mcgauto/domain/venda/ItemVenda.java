@@ -1,65 +1,60 @@
 package br.com.mcgauto.domain.venda;
 
 import br.com.mcgauto.domain.produto.Produto;
-import br.com.mcgauto.domain.veiculo.Veiculo;
-import br.com.mcgauto.domain.venda.enums.VendaItem;
 import jakarta.persistence.*;
-import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.PositiveOrZero;
-
 import java.math.BigDecimal;
 
 @Entity
-@Table (name = "item_venda")
+@Table(name = "itens_venda")
 public class ItemVenda {
 
     @Id
-    @GeneratedValue (strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
-    @Enumerated (EnumType.STRING)
-    @Column (name = "tipo_item", nullable = false)
-    private VendaItem tipoItem;
+
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn (name = "produto_id")
+    @JoinColumn(name = "venda_id", nullable = false)
+    private Venda venda;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "produto_id", nullable = false)
     private Produto produto;
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn (name = "veiculo_id")
-    private Veiculo veiculo;
+
+    @Column(nullable = false)
     private int quantidade;
-    @Column (name = "preco_unitario")
+
+    @Column(name = "preco_unitario", nullable = false)
     private BigDecimal precoUnitario;
-    @Column (name = "preco_venda")
-    private BigDecimal precoVenda;
-    @Column (name = "valor_desconto")
-    private BigDecimal valorDesconto;
-    @Column (name = "valor_total", nullable = false)
+
+    @Column(name = "valor_total", nullable = false)
     private BigDecimal valorTotal;
 
-    public ItemVenda(){}
+    @Column(name = "valor_desconto")
+    private BigDecimal valorDesconto;
 
-    public ItemVenda(long id, VendaItem tipoItem, Produto produto, Veiculo veiculo, int quantidade,
-                     BigDecimal precoUnitario, BigDecimal precoVenda, BigDecimal valorDesconto, BigDecimal valorTotal) {
-        this.id = id;
-        this.tipoItem = tipoItem;
+    public ItemVenda() {}
+
+    public ItemVenda(Venda venda, Produto produto, int quantidade, BigDecimal valorDesconto) {
+        this.venda = venda;
         this.produto = produto;
-        this.veiculo = veiculo;
         this.quantidade = quantidade;
-        this.precoUnitario = precoUnitario;
-        this.precoVenda = precoVenda;
-        this.valorDesconto = valorDesconto;
-        this.valorTotal = valorTotal;
+        this.precoUnitario = produto.getPrecoVenda();
+        this.valorDesconto = valorDesconto != null ? valorDesconto : BigDecimal.ZERO;
+
+        BigDecimal subtotal = this.precoUnitario.multiply(BigDecimal.valueOf(quantidade));
+        this.valorTotal = subtotal.subtract(this.valorDesconto);
+    }
+
+    public void setVenda(Venda venda) {
+        this.venda = venda;
     }
 
     public long getId() {
         return id;
     }
 
-    public VendaItem getTipoItem() {
-        return tipoItem;
-    }
-
-    public void setTipoItem(VendaItem tipoItem) {
-        this.tipoItem = tipoItem;
+    public Venda getVenda() {
+        return venda;
     }
 
     public Produto getProduto() {
@@ -68,14 +63,6 @@ public class ItemVenda {
 
     public void setProduto(Produto produto) {
         this.produto = produto;
-    }
-
-    public Veiculo getVeiculo() {
-        return veiculo;
-    }
-
-    public void setVeiculo(Veiculo veiculo) {
-        this.veiculo = veiculo;
     }
 
     public int getQuantidade() {
@@ -94,12 +81,12 @@ public class ItemVenda {
         this.precoUnitario = precoUnitario;
     }
 
-    public BigDecimal getPrecoVenda() {
-        return precoVenda;
+    public BigDecimal getValorTotal() {
+        return valorTotal;
     }
 
-    public void setPrecoVenda(BigDecimal precoVenda) {
-        this.precoVenda = precoVenda;
+    public void setValorTotal(BigDecimal valorTotal) {
+        this.valorTotal = valorTotal;
     }
 
     public BigDecimal getValorDesconto() {
@@ -110,26 +97,13 @@ public class ItemVenda {
         this.valorDesconto = valorDesconto;
     }
 
-    public BigDecimal getValorTotal() {
-        return valorTotal;
-    }
-
-    public void setValorTotal(BigDecimal valorTotal) {
-        this.valorTotal = valorTotal;
-    }
-
     @Override
     public String toString() {
         return "ItemVenda{" +
                 "id=" + id +
-                ", tipoItem=" + tipoItem +
-                ", produto=" + (produto != null ? produto.getNome() : null) +
-                ", veiculo=" + (veiculo != null ? veiculo.getNome() : null) +
-                ", quantidade=" + quantidade +
-                ", precoUnitario=" + precoUnitario +
-                ", precoVenda=" + precoVenda +
-                ", valorDesconto=" + valorDesconto +
-                ", valorTotal=" + valorTotal +
+                ", produto=" + (produto != null ? produto.getNome() : "null") +
+                ", qtd=" + quantidade +
+                ", total=" + valorTotal +
                 '}';
     }
 }
