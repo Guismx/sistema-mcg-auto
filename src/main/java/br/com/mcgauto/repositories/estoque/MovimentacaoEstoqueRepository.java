@@ -13,6 +13,6 @@ import java.util.List;
 public interface MovimentacaoEstoqueRepository extends JpaRepository<MovimentacaoEstoque, Long> {
     List<MovimentacaoEstoque> findByResponsavelId (Long responsavelId);
     List<MovimentacaoEstoque> findByTipoMovimentacao (TipoMovimentacao tipo);
-    List<MovimentacaoEstoque> findByDataHoraMovimentacaoBetween (LocalDateTime data);
+    List<MovimentacaoEstoque> findByDataHoraMovimentacaoBetween (LocalDateTime inicio, LocalDateTime fim);
 
 }
