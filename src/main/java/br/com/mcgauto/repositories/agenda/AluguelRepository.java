@@ -11,7 +11,7 @@ import java.util.List;
 @Repository
 public interface AluguelRepository extends JpaRepository <Aluguel, Long> {
     List<Aluguel> findByClienteId(Long clienteId);
-    List<Veiculo> findByVeiculoId(Long veiculoId);
+    List<Aluguel> findByVeiculoId(Long veiculoId);
 
     //Carros que saem hoje (Retirada)
     List<Aluguel> findByDataRetiradaPrevista(LocalDate hoje);
