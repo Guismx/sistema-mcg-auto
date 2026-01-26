@@ -11,6 +11,6 @@ import java.util.List;
 public interface AgendamentoRepository extends JpaRepository <Agendamento, Long> {
 
     List<Agendamento> findByClienteId (Long clienteId);
-    List<Agendamento> findByServico(Long servicoId);
+    List<Agendamento> findByServicoId (Long servicoId);
     List<Agendamento> findByStatusAgendamentoEquals(StatusAgendamento status);
 }
