@@ -1,4 +1,4 @@
-package br.com.mcgauto.repositories.veiculo;
+package br.com.mcgauto.repository.veiculo;
 
 import br.com.mcgauto.domain.veiculo.ModeloVeiculo;
 import br.com.mcgauto.domain.veiculo.enums.CategoriaVeiculo;

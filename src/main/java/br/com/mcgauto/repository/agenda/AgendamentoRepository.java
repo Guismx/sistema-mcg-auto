@@ -1,4 +1,4 @@
-package br.com.mcgauto.repositories.agenda;
+package br.com.mcgauto.repository.agenda;
 
 import br.com.mcgauto.domain.agenda.Agendamento;
 import br.com.mcgauto.domain.agenda.enums.StatusAgendamento;

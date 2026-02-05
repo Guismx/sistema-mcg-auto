@@ -1,4 +1,4 @@
-package br.com.mcgauto.repositories.venda;
+package br.com.mcgauto.repository.venda;
 
 import br.com.mcgauto.domain.venda.ItemVenda;
 import org.springframework.data.jpa.repository.JpaRepository;

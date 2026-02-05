@@ -1,4 +1,4 @@
-package br.com.mcgauto.repositories.financeiro;
+package br.com.mcgauto.repository.financeiro;
 
 import br.com.mcgauto.domain.financeiro.Pagamento;
 import org.springframework.data.jpa.repository.JpaRepository;

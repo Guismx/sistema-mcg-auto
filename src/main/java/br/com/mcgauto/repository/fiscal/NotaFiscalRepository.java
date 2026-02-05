@@ -1,4 +1,4 @@
-package br.com.mcgauto.repositories.fiscal;
+package br.com.mcgauto.repository.fiscal;
 
 
 import br.com.mcgauto.domain.fiscal.NotaFiscal;

@@ -1,4 +1,4 @@
-package br.com.mcgauto.repositories.servico;
+package br.com.mcgauto.repository.servico;
 
 import br.com.mcgauto.domain.servico.Servico;
 import br.com.mcgauto.domain.servico.enums.TipoServico;

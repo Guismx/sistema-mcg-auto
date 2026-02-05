@@ -1,4 +1,4 @@
-package br.com.mcgauto.repositories.servico;
+package br.com.mcgauto.repository.servico;
 
 import br.com.mcgauto.domain.servico.ItemOrdemServico;
 import org.springframework.data.jpa.repository.JpaRepository;

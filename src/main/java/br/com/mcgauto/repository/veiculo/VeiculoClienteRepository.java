@@ -1,6 +1,5 @@
-package br.com.mcgauto.repositories.veiculo;
+package br.com.mcgauto.repository.veiculo;
 
-import br.com.mcgauto.domain.usuario.Usuario;
 import br.com.mcgauto.domain.veiculo.VeiculoCliente;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;

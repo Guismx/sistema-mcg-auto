@@ -1,4 +1,4 @@
-package br.com.mcgauto.repositories.venda;
+package br.com.mcgauto.repository.venda;
 
 import br.com.mcgauto.domain.venda.Venda;
 import br.com.mcgauto.domain.venda.enums.CanalVenda;

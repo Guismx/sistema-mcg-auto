@@ -1,4 +1,4 @@
-package br.com.mcgauto.repositories.estoque;
+package br.com.mcgauto.repository.estoque;
 
 import br.com.mcgauto.domain.estoque.MovimentacaoEstoque;
 import br.com.mcgauto.domain.estoque.enums.TipoMovimentacao;

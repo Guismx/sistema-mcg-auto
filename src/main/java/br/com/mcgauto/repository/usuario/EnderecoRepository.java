@@ -1,4 +1,4 @@
-package br.com.mcgauto.repositories.usuario;
+package br.com.mcgauto.repository.usuario;
 
 import br.com.mcgauto.domain.usuario.Endereco;
 import br.com.mcgauto.domain.usuario.enums.TipoEndereco;

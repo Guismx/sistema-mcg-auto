@@ -1,7 +1,6 @@
-package br.com.mcgauto.repositories.agenda;
+package br.com.mcgauto.repository.agenda;
 
 import br.com.mcgauto.domain.agenda.Aluguel;
-import br.com.mcgauto.domain.veiculo.Veiculo;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
