@@ -13,6 +13,40 @@ veiculos, que envolve aprovacoes gerenciais e documentacao, ate a dinamica agil 
 assegurando consistencia contabil e operacional em todas as etapas.
 
 ---
+## Stack Tecnológica
+
+### `Back-end (Core)`
+* **Java 21** (Versão LTS mais recente)
+* **Spring Boot 3.x**
+* **Spring Data JPA** (Persistência de Dados)
+* **Hibernate** (ORM - Object Relational Mapping)
+* **PostgreSQL 16** (Banco de Dados Relacional)
+* **Flyway** (Versionamento e Migração de Banco de Dados)
+* **Spring Security + JWT** (Autenticação e Autorização via Token)
+* **MapStruct** (Mapeamento de Objetos de alta performance)
+* **Bean Validation** (Validação de Regras de Entrada)
+* **Java Records** (Imutabilidade para DTOs)
+
+### `Qualidade e Testes`
+* **JUnit 5** (Framework de Testes Unitários)
+* **Mockito** (Criação de Mocks para isolamento de testes)
+* **Jacoco** (Análise de Cobertura de Código/Code Coverage)
+
+### `DevOps e Infraestrutura`
+* **Docker** (Containerização da Aplicação)
+* **Docker Compose** (Orquestração de ambiente de desenvolvimento)
+* **Git** (Versionamento de Código)
+* **Maven** (Gerenciamento de Dependências e Build)
+
+### `Documentação`
+* **Swagger / OpenAPI** (Documentação Interativa da API)
+* **Javadoc** (Documentação técnica de código)
+
+### `Front-end`
+* **Angular** (Framework SPA)
+* **TypeScript** (Superset JavaScript tipado)
+---
+
 ## Engenharia e Documentacao
 
 Este projeto nao é apenas uma codificacao tecnica, mas o resultado de uma engenharia de requisitos detalhada. Todo o desenvolvimento foi guiado por uma documentacao formal de Requisitos Funcionais, Nao Funcionais e Regras de Negocio (Baseada em IEEE 830).
@@ -58,25 +92,40 @@ O projeto segue uma estrutura baseada em Dominio, separando responsabilidades de
 
 ```text
 src/main/java/br/com/mcgauto
-├── config/          #Configuracoes globais (Swagger, Security, Cors)
-├── controller/      #Camada REST (Entrada de dados)
-├── domain/          #Entidades JPA (Regras de Negocio e Auditoria)
-│   ├── agenda
-│   ├── estoque
-│   ├── financeiro
-│   ├── fiscal
-│   ├── produto
-│   ├── servico
-│   ├── usuario
-│   ├── veiculo
-│   └── venda
-├── dto/             #Objetos de Transferencia de Dados (Input/Output)
-├── exception/       #Tratamento global de erros
-├── global.enums/    #Enums compartilhados pelo sistema
-├── mapper/          #Mapeamento entre DTOs e Entidades
-├── repositories/    #Interfaces Spring Data JPA
-├── service/         #Logica de negocio e transacoes
-└── starter/         #Classe main da aplicacao
+├── config/              # Configurações globais (Swagger, Beans, Security)
+├── controller/          # Camada REST (Entrada de dados)
+│   ├── usuario/         # Ex: UsuarioController, AuthController
+│   ├── veiculo/         # Ex: VeiculoController
+│   ├── venda/           # Ex: VendaController
+│   └── ...
+├── domain/              # Entidades JPA (Regras de Negócio e Relacionamentos)
+│   ├── agenda/          # Ex: Agendamento, Aluguel
+│   ├── estoque/         # Ex: MovimentacaoEstoque
+│   ├── financeiro/      # Ex: Pagamento
+│   ├── fiscal/          # Ex: NotaFiscal
+│   ├── produto/         # Ex: Produto, Categoria
+│   ├── servico/         # Ex: Servico, OrdemServico
+│   ├── usuario/         # Ex: Usuario (Aggregate Root), Endereco, Cnh
+│   ├── veiculo/         # Ex: Veiculo, Marca, Modelo
+│   └── venda/           # Ex: Venda, ItemVenda
+├── dto/                 # Transferência de Dados (Records Imutáveis)
+│   ├── usuario/         # Ex: UsuarioCreateRequestDTO, EnderecoDTO
+│   ├── veiculo/         # Ex: VeiculoResponseDTO
+│   └── ...              
+├── mapper/              # Interfaces MapStruct (Conversão DTO <-> Entity)
+│   ├── usuario/         # Ex: UsuarioMapper, EnderecoMapper
+│   └── ...
+├── repository/          # Interfaces Spring Data JPA (Acesso a Dados)
+│   ├── usuario/         # Ex: UsuarioRepository
+│   ├── veiculo/         # Ex: VeiculoRepository
+│   └── ...              
+├── service/             # Regras de Negócio e Transações (@Service)
+│   ├── usuario/         # Ex: UsuarioService
+│   └── ...
+├── global/              # Recursos Compartilhados
+│   ├── enums/           # Enums globais
+│   └── exception/       # Handlers de Erro e Exceções Personalizadas
+└── starter/             # Classe Main (McgautoApplication)
 ```
 
 ### Destaques Tecnicos
@@ -141,25 +190,22 @@ A aplicacao estara disponivel em: `http://localhost:8080`
     mvn test
     ```
 
----
-
-## Tecnologias Utilizadas
-
-* **Linguagem:** Java 21
-* **Framework:** Spring Boot 3.x
-* **Banco de Dados:** PostgreSQL
-* **Migracao:** Flyway Migration
-* **ORM:** Hibernate / Spring Data JPA
-* **Validacao:** Hibernate Validator (Bean Validation)
-
----
-
 ## Proximos Passos (Roadmap)
 
--  Implementacao do Spring Security (JWT).
--  Criacao dos Repositories e Services.
--  Finalizacao dos Controllers REST.
--  Implementação do Front-end.
+- [x] **Arquitetura Base:** Estrutura de pacotes e Docker Compose configurado.
+- [x] **Domínio (Entities):** Modelagem das entidades, Enums e Relacionamentos (JPA).
+- [x] **Persistência:** Criação das interfaces Repository.
+- [x] **Tratamento de Erros:** Implementação do `GlobalExceptionHandler` e Classes de Erro personalizadas (`BusinessException`, `ResourceNotFoundException`).
+- [ ] **DTOs (Data Transfer Objects):** Criação dos Records de Request/Response.
+- [ ] **Mappers:** Configuração do MapStruct para conversão Entity <-> DTO.
+- [ ] **Configurações:** Beans de configuração (Cors, ModelMapper/MapStruct, etc).
+- [ ] **Database Migrations:** Configuração do Flyway para versionamento de banco.
+- [ ] **Regras de Negócio (Services):** Implementação da lógica core do sistema.
+- [ ] **API REST (Controllers):** Exposição dos endpoints.
+- [ ] **Documentação:** Configuração do Swagger/OpenAPI.
+- [ ] **Segurança:** Implementação de JWT e Filtros de Segurança.
+- [ ] **Testes:** Testes Unitários e de Integração.
+- [ ] Front-end Angular 
 
 ---
 
