@@ -7,6 +7,8 @@ import org.hibernate.validator.constraints.br.CPF;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "usuarios")
@@ -50,6 +52,12 @@ public class Usuario {
 
     @Column (name = "email_validado")
     private boolean emailValidado;
+
+    @OneToMany(mappedBy = "proprietario", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Endereco> enderecos = new ArrayList<>();
+
+    @OneToOne(mappedBy = "titular", cascade = CascadeType.ALL, orphanRemoval = true)
+    private Cnh cnh;
 
     public Usuario(){
 
