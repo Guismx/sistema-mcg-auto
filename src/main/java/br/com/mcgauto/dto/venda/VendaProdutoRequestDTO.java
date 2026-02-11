@@ -1,6 +1,7 @@
 package br.com.mcgauto.dto.venda;
 
 import br.com.mcgauto.domain.venda.enums.CanalVenda;
+import br.com.mcgauto.domain.venda.enums.FormaPagamento;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
@@ -11,7 +12,6 @@ public record VendaProdutoRequestDTO(
         @NotNull(message = "O ID do cliente é obrigatório")
         Long clienteId,
 
-        @NotNull(message = "O ID do vendedor é obrigatório")
         Long vendedorId,
 
         @NotNull(message = "O canal da venda é obrigatório")

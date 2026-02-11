@@ -1,6 +1,7 @@
 package br.com.mcgauto.dto.venda;
 
 import br.com.mcgauto.domain.venda.enums.CanalVenda;
+import br.com.mcgauto.domain.venda.enums.FormaPagamento;
 import jakarta.validation.constraints.NotNull;
 
 public record VendaVeiculoRequestDTO(

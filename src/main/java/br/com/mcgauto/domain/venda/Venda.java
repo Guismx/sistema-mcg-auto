@@ -3,6 +3,7 @@ package br.com.mcgauto.domain.venda;
 import br.com.mcgauto.domain.usuario.Usuario;
 import br.com.mcgauto.domain.veiculo.Veiculo;
 import br.com.mcgauto.domain.venda.enums.CanalVenda;
+import br.com.mcgauto.domain.venda.enums.FormaPagamento;
 import br.com.mcgauto.domain.venda.enums.StatusVenda;
 import br.com.mcgauto.domain.venda.enums.TipoVenda;
 import jakarta.persistence.*;
@@ -12,6 +13,8 @@ import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
+import java.util.concurrent.ThreadLocalRandom;
 
 @Entity
 @Table(name = "vendas")
@@ -21,8 +24,11 @@ public class Venda {
     @GeneratedValue (strategy = GenerationType.IDENTITY)
     private long id;
 
+    @Column(name = "codigo_pedido", nullable = false, unique = true)
+    private String codigoPedido;
+
     @Column (name = "numero_pedido", nullable = false, unique = true)
-    private int numeroPedido;
+    private Integer numeroPedido;
 
     @Enumerated(EnumType.STRING)
     @Column(name = "tipo_venda", nullable = false)
@@ -37,7 +43,7 @@ public class Venda {
     private Usuario cliente;
 
     @ManyToOne (fetch = FetchType.LAZY)
-    @JoinColumn (name = "vendedor_id", nullable = false)
+    @JoinColumn (name = "vendedor_id")
     private Usuario vendedor;
 
     @ManyToOne (fetch = FetchType.LAZY)
@@ -58,7 +64,7 @@ public class Venda {
     private BigDecimal valorTotal;
 
     @Column (name = "forma_pagamento")
-    private String formaPagamento;
+    private FormaPagamento formaPagamento;
 
     private String observacoes;
 
@@ -77,12 +83,13 @@ public class Venda {
     public Venda() {}
 
     //Venda Veículo
-    public Venda(int numeroPedido, Usuario cliente, Usuario vendedor, Veiculo veiculo, CanalVenda canalVenda) {
-        this.numeroPedido = numeroPedido;
+    public Venda(Usuario cliente, Usuario vendedor, Veiculo veiculo, CanalVenda canalVenda, FormaPagamento formaPagamento) {
+        this.configurarIdentificadores(); // Gera UUID e Numero
         this.cliente = cliente;
         this.vendedor = vendedor;
         this.veiculo = veiculo;
         this.canalVenda = canalVenda;
+        this.formaPagamento = formaPagamento;
         this.tipoVenda = TipoVenda.VEICULO;
         this.dataVenda = LocalDateTime.now();
         this.statusVenda = StatusVenda.AGUARDANDO_APROVACAO;
@@ -90,15 +97,23 @@ public class Venda {
     }
 
     //Venda Produto
-    public Venda(int numeroPedido, Usuario cliente, Usuario vendedor, CanalVenda canalVenda) {
-        this.numeroPedido = numeroPedido;
+    public Venda(Usuario cliente, Usuario vendedor, CanalVenda canalVenda, FormaPagamento formaPagamento) {
+        this.configurarIdentificadores(); // Gera UUID e Numero
         this.cliente = cliente;
         this.vendedor = vendedor;
         this.canalVenda = canalVenda;
+        this.formaPagamento = formaPagamento;
         this.tipoVenda = TipoVenda.PRODUTO;
         this.dataVenda = LocalDateTime.now();
         this.statusVenda = StatusVenda.PENDENTE_PAGAMENTO;
         this.valorTotal = BigDecimal.ZERO;
+    }
+
+    //Método privado para gerar os IDs
+    private void configurarIdentificadores() {
+        this.codigoPedido = UUID.randomUUID().toString();
+        //Gera um número aleatório entre 100000 e 999999
+        this.numeroPedido = ThreadLocalRandom.current().nextInt(100000, 999999);
     }
 
     //Métodos Auxiliares
@@ -168,11 +183,11 @@ public class Venda {
         this.valorTotal = valorTotal;
     }
 
-    public String getFormaPagamento() {
+    public FormaPagamento getFormaPagamento() {
         return formaPagamento;
     }
 
-    public void setFormaPagamento(String formaPagamento) {
+    public void setFormaPagamento(FormaPagamento formaPagamento) {
         this.formaPagamento = formaPagamento;
     }
 

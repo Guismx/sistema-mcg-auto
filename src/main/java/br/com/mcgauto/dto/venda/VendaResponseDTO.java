@@ -1,6 +1,7 @@
 package br.com.mcgauto.dto.venda;
 
 import br.com.mcgauto.domain.venda.enums.CanalVenda;
+import br.com.mcgauto.domain.venda.enums.FormaPagamento;
 import br.com.mcgauto.domain.venda.enums.StatusVenda;
 import br.com.mcgauto.domain.venda.enums.TipoVenda;
 import br.com.mcgauto.dto.usuario.UsuarioResponseDTO;
@@ -12,7 +13,8 @@ import java.util.List;
 
 public record VendaResponseDTO(
         Long id,
-        String codigoPedido, // Aquele UUID ou número gerado
+        String codigoPedido,
+        Integer numeroPedido,
         LocalDateTime dataVenda,
         BigDecimal valorTotal,
         TipoVenda tipoVenda,
@@ -20,8 +22,6 @@ public record VendaResponseDTO(
         StatusVenda statusVenda,
         FormaPagamento formaPagamento,
         String observacoes,
-
-        // --- Relacionamentos ---
         UsuarioResponseDTO cliente,
 
         //Pode ser null (venda web)
