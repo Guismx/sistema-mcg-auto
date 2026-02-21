@@ -5,7 +5,7 @@ import jakarta.validation.constraints.Size;
 
 import java.math.BigDecimal;
 
-public record VeiculoUpdateRequest(
+public record VeiculoUpdateRequestDTO(
 
         String nome,
         Long modeloId,
