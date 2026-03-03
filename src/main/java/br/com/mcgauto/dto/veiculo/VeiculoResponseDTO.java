@@ -11,7 +11,7 @@ import java.time.LocalDateTime;
 public record VeiculoResponseDTO(
         Long id,
         String nome,
-        ModeloResponseDTO modelo,
+        ModeloVeiculoResponseDTO modelo,
         Integer anoModelo,
         String cor,
         String placa,
