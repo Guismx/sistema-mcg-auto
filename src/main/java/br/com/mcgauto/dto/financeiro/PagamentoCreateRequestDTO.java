@@ -12,6 +12,7 @@ import java.time.LocalDateTime;
 public record PagamentoCreateRequestDTO(
         Long vendaId,
         Long aluguelId,
+        Long ordemServicoId,
 
         @NotNull (message = "Necessário a origem do pagamento")
         TipoOrigem tipoOrigem,
@@ -25,8 +26,6 @@ public record PagamentoCreateRequestDTO(
 
         @NotNull (message = "Obrigado informar a forma de pagamento")
         TipoPagamento formaPagamento,
-
-        StatusPagamento statusPagamento,
         String transacaoGateway,
         int parcelas
 ) {

@@ -4,8 +4,8 @@ import br.com.mcgauto.domain.veiculo.enums.CategoriaVeiculo;
 
 public record ModeloVeiculoResponseDTO(
       Long id,
-      MarcaVeiculoResponseDTO marcaVeiculo,
+      MarcaVeiculoResponseDTO marca,
       String nome,
-      CategoriaVeiculo categoriaVeiculo
+      CategoriaVeiculo categoria
 ){
 }

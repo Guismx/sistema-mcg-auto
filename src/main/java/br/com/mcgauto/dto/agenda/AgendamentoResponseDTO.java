@@ -13,7 +13,7 @@ public record AgendamentoResponseDTO(
         ServicoResponseDTO servico,
         VeiculoClienteResponseDTO veiculoCliente,
         LocalDateTime dataHoraServico,
-        int estimativaTempo,
+        int estimativaDeTempo,
         StatusAgendamento statusAgendamento
 ) {
 }

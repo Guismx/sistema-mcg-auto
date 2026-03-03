@@ -18,7 +18,7 @@ public record PagamentoResponseDTO(
         TipoOrigem tipoOrigem,
         LocalDateTime dataPagamento,
         BigDecimal valorPago,
-        TipoPagamento tipoPagamento,
+        TipoPagamento formaPagamento,
         StatusPagamento statusPagamento,
         String transacaoGateway,
         int parcelas
