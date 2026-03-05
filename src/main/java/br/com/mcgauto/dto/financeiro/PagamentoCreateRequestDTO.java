@@ -1,6 +1,6 @@
 package br.com.mcgauto.dto.financeiro;
 
-import br.com.mcgauto.domain.financeiro.enums.StatusPagamento;
+
 import br.com.mcgauto.domain.financeiro.enums.TipoOrigem;
 import br.com.mcgauto.domain.financeiro.enums.TipoPagamento;
 import jakarta.validation.constraints.NotNull;
