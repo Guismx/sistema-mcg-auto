@@ -15,6 +15,6 @@ public record ServicoUpdateRequestDTO(
         BigDecimal preco,
 
         @Positive
-        int tempoServico
+        Integer tempoServico
 ) {
 }
