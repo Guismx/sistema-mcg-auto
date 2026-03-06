@@ -13,19 +13,16 @@ public record ServicoCreateRequestDTO(
         @NotNull (message = "Informe o tipo do Serviço")
         TipoServico tipoServico,
 
-        @NotBlank (message = "O nome do serviço é obrigaótrio")
+        @NotBlank (message = "O nome do serviço é obrigatório")
         String nome,
 
-        @NotBlank (message = "Necessário adicionar uma descição")
+        @NotBlank (message = "Necessário adicionar uma descrição")
         String descricao,
 
         @PositiveOrZero
         BigDecimal preco,
 
-        StatusAtivacao statusServico,
-
         @Positive
-        @NotNull
-        int tempoServico
+        Integer tempoServico
 ) {
 }
