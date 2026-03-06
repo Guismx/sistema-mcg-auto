@@ -96,10 +96,10 @@ public class Servico {
         this.tempoServico = tempoServico;
     }
 
-    public StatusAtivacao getStatusAtivacao() {
+    public StatusAtivacao getStatusServico() {
         return statusServico;
     }
-    public void setStatusAtivacao(StatusAtivacao statusAtivacao) {
+    public void setStatusServico(StatusAtivacao statusAtivacao) {
         this.statusServico = statusAtivacao;
     }
 

@@ -9,7 +9,7 @@ import jakarta.validation.constraints.PositiveOrZero;
 
 import java.math.BigDecimal;
 
-public record ServicoRequestDTO(
+public record ServicoCreateRequestDTO(
         @NotNull (message = "Informe o tipo do Serviço")
         TipoServico tipoServico,
 
