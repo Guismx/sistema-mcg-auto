@@ -35,7 +35,7 @@ public class Servico {
 
     @Enumerated (EnumType.STRING)
     @Column (name = "status_servico")
-    private StatusAtivacao statusServico;
+    private StatusAtivacao statusServico = StatusAtivacao.ATIVO;
 
     @CreationTimestamp
     @Column(name = "criado_em", nullable = false, updatable = false)
