@@ -3,6 +3,7 @@ package br.com.mcgauto.dto.usuario;
 import br.com.mcgauto.domain.usuario.enums.TipoConta;
 
 import java.time.LocalDate;
+import java.util.List;
 
 public record UsuarioResponseDTO(
         Long id,
@@ -14,6 +15,8 @@ public record UsuarioResponseDTO(
         TipoConta tipoConta,
         String telefonePrincipal,
         String telefoneSecundario,
-        boolean emailValidado
+        boolean emailValidado,
+        CnhResponseDTO cnh,
+        List<EnderecoResponseDTO> enderecos
 ) {
 }
