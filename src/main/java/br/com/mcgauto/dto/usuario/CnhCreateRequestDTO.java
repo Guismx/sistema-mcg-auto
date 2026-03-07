@@ -6,7 +6,7 @@ import jakarta.validation.constraints.Size;
 
 import java.time.LocalDate;
 
-public record CnhRequestDTO(
+public record CnhCreateRequestDTO(
         @NotBlank(message = "O número da CNH é obrigatório")
         @Size(min = 11, max = 11)
         String numeroCnh,
