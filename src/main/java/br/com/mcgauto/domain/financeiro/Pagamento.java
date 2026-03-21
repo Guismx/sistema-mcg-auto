@@ -5,7 +5,7 @@ import br.com.mcgauto.domain.financeiro.enums.StatusPagamento;
 import br.com.mcgauto.domain.financeiro.enums.TipoOrigem;
 import br.com.mcgauto.domain.financeiro.enums.TipoPagamento;
 import br.com.mcgauto.domain.servico.OrdemServico;
-import br.com.mcgauto.domain.venda.Venda;
+import br.com.mcgauto.domain.venda.VendaVeiculo;
 import jakarta.persistence.*;
 
 import java.math.BigDecimal;
@@ -21,7 +21,7 @@ public class Pagamento {
 
     @ManyToOne (fetch = FetchType.LAZY)
     @JoinColumn (name = "venda_id")
-    private Venda venda;
+    private VendaVeiculo vendaVeículo;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "aluguel_id")
@@ -58,8 +58,8 @@ public class Pagamento {
     public Pagamento() {
     }
 
-    public Pagamento(Venda venda, BigDecimal valorPago, TipoPagamento formaPagamento, int parcelas) {
-        this.venda = venda;
+    public Pagamento(VendaVeiculo vendaVeículo, BigDecimal valorPago, TipoPagamento formaPagamento, int parcelas) {
+        this.vendaVeículo = vendaVeículo;
         this.tipoOrigem = TipoOrigem.VENDA;
         this.valorPago = valorPago;
         this.formaPagamento = formaPagamento;
@@ -80,8 +80,8 @@ public class Pagamento {
         return id;
     }
 
-    public Venda getVenda() {
-        return venda;
+    public VendaVeiculo getVenda() {
+        return vendaVeículo;
     }
 
     public Aluguel getAluguel() {

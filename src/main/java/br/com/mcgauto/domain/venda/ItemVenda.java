@@ -13,8 +13,8 @@ public class ItemVenda {
     private long id;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "venda_id", nullable = false)
-    private Venda venda;
+    @JoinColumn(name = "venda_produto_id", nullable = false)
+    private VendaProduto vendaProduto;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "produto_id", nullable = false)
@@ -34,8 +34,8 @@ public class ItemVenda {
 
     public ItemVenda() {}
 
-    public ItemVenda(Venda venda, Produto produto, int quantidade, BigDecimal valorDesconto) {
-        this.venda = venda;
+    public ItemVenda(VendaProduto vendaProduto, Produto produto, int quantidade, BigDecimal valorDesconto) {
+        this.vendaProduto = vendaProduto;
         this.produto = produto;
         this.quantidade = quantidade;
         this.precoUnitario = produto.getPrecoVenda();
@@ -45,16 +45,16 @@ public class ItemVenda {
         this.valorTotal = subtotal.subtract(this.valorDesconto);
     }
 
-    public void setVenda(Venda venda) {
-        this.venda = venda;
-    }
-
     public long getId() {
         return id;
     }
 
-    public Venda getVenda() {
-        return venda;
+    public VendaProduto getVendaProduto() {
+        return vendaProduto;
+    }
+
+    public void setVendaProduto(VendaProduto vendaProduto) {
+        this.vendaProduto = vendaProduto;
     }
 
     public Produto getProduto() {

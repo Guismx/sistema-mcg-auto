@@ -1,6 +1,6 @@
 package br.com.mcgauto.repository.venda;
 
-import br.com.mcgauto.domain.venda.Venda;
+import br.com.mcgauto.domain.venda.VendaVeiculo;
 import br.com.mcgauto.domain.venda.enums.CanalVenda;
 import br.com.mcgauto.domain.venda.enums.TipoVenda;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -11,32 +11,32 @@ import java.util.List;
 import java.util.Optional;
 
 @Repository
-public interface VendaRepository extends JpaRepository<Venda, Long> {
+public interface VendaRepository extends JpaRepository<VendaVeiculo, Long> {
 
     //Buscar pelo número do pedido
-    Optional<Venda> findByNumeroPedido (int numero);
+    Optional<VendaVeiculo> findByNumeroPedido (int numero);
 
     //Filtar pelo tipo de venda
-    List<Venda> findByTipoVenda (TipoVenda tipo);
+    List<VendaVeiculo> findByTipoVenda (TipoVenda tipo);
 
     //Filtrar pelo tipo de canal
-    List<Venda> findByCanalVenda (CanalVenda canal);
+    List<VendaVeiculo> findByCanalVenda (CanalVenda canal);
 
     //Buscar vendas por cliente
-    List<Venda> findByClienteId (Long id);
+    List<VendaVeiculo> findByClienteId (Long id);
 
     //Filtrar vendas de um vendedor
-    List<Venda> findByVendedorId (Long id);
+    List<VendaVeiculo> findByVendedorId (Long id);
 
     //Filtrar Vendas que um gestor aprovou
-    List<Venda> findByGestorAprovadorId (Long id);
+    List<VendaVeiculo> findByGestorAprovadorId (Long id);
 
     //Filtrar venda de um veículo
-    List<Venda> findByVeiculoId (Long ind);
+    List<VendaVeiculo> findByVeiculoId (Long ind);
 
     //Filtrar vendas por data
-    List<Venda> findByDataVendaBetween(LocalDateTime inicio, LocalDateTime fim);
+    List<VendaVeiculo> findByDataVendaBetween(LocalDateTime inicio, LocalDateTime fim);
 
     //Filtrar vendas pela forma de pagamento
-    List<Venda> findByFormaPagamento (String forma);
+    List<VendaVeiculo> findByFormaPagamento (String forma);
 }

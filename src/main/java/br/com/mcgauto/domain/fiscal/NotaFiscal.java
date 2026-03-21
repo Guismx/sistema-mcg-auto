@@ -4,7 +4,7 @@ import br.com.mcgauto.domain.agenda.Aluguel;
 import br.com.mcgauto.domain.financeiro.enums.TipoOrigem;
 import br.com.mcgauto.domain.fiscal.enums.StatusNotaFiscal;
 import br.com.mcgauto.domain.servico.OrdemServico;
-import br.com.mcgauto.domain.venda.Venda;
+import br.com.mcgauto.domain.venda.VendaVeiculo;
 import jakarta.persistence.*;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
@@ -19,7 +19,7 @@ public class NotaFiscal {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "venda_id")
-    private Venda venda;
+    private VendaVeiculo vendaVeículo;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "aluguel_id")
@@ -70,8 +70,8 @@ public class NotaFiscal {
     public NotaFiscal() {}
 
     //Construtor para VENDA
-    public NotaFiscal(Venda venda, int numeroNotaFiscal, String serieNotaFiscal, BigDecimal valorTotal) {
-        this.venda = venda;
+    public NotaFiscal(VendaVeiculo vendaVeículo, int numeroNotaFiscal, String serieNotaFiscal, BigDecimal valorTotal) {
+        this.vendaVeículo = vendaVeículo;
         this.tipoOrigem = TipoOrigem.VENDA;
         this.numeroNotaFiscal = numeroNotaFiscal;
         this.serieNotaFiscal = serieNotaFiscal;
@@ -93,8 +93,8 @@ public class NotaFiscal {
         return id;
     }
 
-    public Venda getVenda() {
-        return venda;
+    public VendaVeiculo getVenda() {
+        return vendaVeículo;
     }
 
     public Aluguel getAluguel() {
