@@ -15,6 +15,6 @@ public record MovimentacaoEstoqueRequestDTO(
         @Positive(message = "A quantidade deve ser maior que zero")
         Integer quantidade,
 
-        String observacao //
+        String motivo //
 ) {
 }

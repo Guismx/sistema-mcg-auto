@@ -5,14 +5,12 @@ import br.com.mcgauto.domain.financeiro.enums.TipoOrigem;
 import br.com.mcgauto.domain.financeiro.enums.TipoPagamento;
 import br.com.mcgauto.dto.agenda.AluguelResponseDTO;
 import br.com.mcgauto.dto.servico.OrdemServicoResponseDTO;
-import br.com.mcgauto.dto.venda.VendaResponseDTO;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 public record PagamentoResponseDTO(
         Long id,
-        VendaResponseDTO venda,
         AluguelResponseDTO aluguel,
         OrdemServicoResponseDTO ordemServico,
         TipoOrigem tipoOrigem,

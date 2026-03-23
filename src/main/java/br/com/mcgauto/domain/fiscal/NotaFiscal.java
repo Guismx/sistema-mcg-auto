@@ -19,7 +19,7 @@ public class NotaFiscal {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "venda_id")
-    private VendaVeiculo vendaVeículo;
+    private VendaVeiculo vendaVeiculo;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "aluguel_id")
@@ -71,7 +71,7 @@ public class NotaFiscal {
 
     //Construtor para VENDA
     public NotaFiscal(VendaVeiculo vendaVeículo, int numeroNotaFiscal, String serieNotaFiscal, BigDecimal valorTotal) {
-        this.vendaVeículo = vendaVeículo;
+        this.vendaVeiculo = vendaVeículo;
         this.tipoOrigem = TipoOrigem.VENDA;
         this.numeroNotaFiscal = numeroNotaFiscal;
         this.serieNotaFiscal = serieNotaFiscal;
@@ -94,7 +94,7 @@ public class NotaFiscal {
     }
 
     public VendaVeiculo getVenda() {
-        return vendaVeículo;
+        return vendaVeiculo;
     }
 
     public Aluguel getAluguel() {

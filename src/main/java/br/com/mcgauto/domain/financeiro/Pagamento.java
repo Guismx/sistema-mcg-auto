@@ -21,7 +21,7 @@ public class Pagamento {
 
     @ManyToOne (fetch = FetchType.LAZY)
     @JoinColumn (name = "venda_id")
-    private VendaVeiculo vendaVeículo;
+    private VendaVeiculo vendaVeiculo;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "aluguel_id")
@@ -59,7 +59,7 @@ public class Pagamento {
     }
 
     public Pagamento(VendaVeiculo vendaVeículo, BigDecimal valorPago, TipoPagamento formaPagamento, int parcelas) {
-        this.vendaVeículo = vendaVeículo;
+        this.vendaVeiculo = vendaVeículo;
         this.tipoOrigem = TipoOrigem.VENDA;
         this.valorPago = valorPago;
         this.formaPagamento = formaPagamento;
@@ -81,7 +81,7 @@ public class Pagamento {
     }
 
     public VendaVeiculo getVenda() {
-        return vendaVeículo;
+        return vendaVeiculo;
     }
 
     public Aluguel getAluguel() {
