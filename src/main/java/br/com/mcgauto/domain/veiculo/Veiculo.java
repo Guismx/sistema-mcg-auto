@@ -9,7 +9,7 @@ import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import java.math.BigDecimal;
-import java.time.LocalDateTime;
+import java.time.Instant;
 
 @Entity
 @Table (name = "veiculos")
@@ -54,18 +54,18 @@ public class Veiculo {
     private String descricaoDetalhada;
 
     @Column (name = "data_entrada_estoque", nullable = false)
-    private LocalDateTime dataEntradaEstoque;
+    private Instant dataEntradaEstoque;
 
     @Column (name = "data_baixa_estoque")
-    private LocalDateTime dataBaixaEstoque;
+    private Instant dataBaixaEstoque;
 
     @CreationTimestamp
     @Column (name = "criado_em", nullable = false, updatable = false)
-    private LocalDateTime criadoEm;
+    private Instant criadoEm;
 
     @UpdateTimestamp
     @Column (name = "autalizado_em", nullable = false)
-    private LocalDateTime atualizadoEm;
+    private Instant atualizadoEm;
 
     @Enumerated (EnumType.STRING)
     @Column (name = "tipo_combustivel", nullable = false)
@@ -85,23 +85,14 @@ public class Veiculo {
 
     public Veiculo() {}
 
-    public Veiculo(ModeloVeiculo modelo, String nome, int anoModelo, String cor, String placa, String chassi,
-                   int quilometragem, TipoCombustivel tipoCombustivel, BigDecimal precoCusto, BigDecimal precoVenda,
-                   TipoPropriedade tipoPropriedade, EstadoVeiculo estadoVeiculo) {
-        this.modelo = modelo;
-        this.nome = nome;
-        this.anoModelo = anoModelo;
-        this.cor = cor;
-        this.placa = placa;
-        this.chassi = chassi;
-        this.quilometragem = quilometragem;
-        this.tipoCombustivel = tipoCombustivel;
-        this.precoCusto = precoCusto;
-        this.precoVenda = precoVenda;
-        this.tipoPropriedade = tipoPropriedade;
-        this.estadoVeiculo = estadoVeiculo;
-        this.statusVeiculo = StatusVeiculo.DISPONIVEL;
-        this.dataEntradaEstoque = LocalDateTime.now();
+    @PrePersist
+    public void prePersist() {
+        if (this.dataEntradaEstoque == null) {
+            this.dataEntradaEstoque = Instant.now();
+        }
+        if (this.statusVeiculo == null) {
+            this.statusVeiculo = StatusVeiculo.DISPONIVEL;
+        }
     }
 
     public long getId() {
@@ -212,23 +203,23 @@ public class Veiculo {
         this.descricaoDetalhada = descricaoDetalhada;
     }
 
-    public LocalDateTime getDataEntradaEstoque() {
+    public Instant getDataEntradaEstoque() {
         return dataEntradaEstoque;
     }
 
-    public LocalDateTime getDataBaixaEstoque() {
+    public Instant getDataBaixaEstoque() {
         return dataBaixaEstoque;
     }
 
-    public void setDataBaixaEstoque(LocalDateTime dataBaixaEstoque) {
+    public void setDataBaixaEstoque(Instant dataBaixaEstoque) {
         this.dataBaixaEstoque = dataBaixaEstoque;
     }
 
-    public LocalDateTime getCriadoEm() {
+    public Instant getCriadoEm() {
         return criadoEm;
     }
 
-    public LocalDateTime getAtualizadoEm() {
+    public Instant getAtualizadoEm() {
         return atualizadoEm;
     }
 
