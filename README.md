@@ -196,8 +196,8 @@ A aplicacao estara disponivel em: `http://localhost:8080`
 - [x] **Domínio (Entities):** Modelagem das entidades, Enums e Relacionamentos (JPA).
 - [x] **Persistência:** Criação das interfaces Repository.
 - [x] **Tratamento de Erros:** Implementação do `GlobalExceptionHandler` e Classes de Erro personalizadas (`BusinessException`, `ResourceNotFoundException`).
-- [ ] **DTOs (Data Transfer Objects):** Criação dos Records de Request/Response.
-- [ ] **Mappers:** Configuração do MapStruct para conversão Entity <-> DTO.
+- [x] **DTOs (Data Transfer Objects):** Criação dos Records de Request/Response.
+- [x] **Mappers:** Configuração do MapStruct para conversão Entity <-> DTO.
 - [ ] **Configurações:** Beans de configuração (Cors, ModelMapper/MapStruct, etc).
 - [ ] **Database Migrations:** Configuração do Flyway para versionamento de banco.
 - [ ] **Regras de Negócio (Services):** Implementação da lógica core do sistema.
